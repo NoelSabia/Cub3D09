@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:38:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:30:09 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/23 16:44:48 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char *argv[])
 		clean_exit("Usage: ./Cub3d <filename>.cub\n");
 	mlx = ft_calloc(1, sizeof(t_mlx));
 	mlx->parse = ft_calloc(1, sizeof(t_parsing));
-	// mlx->ply = ft_calloc(1, sizeof(t_player));
+	mlx->ply = ft_calloc(1, sizeof(t_player));
 	// mlx->ray = ft_calloc(1, sizeof(t_raytracing));
 	// mlx->key_data = ft_calloc(1, sizeof(mlx_key_data_t));
 	// mlx->f_txt = ft_calloc(1, sizeof(t_texture));

@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:47:05 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:18:11 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/23 16:42:45 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	player_direction(t_mlx *mlx)
 		mlx->ply->angle = 180;
 	else
 		clean_exit("Player spawn is not W N E or S!");
-	mlx->ply->most_left_angle = mlx->ply->angle + 30;
-	mlx->ply->most_right_angle = mlx->ply->angle - 30;
+	// mlx->ply->most_left_angle = mlx->ply->angle + 30;
+	// mlx->ply->most_right_angle = mlx->ply->angle - 30;
 }
 
 void	parsing(t_mlx *mlx, char *filename)

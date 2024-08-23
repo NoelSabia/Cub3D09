@@ -6,11 +6,15 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:27:45 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/23 16:41:19 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	ft_abs(int num);
+void	find_player(t_mlx *mlx);
+char	**map_copy_it(t_mlx *mlx);
 
 char	*fill_spaces(int len)
 {

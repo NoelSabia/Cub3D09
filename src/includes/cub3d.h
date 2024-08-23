@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:30:55 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/23 16:44:40 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ typedef struct s_parsing
 	int				cols;
 }	t_parsing;
 
+typedef struct s_player
+{
+	double			angle;
+}	t_player;
+
 /*Mainstruct*/
 typedef struct s_mlx
 {
@@ -60,7 +65,7 @@ typedef struct s_mlx
 	mlx_t			*mlx_p;
 	mlx_key_data_t	*key_data;
 	t_parsing		*parse;
-	// t_player		*ply;
+	t_player		*ply;
 	// t_raytracing	*ray;
 	// t_texture		*f_txt;
 }	t_mlx;
