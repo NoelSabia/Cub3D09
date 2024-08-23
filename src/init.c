@@ -6,13 +6,15 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:51:11 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/23 17:05:12 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "./includes/cub3d.h"
 
 void	init_values(t_mlx *mlx);
+void	floor_and_ceiling_color(t_mlx *mlx);
+void	keyhook_organizer(mlx_key_data_t keydata, void *mlx_copy);
 
 void	floor_and_ceiling_color_display(t_mlx *mlx)
 {
@@ -53,6 +55,6 @@ void	init(t_mlx *mlx)
     floor_and_ceiling_color_display(mlx);
     mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 	mlx_loop_hook(mlx->mlx_p, &game_loop, mlx);
-	// mlx_key_hook(mlx->mlx_p, &keyhook_organizer, mlx);
+	mlx_key_hook(mlx->mlx_p, &keyhook_organizer, mlx);
 	mlx_loop(mlx->mlx_p);
 }
