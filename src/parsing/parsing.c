@@ -6,11 +6,11 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:47:05 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 14:13:20 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/23 16:18:11 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 char	*replace_tab_helper(const char *str, char *result, int *j, int *i);
 
@@ -87,7 +87,7 @@ void	player_direction(t_mlx *mlx)
 {
 	char	c;
 
-	c = mlx->parse->map[mlx->parse->x][mlx->parse->y];
+	c = mlx->parse->map[mlx->parse->ply_x_pos_in_map][mlx->parse->ply_y_pos_in_map];
 	if (c == 'E')
 		mlx->ply->angle = 90;
 	else if (c == 'N')

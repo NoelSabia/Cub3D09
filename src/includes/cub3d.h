@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:10:45 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/23 16:15:13 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_parsing
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
 	char			**map;
+	int				ply_x_pos_in_map;
+	int				ply_y_pos_in_map;
 }	t_parsing;
 
 /*Mainstruct*/
