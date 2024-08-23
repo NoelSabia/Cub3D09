@@ -6,13 +6,53 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:05:20 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:12:07 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/23 16:12:41 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 int	check_if_exists4(char *str1, char *str2, t_mlx *mlx, char *line);
+
+char	*clean_data(char *str)
+{
+	int		i;
+	char	*result;
+
+	i = 0;
+	while (str[i] && ft_strchr("NOSWAFEC 	", str[i]))
+		i++;
+	result = ft_strncpy(str, i, ft_strlen(str));
+	return (result);
+}
+
+int	check_if_exists3(char *str1, char *str2, t_mlx *mlx, char *line)
+{
+	char	*str;
+
+	(void)str1;
+	if (ft_strncmp(str2, "F", 1) == 0)
+	{
+		if (mlx->parse->floor_set)
+			clean_exit("Error: 'F' specified more than once.");
+		str = clean_data(line);
+		mlx->parse->floor = str;
+		mlx->parse->floor_set = 1;
+		mlx->parse->input_counter++;
+		return (0);
+	}
+	else if (ft_strncmp(str2, "C", 1) == 0)
+	{
+		if (mlx->parse->ceiling_set)
+			clean_exit("Error: 'C' specified more than once.");
+		str = clean_data(line);
+		mlx->parse->ceiling = str;
+		mlx->parse->ceiling_set = 1;
+		mlx->parse->input_counter++;
+		return (0);
+	}
+	return (1);
+}
 
 int	check_if_exists2(char *str1, char *str2, t_mlx *mlx, char *line)
 {
@@ -50,6 +90,7 @@ void	check_if_exists(char *str1, char *str2, t_mlx *mlx, char *line)
 		|| ft_strncmp(str2, "0", 1) == 0 || ft_strncmp(str2, "1", 1) == 0)
 		return ;
 	if (check_if_exists2(str1, str2, mlx, line) == 0
+		|| check_if_exists3(str1, str2, mlx, line) == 0
 		|| check_if_exists4(str1, str2, mlx, line) == 0)
 		return ;
 	clean_exit("Not all elements included in the .cub file!");
