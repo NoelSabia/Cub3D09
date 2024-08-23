@@ -6,11 +6,11 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:38:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 12:38:57 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/23 12:48:22 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/cub3d.h"
+#include "cub3d.h"
 
 void	clean_exit(char *str)
 {
