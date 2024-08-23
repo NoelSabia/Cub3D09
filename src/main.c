@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:38:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:17:45 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/23 16:30:09 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char *argv[])
 	// mlx->f_txt = ft_calloc(1, sizeof(t_texture));
 	mlx->mlx_p = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D", 0);
 	parsing(mlx, argv[1]);
-	init(mlx);
+	// init(mlx);
 	ft_free_all();
 	return (0);
 }

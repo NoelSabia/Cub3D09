@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:15:13 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/23 16:30:55 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_parsing
 	char			**map;
 	int				ply_x_pos_in_map;
 	int				ply_y_pos_in_map;
+	int				rows;
+	int				cols;
 }	t_parsing;
 
 /*Mainstruct*/
@@ -57,14 +59,16 @@ typedef struct s_mlx
 	mlx_image_t		*img;
 	mlx_t			*mlx_p;
 	mlx_key_data_t	*key_data;
-	t_raytracing	*ray;
-	t_player		*ply;
 	t_parsing		*parse;
-	t_texture		*f_txt;
+	// t_player		*ply;
+	// t_raytracing	*ray;
+	// t_texture		*f_txt;
 }	t_mlx;
 
 /*Parsing*/
 void	fill_parse_struct(t_mlx *mlx);
+void	validate_map(t_mlx *mlx);
+void	flood_fill_organizer(t_mlx *mlx);
 void	parsing(t_mlx *mlx, char *filename);
 
 /*Main*/
