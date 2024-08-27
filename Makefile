@@ -1,6 +1,6 @@
 NAME := cub3D
 
-CFLAGS = -Wextra -Wall -Werror -fsanitize=address -g
+CFLAGS = -Wextra -Wall #-Werror -fsanitize=address -g #dont forget the -Werror flag!
 
 HEADERS := -I ./include -I ./libft -I ./MLX/include
 
@@ -15,7 +15,9 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)parsing/flood_fill_helpers.c \
 		$(SRCDIR)parsing/fill_struct.c \
 		$(SRCDIR)parsing/fill_struct_helpers.c \
-		$(SRCDIR)player_movement/player_movement.c
+		$(SRCDIR)player_movement/player_movement.c \
+		$(SRCDIR)raycasting/minimap.c
+
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)

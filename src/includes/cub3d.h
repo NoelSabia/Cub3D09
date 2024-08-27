@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:44:40 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/27 12:12:56 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,14 @@ typedef struct s_parsing
 typedef struct s_player
 {
 	double			angle;
+	int				ply_x_coord;
+	int				ply_y_coord;
 }	t_player;
+
+typedef struct raytracing
+{
+	mlx_image_t	*minimap;
+}	t_raytracing;
 
 /*Mainstruct*/
 typedef struct s_mlx
@@ -66,8 +73,7 @@ typedef struct s_mlx
 	mlx_key_data_t	*key_data;
 	t_parsing		*parse;
 	t_player		*ply;
-	// t_raytracing	*ray;
-	// t_texture		*f_txt;
+	t_raytracing	*ray;
 }	t_mlx;
 
 /*Parsing*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floor_ceiling_color.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:45:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:47:09 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/27 10:52:28 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	floor_color(t_mlx *mlx)
 		k++;
 	while (mlx->parse->floor[k] && i < 3)
 	{
-		temp = malloc(1);
+		temp = ft_malloc(1);
 		temp[0] = '\0';
 		while (strchr("0123456789", mlx->parse->floor[k]))
 		{
@@ -92,7 +92,7 @@ void	floor_and_ceiling_color(t_mlx *mlx)
 	fuck_norminette(mlx, &k);
 	while (mlx->parse->ceiling[k] && i < 3)
 	{
-		temp = malloc(1);
+		temp = ft_malloc(1);
 		temp[0] = '\0';
 		while (strchr("0123456789", mlx->parse->ceiling[k]))
 		{
