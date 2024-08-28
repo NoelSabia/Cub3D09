@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:47:05 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:42:45 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/28 11:19:15 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	parsing(t_mlx *mlx, char *filename)
 	char	*cub;
 
 	cub = ft_strnstr(filename, ".cub", ft_strlen(filename));
-	if (!cub)
+	if (!cub || cub == filename)
 		clean_exit("No .cub found!");
 	while (*cub)
 		if (!ft_strchr(".cub", *cub++))
