@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_preparation.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:14:01 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:15:53 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/08/28 10:54:54 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ void	search_player_position(t_mlx *mlx)
 {
 	int	i;
 	int	m;
+	int	player_count;
 
 	i = -1;
+	player_count = 0;
 	while (mlx->parse->map[++i])
 	{
 		m = 0;
@@ -84,9 +86,11 @@ void	search_player_position(t_mlx *mlx)
 		{
 			mlx->parse->ply_y_pos_in_map = i;
 			mlx->parse->ply_x_pos_in_map = m;
-			return ;
+			player_count++;
 		}
 	}
+	if (player_count > 1)
+		clean_exit("More then one player detected!");
 }
 
 void	validate_map(t_mlx *mlx)
