@@ -1,6 +1,6 @@
 NAME := cub3D
 
-CFLAGS = -Wextra -Wall #-Werror -fsanitize=address -g #dont forget the -Werror flag!
+CFLAGS = -Wextra -Wall #-Werror  //dont forget to uncomment!!
 
 HEADERS := -I ./include -I ./libft -I ./MLX/include
 
@@ -22,7 +22,7 @@ SRCS := $(SRCDIR)main.c \
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
-CC := cc -fsanitize=address -g
+CC := cc
 
 MLX_LIB		= ./MLX42/build/libmlx42.a
 MLX_PATH	= ./MLX42

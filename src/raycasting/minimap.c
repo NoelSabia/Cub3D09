@@ -47,7 +47,6 @@ void draw_walls(t_mlx *mlx)
 
 void draw_player (t_mlx *mlx)
 {
-	printf("x: %d y: %d\n", mlx->ply->ply_x_coord, mlx->ply->ply_y_coord);
 	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord, 0x00FF00FF);
 	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord + 1, mlx->ply->ply_y_coord, 0x00FF00FF);
 	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord + 2, mlx->ply->ply_y_coord, 0x00FF00FF);
@@ -148,7 +147,6 @@ void	minimap_draw(t_mlx *mlx)
     //This part is to initalize the important values for the minimap
 	mlx->ply->ply_x_coord = mlx->parse->ply_y_pos_in_map * 64 + 32;
 	mlx->ply->ply_y_coord = mlx->parse->ply_x_pos_in_map * 64 + 32;
-	printf("x: %d y: %d\n", mlx->parse->ply_y_pos_in_map, mlx->parse->ply_x_pos_in_map);
 
 	//This just draws horizontal and vertical lines
 	draw_vert(mlx);
