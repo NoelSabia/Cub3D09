@@ -16,7 +16,8 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)parsing/fill_struct.c \
 		$(SRCDIR)parsing/fill_struct_helpers.c \
 		$(SRCDIR)player_movement/player_movement.c \
-		$(SRCDIR)raycasting/minimap.c
+		$(SRCDIR)raycasting/minimap.c \
+		$(SRCDIR)raycasting/raycasting.c \
 
 
 OBJDIR := ./obj/

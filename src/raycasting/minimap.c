@@ -1,4 +1,14 @@
-//header nicht vergessen
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
+/*   Updated: 2024/09/02 12:34:52 by nsabia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 int	ft_abs(int num);
@@ -159,4 +169,7 @@ void	minimap_draw(t_mlx *mlx)
 	//This function can be useful for the raycasting
 	//First param: mlx, Second param: x_coordinate, Third param: y_coordinate
 	minimap_draw_line(mlx, 100, 100);
+
+	//raycasting
+	raycasting(mlx);
 }

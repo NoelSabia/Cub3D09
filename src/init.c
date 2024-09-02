@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/26 15:48:52 by noel             ###   ########.fr       */
+/*   Updated: 2024/09/02 14:40:30 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	game_loop(void *mlx_copy)
 void	init(t_mlx *mlx)
 {
 	floor_and_ceiling_color(mlx);
+	raycasting_init(mlx);
     // mlx->img = mlx_new_image(mlx->mlx_p, SCREEN_WIDTH, SCREEN_HEIGHT);
     // floor_and_ceiling_color_display(mlx);
     // mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);

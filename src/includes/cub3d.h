@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/28 17:39:49 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/09/02 17:09:03 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
+# define FOV 60
+# define TILE_SIZE 50
 
 /*Parsing*/
 typedef struct s_parsing
@@ -55,7 +57,9 @@ typedef struct s_parsing
 
 typedef struct s_player
 {
-	double			angle;
+	float			player_angle;
+	float			most_left_angle;
+	float			most_right_angle;	
 	int				ply_x_coord;
 	int				ply_y_coord;
 }	t_player;
@@ -63,6 +67,7 @@ typedef struct s_player
 typedef struct raytracing
 {
 	mlx_image_t	*minimap;
+	double		main_ray;
 }	t_raytracing;
 
 /*Mainstruct*/
@@ -95,6 +100,7 @@ void	check_if_exists(char *str1, char *str2, t_mlx *mlx, char *line);
 
 /*Minimap*/
 void	minimap_draw(t_mlx *mlx);
+void	raycasting(t_mlx *mlx);
 
 
 /*Main*/
