@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/02 14:40:30 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/05 15:47:05 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	game_loop(void *mlx_copy)
 	
 
 	//below code is for the minimap
-	mlx->ray->minimap = mlx_new_image(mlx->mlx_p, 64*(mlx->parse->rows + 1), 64*(mlx->parse->cols + 1));
+	mlx->ray->minimap = mlx_new_image(mlx->mlx_p, TILE_SIZE*(mlx->parse->rows + 1), TILE_SIZE*(mlx->parse->cols + 1));
     mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
     minimap_draw(mlx);
 }
@@ -65,5 +65,6 @@ void	init(t_mlx *mlx)
     // mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 	mlx_loop_hook(mlx->mlx_p, &game_loop, mlx);
 	mlx_key_hook(mlx->mlx_p, &keyhook_organizer, mlx);
+	raycasting(mlx);
 	mlx_loop(mlx->mlx_p);
 }

@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/02 12:34:52 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/05 15:59:18 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void put_block(t_mlx *mlx, int i, int j)
 	int		j_zero;
 
 	j_zero = j;
-	i_end = i + 64;
-	j_end = j + 64;
+	i_end = i + TILE_SIZE;
+	j_end = j + TILE_SIZE;
 	while (i < i_end)
 	{
 		while (j < j_end)
@@ -47,7 +47,7 @@ void draw_walls(t_mlx *mlx)
         {
             if (mlx->parse->map[i][j] == '1')
             {
-                put_block(mlx, j * 64, i * 64);
+                put_block(mlx, j * TILE_SIZE, i * TILE_SIZE);
             }
             j++;
         }
@@ -79,9 +79,9 @@ void draw_vert (t_mlx *mlx)
 	j = 1;
 	while (k < (mlx->parse->rows))
 	{
-		while (i < 64 * (mlx->parse->cols))
+		while (i < TILE_SIZE * (mlx->parse->cols))
 		{
-			mlx_put_pixel(mlx->ray->minimap, 64*j, i, 0xFFFFFFFF);
+			mlx_put_pixel(mlx->ray->minimap, TILE_SIZE*j, i, 0xFFFFFFFF);
 			i++;
 		}
 		i = 0;
@@ -101,9 +101,9 @@ void draw_horiz (t_mlx *mlx)
 	j = 1;
 	while (k < (mlx->parse->cols))
 	{
-		while (i < 64 * (mlx->parse->rows))
+		while (i < TILE_SIZE * (mlx->parse->rows))
 		{
-			mlx_put_pixel(mlx->ray->minimap, i, 64 * j, 0xFFFFFFFF);
+			mlx_put_pixel(mlx->ray->minimap, i, TILE_SIZE * j, 0xFFFFFFFF);
 			i++;
 		}
 		i = 0;
@@ -120,11 +120,7 @@ void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord)
     int sy;
     int err;
     int e2;
-	int width;
-	int height;
 
-	width = 64*(mlx->parse->rows + 1);
-	height = 64*(mlx->parse->cols + 1);
     dx = ft_abs((int)x_coord - mlx->ply->ply_x_coord);
     dy = ft_abs((int)y_coord - mlx->ply->ply_y_coord);
 	sx = (mlx->ply->ply_x_coord < (int)x_coord) ? 1 : -1;
@@ -132,9 +128,9 @@ void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord)
     err = dx - dy;
     while (1)
 	{
-		if (mlx->ply->ply_x_coord >= 0 && mlx->ply->ply_x_coord < width
-            && mlx->ply->ply_y_coord >= 0 && mlx->ply->ply_y_coord < height) //corrected width and height
-			mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord, 0x00FF00FF); //corrected img of minimap
+		if ((mlx->ply->ply_x_coord > 0 && mlx->ply->ply_x_coord < SCREEN_WIDTH) && (mlx->ply->ply_y_coord > 0 && mlx->ply->ply_y_coord < SCREEN_HEIGHT))
+			mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord, 0x00FF00FF);
+		// printf("x: %d y: %d\n", mlx->ply->ply_x_coord, mlx->ply->ply_y_coord);
 		if (mlx->ply->ply_x_coord == (int)x_coord
             && mlx->ply->ply_y_coord == (int)y_coord)
 			break;
@@ -154,10 +150,6 @@ void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord)
 
 void	minimap_draw(t_mlx *mlx)
 {
-    //This part is to initalize the important values for the minimap
-	mlx->ply->ply_x_coord = mlx->parse->ply_y_pos_in_map * 64 + 32;
-	mlx->ply->ply_y_coord = mlx->parse->ply_x_pos_in_map * 64 + 32;
-
 	//This just draws horizontal and vertical lines
 	draw_vert(mlx);
 	draw_horiz(mlx);
@@ -168,8 +160,8 @@ void	minimap_draw(t_mlx *mlx)
 
 	//This function can be useful for the raycasting
 	//First param: mlx, Second param: x_coordinate, Third param: y_coordinate
-	minimap_draw_line(mlx, 100, 100);
+	// minimap_draw_line(mlx, 100, 100);
 
 	//raycasting
-	raycasting(mlx);
+	// raycasting(mlx);
 }
