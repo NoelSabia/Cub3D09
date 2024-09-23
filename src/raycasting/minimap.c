@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/05 15:59:18 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/11 10:41:42 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,36 +114,31 @@ void draw_horiz (t_mlx *mlx)
 
 void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord)
 {
-	int dx;
-    int dy;
-    int sx;
-    int sy;
-    int err;
-    int e2;
-
-    dx = ft_abs((int)x_coord - mlx->ply->ply_x_coord);
-    dy = ft_abs((int)y_coord - mlx->ply->ply_y_coord);
-	sx = (mlx->ply->ply_x_coord < (int)x_coord) ? 1 : -1;
-	sy = (mlx->ply->ply_y_coord < (int)y_coord) ? -1 : 1;
-    err = dx - dy;
+    int dx = ft_abs((int)x_coord - mlx->ply->ply_x_coord);
+    int dy = ft_abs((int)y_coord - mlx->ply->ply_y_coord);
+	int sx = (mlx->ply->ply_x_coord < (int)x_coord) ? 1 : -1;
+	int sy = (mlx->ply->ply_y_coord < (int)y_coord) ? -1 : 1;
+    int err = dx - dy;
+	int	e2;
+	int x_coord_tmp = mlx->ply->ply_x_coord;
+	int y_coord_tmp = mlx->ply->ply_y_coord;
     while (1)
 	{
-		if ((mlx->ply->ply_x_coord > 0 && mlx->ply->ply_x_coord < SCREEN_WIDTH) && (mlx->ply->ply_y_coord > 0 && mlx->ply->ply_y_coord < SCREEN_HEIGHT))
-			mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord, 0x00FF00FF);
-		// printf("x: %d y: %d\n", mlx->ply->ply_x_coord, mlx->ply->ply_y_coord);
-		if (mlx->ply->ply_x_coord == (int)x_coord
-            && mlx->ply->ply_y_coord == (int)y_coord)
+		if ((x_coord_tmp > 0 && x_coord_tmp < TILE_SIZE*(mlx->parse->rows + 1)) && (y_coord_tmp > 0 && y_coord_tmp < TILE_SIZE*(mlx->parse->cols + 1)))
+			mlx_put_pixel(mlx->ray->minimap, x_coord_tmp, y_coord_tmp, 0x00FF00FF);
+		if (x_coord_tmp >= (int)x_coord
+            && y_coord_tmp >= (int)y_coord)
 			break;
         e2 = err * 2;
         if (e2 > -dy)
 		{
             err -= dy;
-            mlx->ply->ply_x_coord += sx;
+            x_coord_tmp += sx;
         }
         if (e2 < dx)
 		{
             err += dx;
-            mlx->ply->ply_y_coord -= sy;
+            y_coord_tmp -= sy;
         }
     }
 }
@@ -160,7 +155,7 @@ void	minimap_draw(t_mlx *mlx)
 
 	//This function can be useful for the raycasting
 	//First param: mlx, Second param: x_coordinate, Third param: y_coordinate
-	// minimap_draw_line(mlx, 100, 100);
+	// minimap_draw_line(mlx, 500, 500);
 
 	//raycasting
 	// raycasting(mlx);

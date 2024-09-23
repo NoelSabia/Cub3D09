@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/06 15:27:13 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/11 12:36:42 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,28 +127,16 @@ double	get_x_inter(t_mlx *mlx, double main_ray_angle)
 
 	x_step = TILE_SIZE;
 	y_step = TILE_SIZE * tan(degree_to_rad((float)main_ray_angle));
-	// printf("-->y_step: %f\n", degree_to_rad((float)main_ray_angle));
 	intersec_x = floor(mlx->ply->ply_x_coord / TILE_SIZE) * TILE_SIZE;
-	// printf("1intersec_x: %f \n", intersec_x);
 	pixel = intersec_check(main_ray_angle, &intersec_x, &x_step, false);
-	// printf("pixel: %d\n", pixel);
 	intersec_y = mlx->ply->ply_y_coord + (intersec_x - mlx->ply->ply_x_coord) * tan(degree_to_rad((float)main_ray_angle));
-	// printf("1intersec_y: %f\n", intersec_y);
 	if ((unit_circle(main_ray_angle, true) && x_step > 0) || (!unit_circle(main_ray_angle, true) && x_step < 0))
 		y_step *= -1;
-	// printf("1intersec_x: %f ", intersec_x);
-	// printf("1intersec_y: %f ", intersec_y);
-	// printf("\n");
 	while (wall_hit(intersec_x - pixel, intersec_y, mlx))
 	{
 		intersec_x += x_step;
-		// printf("intersec_x: %f ", intersec_x);
-		// printf("x_step: %f\n", x_step);
 		intersec_y += y_step;
-		// printf("intersec_y: %f ", intersec_y);
-		// printf("y_step: %f\n", y_step);
 	}
-	// printf("\n");
 	return (sqrt(pow(intersec_x - mlx->ply->ply_x_coord, 2) + pow(intersec_y - mlx->ply->ply_y_coord, 2)));
 }
 
@@ -180,11 +168,10 @@ void	raycasting(t_mlx *mlx)
 		printf("x: %f y: %f main_ray: %f\n", x_coord, y_coord, mlx->ray->main_ray);
 		i++;
 		mlx->ray->main_ray = num_check(mlx->ray->main_ray + ((double)FOV / (double)RAY_LIMIT));
-		// minimap_draw_line(mlx, x_coord, y_coord);
+		minimap_draw_line(mlx, x_coord, y_coord);
 	}
 }
 
-
 //Programflow:
 //1) raycasting is initalized means -> we init the values in the struct player like the angle or FOV
-//2) 
+//2)
