@@ -6,12 +6,22 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/11 10:41:42 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/23 17:39:43 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 int	ft_abs(int num);
+
+int	minimap_dynamic_scale(t_mlx *mlx)
+{
+	int	dynamic_minimap_size;
+
+	dynamic_minimap_size = (SCREEN_WIDTH / 100) * 25 / mlx->parse->rows;
+	if (dynamic_minimap_size > 50)
+		return (50);
+	return (dynamic_minimap_size);
+}
 
 void put_block(t_mlx *mlx, int i, int j)
 {
@@ -20,8 +30,8 @@ void put_block(t_mlx *mlx, int i, int j)
 	int		j_zero;
 
 	j_zero = j;
-	i_end = i + TILE_SIZE;
-	j_end = j + TILE_SIZE;
+	i_end = i + minimap_dynamic_scale(mlx);
+	j_end = j + minimap_dynamic_scale(mlx);
 	while (i < i_end)
 	{
 		while (j < j_end)
@@ -38,8 +48,10 @@ void draw_walls(t_mlx *mlx)
 {
     int i;
     int j;
+	int	len_for_draw;
 
     i = 0;
+	len_for_draw = minimap_dynamic_scale(mlx);
     while (i < mlx->parse->cols)
     {
         j = 0;
@@ -47,7 +59,7 @@ void draw_walls(t_mlx *mlx)
         {
             if (mlx->parse->map[i][j] == '1')
             {
-                put_block(mlx, j * TILE_SIZE, i * TILE_SIZE);
+                put_block(mlx, j * len_for_draw, i * len_for_draw);
             }
             j++;
         }
@@ -79,9 +91,9 @@ void draw_vert (t_mlx *mlx)
 	j = 1;
 	while (k < (mlx->parse->rows))
 	{
-		while (i < TILE_SIZE * (mlx->parse->cols))
+		while (i < minimap_dynamic_scale(mlx) * (mlx->parse->cols))
 		{
-			mlx_put_pixel(mlx->ray->minimap, TILE_SIZE*j, i, 0xFFFFFFFF);
+			mlx_put_pixel(mlx->ray->minimap, minimap_dynamic_scale(mlx)  * j, i, 0xFFFFFFFF);
 			i++;
 		}
 		i = 0;
@@ -101,9 +113,9 @@ void draw_horiz (t_mlx *mlx)
 	j = 1;
 	while (k < (mlx->parse->cols))
 	{
-		while (i < TILE_SIZE * (mlx->parse->rows))
+		while (i < minimap_dynamic_scale(mlx) * (mlx->parse->rows))
 		{
-			mlx_put_pixel(mlx->ray->minimap, i, TILE_SIZE * j, 0xFFFFFFFF);
+			mlx_put_pixel(mlx->ray->minimap, i, minimap_dynamic_scale(mlx) * j, 0xFFFFFFFF);
 			i++;
 		}
 		i = 0;
@@ -114,11 +126,11 @@ void draw_horiz (t_mlx *mlx)
 
 void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord)
 {
-    int dx = ft_abs((int)x_coord - mlx->ply->ply_x_coord);
-    int dy = ft_abs((int)y_coord - mlx->ply->ply_y_coord);
+	int dx = ft_abs((int)x_coord - mlx->ply->ply_x_coord);
+	int dy = ft_abs((int)y_coord - mlx->ply->ply_y_coord);
 	int sx = (mlx->ply->ply_x_coord < (int)x_coord) ? 1 : -1;
 	int sy = (mlx->ply->ply_y_coord < (int)y_coord) ? -1 : 1;
-    int err = dx - dy;
+	int err = dx - dy;
 	int	e2;
 	int x_coord_tmp = mlx->ply->ply_x_coord;
 	int y_coord_tmp = mlx->ply->ply_y_coord;
