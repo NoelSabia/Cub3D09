@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:41:19 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/23 12:53:24 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,51 +48,23 @@ char	*combine_strs(char *str1, char *str2)
 		str1[len - 1] = '\0';
 	i = -1;
 	while (str1[++i])
-		result[i] = str1[i];
+		result[i] = str1[i]; /*use strcpy here*/
 	while (str2[++j])
-		result[i + j] = str2[j];
-	result[i + j] = '\n';
+		result[i + j] = str2[j]; /*use strcpy here*/
+	result[i + j] = '\n'; /*why newline here?*/
 	result[i + j + 1] = '\0';
 	return (result);
 }
 
-void	out_of_bounds_procection(t_mlx *mlx, int len)
-{
-	int	longest;
-	int	i;
-	int	m;
 
-	len = 0;
-	i = -1;
-	longest = 0;
-	while (mlx->parse->map[++i])
-	{
-		len = ft_strlen(mlx->parse->map[i]);
-		if (len > longest)
-			longest = len;
-	}
-	longest--;
-	mlx->parse->cols = i;
-	mlx->parse->rows = longest;
-	i = -1;
-	while (mlx->parse->map[++i])
-	{
-		m = 0;
-		while (mlx->parse->map[i][m])
-			m++;
-		mlx->parse->map[i] = combine_strs(mlx->parse->map[i],
-				fill_spaces(longest - m));
-	}
-}
-
-void	flood_fill(t_mlx *mlx, int x, int y, char **map_copy)
+void	flood_fill(t_mlx *mlx, int x, int y, char **map_copy) /*compare to my floodfill*/
 {
 	if (x < 0 || x >= mlx->parse->cols || y < 0
 		|| y >= (int)ft_strlen(map_copy[x]))
 		clean_exit("Error: player isn't locked inside the map\n");
-	else if (map_copy[x][y] == '1' || map_copy[x][y] == '*')
+	else if (map_copy[x][y] == '1')
 		return ;
-	map_copy[x][y] = '*';
+	map_copy[x][y] = '1';
 	flood_fill(mlx, x - 1, y, map_copy);
 	flood_fill(mlx, x + 1, y, map_copy);
 	flood_fill(mlx, x, y - 1, map_copy);
@@ -105,7 +77,6 @@ void	flood_fill_organizer(t_mlx *mlx)
 	int		len;
 
 	len = 0;
-	out_of_bounds_procection(mlx, len);
 	mlx->parse->ply_x_pos_in_map = 0;
 	mlx->parse->ply_y_pos_in_map = 0;
 	find_player(mlx);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:44:40 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/04 12:24:32 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
+# define FOV 60
+# define TILE_SIZE 50
+# define RAY_LIMIT 120
 
 /*Parsing*/
 typedef struct s_parsing
@@ -55,8 +58,18 @@ typedef struct s_parsing
 
 typedef struct s_player
 {
-	double			angle;
+	float			player_angle;
+	float			most_left_angle;
+	float			most_right_angle;	
+	int				ply_x_coord;
+	int				ply_y_coord;
 }	t_player;
+
+typedef struct raytracing
+{
+	mlx_image_t	*minimap;
+	double		main_ray;
+}	t_raytracing;
 
 /*Mainstruct*/
 typedef struct s_mlx
@@ -66,8 +79,7 @@ typedef struct s_mlx
 	mlx_key_data_t	*key_data;
 	t_parsing		*parse;
 	t_player		*ply;
-	// t_raytracing	*ray;
-	// t_texture		*f_txt;
+	t_raytracing	*ray;
 }	t_mlx;
 
 /*Parsing*/
@@ -75,6 +87,23 @@ void	fill_parse_struct(t_mlx *mlx);
 void	validate_map(t_mlx *mlx);
 void	flood_fill_organizer(t_mlx *mlx);
 void	parsing(t_mlx *mlx, char *filename);
+
+/*Input reception*/
+char	*clean_data(char *str);
+int		get_floor_color(char *str_in, t_mlx *mlx, char *line);
+int		get_celing_color(char *str_in, t_mlx *mlx, char *line);
+int		graphic_path_west(char *str_in, t_mlx *mlx, char *line);
+int		graphic_path_east(char *str_in, t_mlx *mlx, char *line);
+int		graphic_path_north(char *str_in, t_mlx *mlx, char *line);
+int		graphic_path_south(char *str_in, t_mlx *mlx, char *line);
+void	check_if_exists(char *str1, char *str2, t_mlx *mlx, char *line);
+
+
+/*Minimap*/
+void	minimap_draw(t_mlx *mlx);
+void	raycasting(t_mlx *mlx);
+void	raycasting_init(t_mlx *mlx);
+
 
 /*Main*/
 void	clean_exit(char *str);

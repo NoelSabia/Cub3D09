@@ -14,13 +14,16 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)parsing/flood_fill_preparation.c \
 		$(SRCDIR)parsing/flood_fill_helpers.c \
 		$(SRCDIR)parsing/fill_struct.c \
-		$(SRCDIR)parsing/fill_struct_helpers.c \
-		$(SRCDIR)player_movement/player_movement.c
+		$(SRCDIR)parsing/graphic_orientation.c \
+		$(SRCDIR)player_movement/player_movement.c \
+		$(SRCDIR)raycasting/minimap.c \
+		$(SRCDIR)raycasting/raycasting.c \
+
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
-CC := cc
+CC := cc -fsanitize=address -g
 
 MLX_LIB		= ./MLX42/build/libmlx42.a
 MLX_PATH	= ./MLX42
