@@ -6,13 +6,14 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/11 12:36:42 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/23 17:39:32 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord);
+int		minimap_dynamic_scale(t_mlx *mlx);
 
 float	rad_to_degree(float radian)
 {
@@ -32,8 +33,8 @@ float	degree_to_rad(float degree)
 
 void	raycasting_init(t_mlx *mlx)
 {
-	mlx->ply->ply_x_coord = (mlx->parse->ply_x_pos_in_map) * TILE_SIZE + TILE_SIZE / 2;
-	mlx->ply->ply_y_coord = (mlx->parse->ply_y_pos_in_map) * TILE_SIZE + TILE_SIZE / 2;
+	mlx->ply->ply_y_coord = (mlx->parse->ply_x_pos_in_map) * minimap_dynamic_scale(mlx) + minimap_dynamic_scale(mlx) / 2;
+	mlx->ply->ply_x_coord = (mlx->parse->ply_y_pos_in_map) * minimap_dynamic_scale(mlx) + minimap_dynamic_scale(mlx) / 2;
     mlx->ply->most_left_angle = mlx->ply->player_angle - (FOV / 2);
     mlx->ply->most_right_angle = mlx->ply->most_left_angle + FOV;
     if (mlx->ply->most_left_angle < 0)
@@ -165,7 +166,7 @@ void	raycasting(t_mlx *mlx)
 	{
 		x_coord = get_x_inter(mlx, num_check(mlx->ray->main_ray));
 		y_coord = get_y_inter(mlx, num_check(mlx->ray->main_ray));
-		printf("x: %f y: %f main_ray: %f\n", x_coord, y_coord, mlx->ray->main_ray);
+		// printf("x: %f y: %f main_ray: %f\n", x_coord, y_coord, mlx->ray->main_ray);
 		i++;
 		mlx->ray->main_ray = num_check(mlx->ray->main_ray + ((double)FOV / (double)RAY_LIMIT));
 		minimap_draw_line(mlx, x_coord, y_coord);
