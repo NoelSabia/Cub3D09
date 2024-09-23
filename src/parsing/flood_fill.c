@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/23 16:41:19 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/21 00:58:08 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ char	*combine_strs(char *str1, char *str2)
 		str1[len - 1] = '\0';
 	i = -1;
 	while (str1[++i])
-		result[i] = str1[i];
+		result[i] = str1[i]; /*use strcpy here*/
 	while (str2[++j])
-		result[i + j] = str2[j];
-	result[i + j] = '\n';
+		result[i + j] = str2[j]; /*use strcpy here*/
+	result[i + j] = '\n'; /*why newline here?*/
 	result[i + j + 1] = '\0';
 	return (result);
 }
 
-void	out_of_bounds_procection(t_mlx *mlx, int len)
+void	out_of_bounds_procection(t_mlx *mlx, int len) /*pls explain this*/
 {
 	int	longest;
 	int	i;
@@ -85,7 +85,7 @@ void	out_of_bounds_procection(t_mlx *mlx, int len)
 	}
 }
 
-void	flood_fill(t_mlx *mlx, int x, int y, char **map_copy)
+void	flood_fill(t_mlx *mlx, int x, int y, char **map_copy) /*compare to my floodfill*/
 {
 	if (x < 0 || x >= mlx->parse->cols || y < 0
 		|| y >= (int)ft_strlen(map_copy[x]))

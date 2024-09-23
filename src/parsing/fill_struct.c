@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:05:20 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/28 17:38:20 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/09/21 00:37:40 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,40 +87,6 @@ int	get_celing_color(char *str_in, t_mlx *mlx, char *line)
 // 	}
 // 	return (1);
 // }
-
-int	graphic_path_west(char *str_in, t_mlx *mlx, char *line)
-{
-	char	*str_tmp;
-
-	if (ft_strncmp(str_in, "WE", 2) == 0)
-	{
-		if (mlx->parse->west_set)
-			clean_exit("Error: 'WE' specified more than once.");
-		str_tmp = clean_data(line);
-		mlx->parse->west = str_tmp;
-		mlx->parse->west_set = 1;
-		mlx->parse->input_counter++;
-		return (1);
-	}
-	return (0);
-}
-
-int	graphic_path_east(char *str_in, t_mlx *mlx, char *line)
-{
-	char	*str_tmp;
-
-	if (ft_strncmp(str_in, "EA", 2) == 0)
-	{
-		if (mlx->parse->east_set)
-			clean_exit("Error: 'EA' specified more than once.");
-		str_tmp = clean_data(line);
-		mlx->parse->east = str_tmp;
-		mlx->parse->east_set = 1;
-		mlx->parse->input_counter++;
-		return (1);
-	}
-	return (0);
-}
 
 // int	check_if_exists2(char *str1, char *str2, t_mlx *mlx, char *line)
 // {

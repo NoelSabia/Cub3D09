@@ -14,7 +14,7 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)parsing/flood_fill_preparation.c \
 		$(SRCDIR)parsing/flood_fill_helpers.c \
 		$(SRCDIR)parsing/fill_struct.c \
-		$(SRCDIR)parsing/fill_struct_helpers.c \
+		$(SRCDIR)parsing/graphic_orientation.c \
 		$(SRCDIR)player_movement/player_movement.c \
 		$(SRCDIR)raycasting/minimap.c \
 		$(SRCDIR)raycasting/raycasting.c \
