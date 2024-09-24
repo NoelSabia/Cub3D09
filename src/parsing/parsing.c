@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:47:05 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/02 13:23:35 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/23 15:39:25 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-char	*replace_tab_helper(const char *str, char *result, int *j, int *i);
 
 char	*read_into_input(char *filename)
 {
@@ -32,25 +30,21 @@ char	*read_into_input(char *filename)
 	return (buffer);
 }
 
-char	*replace_tab(const char *str, char old_char, const char *new_str)
+char	*replace_tab(const char *str)
 {
 	int		i;
 	int		count;
 	int		new_str_len;
 	char	*result;
-	int		j;
 
 	i = -1;
 	count = 0;
-	j = -1;
-	new_str_len = ft_strlen(new_str);
 	while (str[++i])
-		if (str[i] == old_char)
+		if (str[i] == '\t')
 			count++;
-	result = ft_calloc(1, (count * new_str_len) + (ft_strlen(str) + 1) + 10);
-	i = -1;
-	result = replace_tab_helper(str, result, &j, &i);
-	result[++j] = '\0';
+	new_str_len = ((count * 4) + ft_strlen(str) + 2);
+	result = ft_calloc(new_str_len, 1);
+	result = ft_tab_to_space(str, result);
 	return (result);
 }
 
@@ -117,7 +111,7 @@ void	parsing(t_mlx *mlx, char *filename)
 	if (!ft_strnstr(filename, ".cub", ft_strlen(filename)))
 		clean_exit("Please submit a .cub file!\n");
 	output = read_into_input(filename);
-	clean_output = replace_tab(output, '	', "    ");
+	clean_output = replace_tab(output);
 	put_in_2d_str(mlx, clean_output);
 	fill_parse_struct(mlx);
 	validate_map(mlx);
