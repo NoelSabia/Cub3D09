@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/23 17:39:43 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/25 12:00:19 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ void draw_walls(t_mlx *mlx)
 
 void draw_player (t_mlx *mlx)
 {
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord + 1, mlx->ply->ply_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord + 2, mlx->ply->ply_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord - 1, mlx->ply->ply_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord - 2, mlx->ply->ply_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord + 1, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord - 1, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord + 2, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord - 2, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord, mlx->ply->minimap_y_coord, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord + 1, mlx->ply->minimap_y_coord, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord + 2, mlx->ply->minimap_y_coord, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord - 1, mlx->ply->minimap_y_coord, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord - 2, mlx->ply->minimap_y_coord, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord, mlx->ply->minimap_y_coord + 1, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord, mlx->ply->minimap_y_coord - 1, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord, mlx->ply->minimap_y_coord + 2, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord, mlx->ply->minimap_y_coord - 2, 0x00FF00FF);
 }
 
 void draw_vert (t_mlx *mlx)
@@ -124,39 +124,53 @@ void draw_horiz (t_mlx *mlx)
 	}
 }
 
-void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord)
+int		new_minimap_target(int target)
 {
-	int dx = ft_abs((int)x_coord - mlx->ply->ply_x_coord);
-	int dy = ft_abs((int)y_coord - mlx->ply->ply_y_coord);
-	int sx = (mlx->ply->ply_x_coord < (int)x_coord) ? 1 : -1;
-	int sy = (mlx->ply->ply_y_coord < (int)y_coord) ? -1 : 1;
-	int err = dx - dy;
-	int	e2;
-	int x_coord_tmp = mlx->ply->ply_x_coord;
-	int y_coord_tmp = mlx->ply->ply_y_coord;
+	int	new_target;
+
+	new_target = target / 2;
+	// printf("new: %d\n", new_target);
+	return (new_target);
+}
+
+void	minimap_draw_line(t_mlx *mlx, float target_x, float target_y)
+{
+	int delta_x = ft_abs(new_minimap_target((int)target_x) - mlx->ply->minimap_x_coord);
+	int delta_y = ft_abs(new_minimap_target((int)target_y) - mlx->ply->minimap_y_coord);
+	int step_x = (mlx->ply->minimap_x_coord < (int)target_x) ? 1 : -1;
+	int step_y = (mlx->ply->minimap_y_coord < (int)target_y) ? -1 : 1;
+	int error = delta_x - delta_y;
+	int	double_error;
+	int current_x = mlx->ply->minimap_x_coord;
+	int current_y = mlx->ply->minimap_y_coord;
     while (1)
 	{
-		if ((x_coord_tmp > 0 && x_coord_tmp < TILE_SIZE*(mlx->parse->rows + 1)) && (y_coord_tmp > 0 && y_coord_tmp < TILE_SIZE*(mlx->parse->cols + 1)))
-			mlx_put_pixel(mlx->ray->minimap, x_coord_tmp, y_coord_tmp, 0x00FF00FF);
-		if (x_coord_tmp >= (int)x_coord
-            && y_coord_tmp >= (int)y_coord)
+		if ((current_x > 0 && current_x < minimap_dynamic_scale(mlx) * (mlx->parse->rows + 1)) &&
+            (current_y > 0 && current_y < minimap_dynamic_scale(mlx) * (mlx->parse->cols + 1)))
+			mlx_put_pixel(mlx->ray->minimap, current_x, current_y, 0x00FF00FF);
+		if (current_x >= new_minimap_target((int)target_x) && current_y >= new_minimap_target((int)target_y))
 			break;
-        e2 = err * 2;
-        if (e2 > -dy)
+        double_error = error * 2;
+        if (double_error > -delta_y)
 		{
-            err -= dy;
-            x_coord_tmp += sx;
+            error -= delta_y;
+            current_x += step_x;
         }
-        if (e2 < dx)
+        if (double_error < delta_x)
 		{
-            err += dx;
-            y_coord_tmp -= sy;
+            error += delta_x;
+            current_y -= step_y;
         }
     }
 }
 
+
 void	minimap_draw(t_mlx *mlx)
 {
+	//This is to check where the  player is
+	mlx->ply->minimap_y_coord = (mlx->parse->ply_x_pos_in_map) * minimap_dynamic_scale(mlx) + minimap_dynamic_scale(mlx) / 2;
+	mlx->ply->minimap_x_coord = (mlx->parse->ply_y_pos_in_map) * minimap_dynamic_scale(mlx) + minimap_dynamic_scale(mlx) / 2;
+
 	//This just draws horizontal and vertical lines
 	draw_vert(mlx);
 	draw_horiz(mlx);
@@ -164,11 +178,4 @@ void	minimap_draw(t_mlx *mlx)
 	//This draws the walls (so fills the squares from the lines) and draws the player
 	draw_walls(mlx);
 	draw_player(mlx);
-
-	//This function can be useful for the raycasting
-	//First param: mlx, Second param: x_coordinate, Third param: y_coordinate
-	// minimap_draw_line(mlx, 500, 500);
-
-	//raycasting
-	// raycasting(mlx);
 }
