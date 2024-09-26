@@ -3,12 +3,16 @@ NAME = libft.a
 SOURCES = ft_atoi.c \
 ft_bzero.c \
 ft_calloc.c \
+ft_free_all.c \
+ft_free.c \
 ft_isalnum.c \
 ft_isalpha.c \
 ft_isascii.c \
 ft_isdigit.c \
 ft_isprint.c \
 ft_itoa.c \
+ft_malloc_str_arr.c \
+ft_malloc.c \
 ft_memchr.c \
 ft_memcmp.c \
 ft_memcpy.c \
@@ -38,8 +42,7 @@ ft_tolower.c \
 ft_toupper.c \
 ft_strncpy.c \
 ft_realloc.c \
-garbage_collector.c \
-garbage_collector2.c
+garbage_collector.c
 
 OBJ = ${SOURCES:.c=.o}
 

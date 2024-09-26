@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:34:25 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 14:07:55 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/09/26 16:35:16 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define GARBAGE_SUCCESS 0
 
 # include <stdlib.h>
+# include <stdbool.h>
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -57,8 +58,17 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	*ft_strncpy(char *src, int start, int end);
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+bool	ft_malloc_str_arr(size_t size, char ***arr);
+
+
+/* for garbage collector*/
+int		*garbage_col_count(void);
+void	***garbage_col_get(void);
 void	*ft_malloc(size_t size);
+int		ft_garbage_col_create(void);
+int		ft_garbage_col_add(void *ptr);
+void	ft_free(void *ptr);
 void	ft_free_all(void);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_preparation.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:14:01 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/24 14:46:04 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/09/26 13:17:45 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,35 +67,8 @@ void	search_for_map_start(t_mlx *mlx)
 	}
 }
 
-void	search_player_position(t_mlx *mlx)
-{
-	int	i;
-	int	m;
-	int	player_count;
-
-	i = -1;
-	player_count = 0;
-	while (mlx->parse->map[++i])
-	{
-		m = 0;
-		while (mlx->parse->map[i][m] == '\t' || mlx->parse->map[i][m] == ' '
-			|| mlx->parse->map[i][m] == '1' || mlx->parse->map[i][m] == '0')
-			m++;
-		if (mlx->parse->map[i][m] == 'N' || mlx->parse->map[i][m] == 'S'
-			|| mlx->parse->map[i][m] == 'W' || mlx->parse->map[i][m] == 'E')
-		{
-			mlx->parse->ply_y_pos_in_map = i;
-			mlx->parse->ply_x_pos_in_map = m;
-			player_count++;
-		}
-	}
-	if (player_count > 1)
-		clean_exit("More then one player detected!");
-}
-
 void	validate_map(t_mlx *mlx)
 {
 	search_for_map_start(mlx);
-	search_player_position(mlx);
 	flood_fill_organizer(mlx);
 }
