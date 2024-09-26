@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 08:37:48 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/26 10:09:27 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	raycasting_init(t_mlx *mlx)
     mlx->ply->most_right_angle = num_check(mlx->ply->player_angle + ((M_PI / 2) / 2));
 }
 
-bool	intersec_check(float main_ray_angle, float *intersec, float *step, bool is_w_to_east)
+bool	intersec_check(float main_ray_angle, float *intersec, float *step, bool is_horizontal)
 {
-	if (is_w_to_east == true)
+	if (is_horizontal == true)
 	{
 		if (main_ray_angle > 0 && main_ray_angle < M_PI)
 		{
@@ -44,7 +44,7 @@ bool	intersec_check(float main_ray_angle, float *intersec, float *step, bool is_
 		}
 		*step *= -1;
 	}
-	if (is_w_to_east == false)
+	if (is_horizontal == false)
 	{
 		if (!(main_ray_angle > (M_PI / 2) && main_ray_angle < (3 * M_PI) / 2))
 		{
@@ -94,10 +94,10 @@ double	get_y_inter(t_mlx *mlx, double main_ray_angle)
 
 	y_step = TILE_SIZE;
 	x_step = TILE_SIZE / tan(main_ray_angle);
-	intersec_y = floor(mlx->ply->ply_y_coord / TILE_SIZE) * TILE_SIZE;
+	intersec_y = floor(mlx->ply->ply_y_coord / TILE_SIZE) * TILE_SIZE; //does this even make sense?
 	pixel = intersec_check(main_ray_angle, &intersec_y, &y_step, true);
 	intersec_x = mlx->ply->ply_x_coord + (intersec_y - mlx->ply->ply_y_coord) / tan(main_ray_angle);
-	if((unit_circle(main_ray_angle, false) && x_step > 0) || (!unit_circle(main_ray_angle, false) && x_step < 0))
+	if ((unit_circle(main_ray_angle, 'y') && x_step > 0) || (!unit_circle(main_ray_angle, 'y') && x_step < 0))
 		x_step *= -1;
 	while (wall_hit(intersec_x, intersec_y - pixel, mlx))
 	{
@@ -122,8 +122,8 @@ double	get_x_inter(t_mlx *mlx, double main_ray_angle)
 	pixel = intersec_check(main_ray_angle, &intersec_x, &x_step, false);
 	intersec_y = mlx->ply->ply_y_coord + (intersec_x - mlx->ply->ply_x_coord) * tan(main_ray_angle);
 	// printf("intersec_y: %f\n", intersec_y);	
-	if ((unit_circle(main_ray_angle, true) && x_step > 0) || (!unit_circle(main_ray_angle, true) && x_step < 0))
-		y_step *= -1;
+	if ((unit_circle(main_ray_angle, 'x') && y_step < 0) || (!unit_circle(main_ray_angle, 'x') && y_step > 0))
+    	y_step *= -1;
 	while (wall_hit(intersec_x - pixel, intersec_y, mlx))
 	{
 		intersec_x += x_step;
@@ -146,10 +146,10 @@ void	raycasting(t_mlx *mlx)
 		x_coord = get_x_inter(mlx, num_check(mlx->ray->main_ray));
 		y_coord = get_y_inter(mlx, num_check(mlx->ray->main_ray));
 		printf("x: %f y: %f main_ray: %f\n", x_coord, y_coord, mlx->ray->main_ray);
-		// exit(0);
 		i++;
 		mlx->ray->main_ray = num_check(mlx->ray->main_ray + ((M_PI / 2) / RAY_LIMIT));
-		printf("mainiterator: %f\n", ((M_PI / 2) / RAY_LIMIT));
+		// printf("mainiterator: %f\n", ((M_PI / 2) / RAY_LIMIT));
 		minimap_draw_line(mlx, x_coord, y_coord);
 	}
+	// exit(0);
 }
