@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
 /*   Updated: 2024/09/23 16:57:56 by tpaesch          ###   ########.fr       */
@@ -48,16 +48,44 @@ char	*combine_strs(char *str1, char *str2)
 		str1[len - 1] = '\0';
 	i = -1;
 	while (str1[++i])
-		result[i] = str1[i]; /*use strcpy here*/
+		result[i] = str1[i];
 	while (str2[++j])
-		result[i + j] = str2[j]; /*use strcpy here*/
-	result[i + j] = '\n'; /*why newline here?*/
+		result[i + j] = str2[j];
+	result[i + j] = '\n'; /*why newline here? cause if fucking works xD*/
 	result[i + j + 1] = '\0';
 	return (result);
 }
 
+void	out_of_bounds_procection(t_mlx *mlx, int len)
+{
+	int	longest;
+	int	i;
+	int	m;
 
-void	flood_fill(t_mlx *mlx, int x, int y, char **map_copy) /*compare to my floodfill*/
+	len = 0;
+	i = -1;
+	longest = 0;
+	while (mlx->parse->map[++i])
+	{
+		len = ft_strlen(mlx->parse->map[i]);
+		if (len > longest)
+			longest = len;
+	}
+	longest--;
+	mlx->parse->cols = i;
+	mlx->parse->rows = longest;
+	i = -1;
+	while (mlx->parse->map[++i])
+	{
+		m = 0;
+		while (mlx->parse->map[i][m])
+			m++;
+		mlx->parse->map[i] = combine_strs(mlx->parse->map[i],
+				fill_spaces(longest - m));
+	}
+}
+
+void	flood_fill(t_mlx *mlx, int x, int y, char **map_copy)
 {
 	if (x < 0 || x >= mlx->parse->cols || y < 0
 		|| y >= (int)ft_strlen(map_copy[x]))
@@ -81,6 +109,7 @@ void	flood_fill_organizer(t_mlx *mlx)
 	int 	y;
 
 	len = 0;
+	out_of_bounds_procection(mlx, len);
 	mlx->parse->ply_x_pos_in_map = 0;
 	mlx->parse->ply_y_pos_in_map = 0;
 	find_player(mlx);

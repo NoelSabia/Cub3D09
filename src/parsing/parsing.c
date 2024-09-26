@@ -83,17 +83,15 @@ void	player_direction(t_mlx *mlx)
 
 	c = mlx->parse->map[mlx->parse->ply_x_pos_in_map][mlx->parse->ply_y_pos_in_map];
 	if (c == 'E')
-		mlx->ply->player_angle = 90;
-	else if (c == 'N')
 		mlx->ply->player_angle = 0;
-	else if (c == 'W')
-		mlx->ply->player_angle = 270;
 	else if (c == 'S')
-		mlx->ply->player_angle = 180;
+		mlx->ply->player_angle = (M_PI / 2);
+	else if (c == 'W')
+		mlx->ply->player_angle = M_PI;
+	else if (c == 'N')
+		mlx->ply->player_angle = (3 * M_PI) / 2;
 	else
 		clean_exit("Player spawn is not W N E or S!");
-	// mlx->ply->most_left_angle = mlx->ply->angle + 30;
-	// mlx->ply->most_right_angle = mlx->ply->angle - 30;
 }
 
 void	parsing(t_mlx *mlx, char *filename)

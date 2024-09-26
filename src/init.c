@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/11 14:17:18 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/25 08:54:35 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,7 @@ void	game_loop(void *mlx_copy)
 	t_mlx	*mlx;
 
 	mlx = mlx_copy;
-
-	//all this stuff below is for the "3D" part
-	mlx_delete_image(mlx->mlx_p, mlx->img);
-	mlx->img = mlx_new_image(mlx->mlx_p, SCREEN_WIDTH, SCREEN_HEIGHT);
-	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
-	floor_and_ceiling_color_display(mlx);
-
-	//below code is for the minimap
-	mlx_delete_image(mlx->mlx_p, mlx->ray->minimap);
-	mlx->ray->minimap = mlx_new_image(mlx->mlx_p, TILE_SIZE*(mlx->parse->rows + 1), TILE_SIZE*(mlx->parse->cols + 1));
-    mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
+	ft_memset(mlx->ray->minimap->pixels , 0, mlx->ray->minimap->width * mlx->ray->minimap->height);
     minimap_draw(mlx);
 	raycasting(mlx);
 }
@@ -61,9 +51,11 @@ void	init(t_mlx *mlx)
 {
 	floor_and_ceiling_color(mlx);
 	raycasting_init(mlx);
+	mlx->ray->minimap = mlx_new_image(mlx->mlx_p, TILE_SIZE*(mlx->parse->rows + 1), TILE_SIZE*(mlx->parse->cols + 1));
     mlx->img = mlx_new_image(mlx->mlx_p, SCREEN_WIDTH, SCREEN_HEIGHT);
-    floor_and_ceiling_color_display(mlx);
     mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
+    floor_and_ceiling_color_display(mlx);
+    mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
 	mlx_loop_hook(mlx->mlx_p, &game_loop, mlx);
 	mlx_key_hook(mlx->mlx_p, &keyhook_organizer, mlx);
 	mlx_loop(mlx->mlx_p);
