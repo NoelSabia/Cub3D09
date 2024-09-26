@@ -6,13 +6,11 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/25 17:30:21 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/26 08:37:48 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-#define mainiterator 0.0174533
 
 void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord);
 int		minimap_dynamic_scale(t_mlx *mlx);
@@ -148,8 +146,10 @@ void	raycasting(t_mlx *mlx)
 		x_coord = get_x_inter(mlx, num_check(mlx->ray->main_ray));
 		y_coord = get_y_inter(mlx, num_check(mlx->ray->main_ray));
 		printf("x: %f y: %f main_ray: %f\n", x_coord, y_coord, mlx->ray->main_ray);
+		// exit(0);
 		i++;
-		mlx->ray->main_ray = num_check(mlx->ray->main_ray + mainiterator);
+		mlx->ray->main_ray = num_check(mlx->ray->main_ray + ((M_PI / 2) / RAY_LIMIT));
+		printf("mainiterator: %f\n", ((M_PI / 2) / RAY_LIMIT));
 		minimap_draw_line(mlx, x_coord, y_coord);
 	}
 }

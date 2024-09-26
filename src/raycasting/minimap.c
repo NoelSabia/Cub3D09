@@ -6,11 +6,12 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/25 12:00:19 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/25 19:53:33 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
 int	ft_abs(int num);
 
 int	minimap_dynamic_scale(t_mlx *mlx)
@@ -128,8 +129,7 @@ int		new_minimap_target(int target)
 {
 	int	new_target;
 
-	new_target = target / 2;
-	// printf("new: %d\n", new_target);
+	new_target = target / 100 * 25;
 	return (new_target);
 }
 
