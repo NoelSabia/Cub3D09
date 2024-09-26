@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/23 13:43:58 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/23 16:57:56 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	flood_fill(t_mlx *mlx, int x, int y, char **map_copy)
 	if (x < 0 || x >= mlx->parse->cols || y < 0
 		|| y >= (int)ft_strlen(map_copy[x]))
 		clean_exit("Error: player isn't locked inside the map\n");
+	else if (map_copy[x][y] != '0' && map_copy[x][y] != '1')
+		clean_exit("Error: Map is invalid!\n");
 	else if (map_copy[x][y] == '1')
 		return ;
 	map_copy[x][y] = '1';
@@ -103,6 +105,8 @@ void	flood_fill_organizer(t_mlx *mlx)
 {
 	char	**map_copy;
 	int		len;
+	int 	x;
+	int 	y;
 
 	len = 0;
 	out_of_bounds_procection(mlx, len);
@@ -110,6 +114,9 @@ void	flood_fill_organizer(t_mlx *mlx)
 	mlx->parse->ply_y_pos_in_map = 0;
 	find_player(mlx);
 	map_copy = map_copy_it(mlx);
+	x = mlx->parse->ply_x_pos_in_map;
+	y = mlx->parse->ply_y_pos_in_map;
+	map_copy[x][y] = '0';
 	flood_fill(mlx, mlx->parse->ply_x_pos_in_map,
 			mlx->parse->ply_y_pos_in_map, map_copy);
 }
