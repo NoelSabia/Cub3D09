@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_helpers.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:34:48 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/23 15:02:36 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/09/26 14:08:49 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,25 @@ int	ft_abs(int num)
 
 void	find_player(t_mlx *mlx)
 {
-	int		i;
-	int		j;
+	int		y;
+	int		x;
 
-	i = 0;
-	while (i < mlx->parse->cols)
+	y = -1;
+	while (++y < mlx->parse->cols)
 	{
-		j = 0;
-		while (mlx->parse->map[i][j] != '\n')
+		x = -1;
+		while (mlx->parse->map[y][++x] != '\n')
 		{
-			if (mlx->parse->map[i][j] == 'N' || mlx->parse->map[i][j] == 'S'\
-			|| mlx->parse->map[i][j] == 'W' || mlx->parse->map[i][j] == 'E')
+			if (mlx->parse->map[y][x] == 'N' || mlx->parse->map[y][x] == 'S'\
+			|| mlx->parse->map[y][x] == 'W' || mlx->parse->map[y][x] == 'E')
 			{
-				mlx->parse->ply_x_pos_in_map = i;
-				mlx->parse->ply_y_pos_in_map = j;
+				mlx->parse->ply_x_pos_in_map = x;
+				mlx->parse->ply_y_pos_in_map = y;
+				printf("x in prep: %d\n", x);
+				printf("y in prep: %d\n", y);
 				return ;
 			}
-			j++;
 		}
-		i++;
 	}
 }
 
@@ -48,13 +48,10 @@ char	**map_copy_it(t_mlx *mlx)
 	char	**copy;
 	int		i;
 
-	copy = ft_malloc((mlx->parse->cols + 1) * sizeof(char *));
-	i = 0;
-	while (i < mlx->parse->cols)
-	{
+	copy = ft_malloc((mlx->parse->rows + 1) * sizeof(char *));
+	i = -1;
+	while (++i < mlx->parse->rows)
 		copy[i] = ft_strdup(mlx->parse->map[i]);
-		i++;
-	}
 	copy[i] = NULL;
 	return (copy);
 }
