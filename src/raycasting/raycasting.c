@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 16:46:14 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/26 18:05:26 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,12 +138,17 @@ void	raycasting(t_mlx *mlx)
 
 	i = 0;
 	mlx->ray->main_ray = mlx->ply->most_left_angle;
-	//check if the iterations mess with the mainiterator (must fill out the fov of 90)
 	while (i < RAY_LIMIT)
 	{
 		x_coord = get_x_inter(mlx, num_check(mlx->ray->main_ray));
-		// y_coord = get_y_inter(mlx, num_check(mlx->ray->main_ray));
-		printf("x: %f y: %f main_ray: %f\n", x_coord, 0.0, mlx->ray->main_ray);
+		y_coord = get_y_inter(mlx, num_check(mlx->ray->main_ray));
+		if (x_coord <= y_coord)
+			mlx->ray->distance_to_w = x_coord;
+		else
+		{
+			mlx->ray->distance_to_w = y_coord;
+		}
+		printf("dist: %f\n", mlx->ray->distance_to_w);
 		i++;
 		mlx->ray->main_ray = num_check(mlx->ray->main_ray + ((M_PI / 2) / RAY_LIMIT));
 		// minimap_draw_line(mlx, x_coord, y_coord);

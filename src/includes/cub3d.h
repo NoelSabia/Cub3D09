@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/25 15:59:54 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/26 18:00:12 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct raytracing
 	mlx_image_t	*minimap;
 	double		main_ray;
 	int			wallhit_flag;
+	double		distance_to_w;
 }	t_raytracing;
 
 /*Mainstruct*/
