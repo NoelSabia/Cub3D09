@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_helpers.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:34:48 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/23 17:38:46 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/23 15:02:36 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,4 @@ char	**map_copy_it(t_mlx *mlx)
 	}
 	copy[i] = NULL;
 	return (copy);
-}
-
-char	*replace_tab_helper(const char *str, char *result, int *j, int *i)
-{
-	char	old_char;
-
-	old_char = '\t';
-	while (str[++(*i)])
-	{
-		if (str[*i] == old_char)
-		{
-			result[++(*j)] = ' ';
-			result[++(*j)] = ' ';
-			result[++(*j)] = ' ';
-			result[++(*j)] = ' ';
-		}
-		else
-			result[++(*j)] = str[*i];
-	}
-	return (result);
 }
