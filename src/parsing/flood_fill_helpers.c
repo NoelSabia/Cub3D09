@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:34:48 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 14:08:49 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:41:33 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,16 @@ void	find_player(t_mlx *mlx)
 	}
 }
 
-char	**map_copy_it(t_mlx *mlx)
+bool	map_copy_it(t_mlx *mlx, char ***map_copy)
 {
-	char	**copy;
 	int		i;
 
-	copy = ft_malloc((mlx->parse->rows + 1) * sizeof(char *));
+	map_copy = ft_malloc((mlx->parse->cols + 1) * sizeof(char *));
 	i = -1;
-	while (++i < mlx->parse->rows)
-		copy[i] = ft_strdup(mlx->parse->map[i]);
+	while (++i < mlx->parse->cols)
+		map_copy[i] = ft_strdup(mlx->parse->map[i]);
 	copy[i] = NULL;
+	for (int i = 0; i < 3; i++)
+		printf("line: %s\n", mlx->parse->map[i]);
 	return (copy);
 }
