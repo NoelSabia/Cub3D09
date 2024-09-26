@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 13:14:54 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/26 16:46:14 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,10 +143,10 @@ void	raycasting(t_mlx *mlx)
 	{
 		x_coord = get_x_inter(mlx, num_check(mlx->ray->main_ray));
 		// y_coord = get_y_inter(mlx, num_check(mlx->ray->main_ray));
-		// printf("x: %f y: %f main_ray: %f\n", x_coord, 0.0, mlx->ray->main_ray);
+		printf("x: %f y: %f main_ray: %f\n", x_coord, 0.0, mlx->ray->main_ray);
 		i++;
 		mlx->ray->main_ray = num_check(mlx->ray->main_ray + ((M_PI / 2) / RAY_LIMIT));
-		minimap_draw_line(mlx, x_coord, y_coord);
+		// minimap_draw_line(mlx, x_coord, y_coord);
 	}
 	exit(0);
 }
