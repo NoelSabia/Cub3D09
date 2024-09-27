@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:47:05 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 17:31:08 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/27 13:35:32 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ void	player_direction(t_mlx *mlx)
 
 	c = mlx->parse->map[mlx->parse->ply_y_pos_in_map][mlx->parse->ply_x_pos_in_map];
 	if (c == 'E')
-		mlx->ply->player_angle = 0;
+		mlx->ply->center_angle = 0;
 	else if (c == 'S')
-		mlx->ply->player_angle = (M_PI / 2);
+		mlx->ply->center_angle = (M_PI / 2);
 	else if (c == 'W')
-		mlx->ply->player_angle = M_PI;
+		mlx->ply->center_angle = M_PI;
 	else if (c == 'N')
-		mlx->ply->player_angle = (3 * M_PI) / 2;
+		mlx->ply->center_angle = (3 * M_PI) / 2;
 	else
 		clean_exit("Player spawn is not W N E or S!");
 }

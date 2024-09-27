@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 18:07:59 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/27 16:44:58 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	raycasting_init(t_mlx *mlx)
 
 	mlx->ply->ply_y_coord = (mlx->parse->ply_x_pos_in_map) * TILE_SIZE + TILE_SIZE / 2;
 	mlx->ply->ply_x_coord = (mlx->parse->ply_y_pos_in_map) * TILE_SIZE + TILE_SIZE / 2;
-	mlx->ply->most_left_angle = num_check(mlx->ply->player_angle - ((M_PI / 2) / 2));
-    mlx->ply->most_right_angle = num_check(mlx->ply->player_angle + ((M_PI / 2) / 2));
+	mlx->ply->most_left_angle = num_check(mlx->ply->center_angle - ((M_PI / 2) / 2));
+    mlx->ply->most_right_angle = num_check(mlx->ply->center_angle + ((M_PI / 2) / 2));
 }
 
 bool	intersec_check(float main_ray_angle, float *intersec, float *step, bool is_horizontal)
@@ -148,9 +148,9 @@ void	raycasting(t_mlx *mlx)
 		{
 			mlx->ray->distance_to_w = x_coord;
 		}
-		printf("dist: %f\n", mlx->ray->distance_to_w);
+		// printf("dist: %f\n", mlx->ray->distance_to_w);
+		// printf("center_angle: %f\n", mlx->ply->center_angle);
 		i++;
 		mlx->ray->main_ray = num_check(mlx->ray->main_ray + ((M_PI / 2) / RAY_LIMIT));
-		// minimap_draw_line(mlx, x_coord, y_coord);
 	}
 }

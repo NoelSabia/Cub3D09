@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 18:00:12 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/27 16:32:21 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define FOV 60
 # define TILE_SIZE 50
 # define RAY_LIMIT 120
+# define ROTATION_SPEED M_PI / 100
 
 /*Parsing*/
 typedef struct s_parsing
@@ -58,13 +59,19 @@ typedef struct s_parsing
 
 typedef struct s_player
 {
-	float			player_angle;
 	float			most_left_angle;
+	float			center_angle;
 	float			most_right_angle;
 	int				ply_x_coord;
 	int				ply_y_coord;
 	int				minimap_x_coord;
 	int				minimap_y_coord;	
+	bool			looking_left;
+	bool			looking_right;
+	bool			pressing_w;
+	bool			pressing_a;
+	bool			pressing_s;
+	bool			pressing_d;
 }	t_player;
 
 typedef struct raytracing

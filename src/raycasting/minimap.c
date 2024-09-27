@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 18:09:53 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/27 13:38:01 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,47 +124,6 @@ void draw_horiz (t_mlx *mlx)
 		k++;
 	}
 }
-
-// int		new_minimap_target(int target)
-// {
-// 	int	new_target;
-
-// 	new_target = target;
-// 	return (new_target);
-// }
-
-void	minimap_draw_line(t_mlx *mlx, float target_x, float target_y)
-{
-	int delta_x = ft_abs(((int)target_x) - mlx->ply->ply_x_coord);
-	int delta_y = ft_abs(((int)target_y) - mlx->ply->ply_y_coord);
-	int step_x = (mlx->ply->ply_x_coord < (int)target_x) ? 1 : -1;
-	int step_y = (mlx->ply->ply_y_coord < (int)target_y) ? -1 : 1;
-	int error = delta_x - delta_y;
-	int	double_error;
-	int current_x = mlx->ply->ply_x_coord;
-	int current_y = mlx->ply->ply_y_coord;
-    while (1)
-	{
-		if ((current_x > 0 && current_x < current_x * (mlx->parse->rows + 1)) &&
-            (current_y > 0 && current_y < current_y * (mlx->parse->cols + 1)) &&
-			target_x < 1920 && target_y < 1080)
-			mlx_put_pixel(mlx->ray->minimap, current_x, current_y, 0x00FF00FF);
-		if (current_x >= ((int)target_x) && current_y >= ((int)target_y))
-			break;
-        double_error = error * 2;
-        if (double_error > -delta_y)
-		{
-            error -= delta_y;
-            current_x += step_x;
-        }
-        if (double_error < delta_x)
-		{
-            error += delta_x;
-            current_y -= step_y;
-        }
-    }
-}
-
 
 void	minimap_draw(t_mlx *mlx)
 {
