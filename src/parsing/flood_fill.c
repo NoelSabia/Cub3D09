@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 17:30:26 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/28 21:52:25 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void	flood_fill(t_mlx *mlx, int x, int y, char **map_copy)
 	// for (int i  = 0; i < 5 ; i++)
 	// 	for (int j = 0; j < 3; j++)
 	// 	printf("%c", map_copy[i][j]);
-	if (x < 0 || x >= mlx->parse->cols || y < 0
-		|| y >= (int)ft_strlen(map_copy[x]))
+	if (y < 0 || y >= mlx->parse->cols || x < 0
+		|| x >= (int)ft_strlen(map_copy[x]))
 		clean_exit("Error: player isn't locked inside the map\n");
 	else if (map_copy[x][y] != '0' && map_copy[x][y] != '1')
 		clean_exit("Error: Map is invalid!\n");

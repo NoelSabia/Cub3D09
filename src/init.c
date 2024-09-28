@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/25 08:54:35 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/28 21:55:58 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	game_loop(void *mlx_copy)
 
 void	init(t_mlx *mlx)
 {
+	mlx->mlx_p = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D", 0);
 	floor_and_ceiling_color(mlx);
 	raycasting_init(mlx);
 	mlx->ray->minimap = mlx_new_image(mlx->mlx_p, TILE_SIZE*(mlx->parse->rows + 1), TILE_SIZE*(mlx->parse->cols + 1));

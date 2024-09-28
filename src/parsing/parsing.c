@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:47:05 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/27 13:35:32 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/28 22:23:43 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char	*read_into_input(char *filename)
+char	*readCubFile(char *filename)
 {
 	int			fd;
 	char		*buffer;
@@ -30,12 +30,12 @@ char	*read_into_input(char *filename)
 	return (buffer);
 }
 
-char	*replace_tab(const char *str)
+char	*mapTabstoSpaces(const char *str)
 {
 	int		i;
 	int		count;
 	int		new_str_len;
-	char	*result;
+	char	*newLineWithoutTabs;
 
 	i = -1;
 	count = 0;
@@ -43,12 +43,12 @@ char	*replace_tab(const char *str)
 		if (str[i] == '\t')
 			count++;
 	new_str_len = ((count * 4) + ft_strlen(str) + 2);
-	result = ft_calloc(new_str_len, 1);
-	result = ft_tab_to_space(str, result);
-	return (result);
+	newLineWithoutTabs = ft_calloc(new_str_len, 1);
+	newLineWithoutTabs = ft_tab_to_space(str, newLineWithoutTabs);
+	return (newLineWithoutTabs);
 }
 
-void	put_in_2d_str(t_mlx *mlx, char *clean_output)
+void	put_in_2d_str(t_mlx *mlx, char *clean_file_content)
 {
 	int		i;
 	int		j;
@@ -60,16 +60,16 @@ void	put_in_2d_str(t_mlx *mlx, char *clean_output)
 	j = 0;
 	k = 0;
 	line_count = 0;
-	while (clean_output[++i])
-		if (clean_output[i] == '\n')
+	while (clean_file_content[++i])
+		if (clean_file_content[i] == '\n')
 			line_count++;
 	mlx->parse->input = ft_malloc((line_count + 3) * sizeof(char *));
 	i = 0;
-	while (clean_output[i])
+	while (clean_file_content[i])
 	{
-		while (clean_output[i] && clean_output[i] != '\n')
+		while (clean_file_content[i] && clean_file_content[i] != '\n')
 			i++;
-		str = ft_strncpy(clean_output, j, i);
+		str = ft_strncpy(clean_file_content, j, i);
 		i++;
 		j = i;
 		mlx->parse->input[k++] = ft_strdup(str);
@@ -94,12 +94,12 @@ void	player_direction(t_mlx *mlx)
 		clean_exit("Player spawn is not W N E or S!");
 }
 
-void	parsing(t_mlx *mlx, char *filename)
+void	validateArgsAndFileName(char *filename, int argc)
 {
-	char	*output;
-	char	*clean_output;
 	char	*cub;
 
+	if (argc < 2 || argc > 2)
+		clean_exit("Usage: ./Cub3d <filename>.cub\n");
 	cub = ft_strnstr(filename, ".cub", ft_strlen(filename));
 	if (!cub || cub == filename)
 		clean_exit("No .cub found!");
@@ -108,9 +108,17 @@ void	parsing(t_mlx *mlx, char *filename)
 			clean_exit("Please only .cub at the end!\n");
 	if (!ft_strnstr(filename, ".cub", ft_strlen(filename)))
 		clean_exit("Please submit a .cub file!\n");
-	output = read_into_input(filename);
-	clean_output = replace_tab(output);
-	put_in_2d_str(mlx, clean_output);
+}
+
+void	parsing(t_mlx *mlx, char *filename, int argc)
+{
+	char	*file_content;
+	char	*clean_file_content;
+
+	validateArgsAndFileName(filename, argc);
+	file_content = readCubFile(filename);
+	clean_file_content = mapTabstoSpaces(file_content);
+	put_in_2d_str(mlx, clean_file_content);
 	fill_parse_struct(mlx);
 	validate_map(mlx);
 	player_direction(mlx);

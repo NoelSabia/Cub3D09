@@ -6,7 +6,7 @@
 /*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:38:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/27 17:25:38 by noel             ###   ########.fr       */
+/*   Updated: 2024/09/28 22:00:18 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,24 @@ void	clean_exit(char *str)
 	exit(EXIT_FAILURE);
 }
 
-
-int	main(int argc, char *argv[])
+t_mlx *initalize_structs()
 {
-	t_mlx	*mlx;
+	t_mlx *mlx;
 
-	if (argc < 2 || argc > 2)
-		clean_exit("Usage: ./Cub3d <filename>.cub\n");
 	mlx = ft_calloc(1, sizeof(t_mlx));
 	mlx->parse = ft_calloc(1, sizeof(t_parsing));
 	mlx->ply = ft_calloc(1, sizeof(t_player));
 	mlx->ray = ft_calloc(1, sizeof(t_raytracing));
 	mlx->key_data = ft_calloc(1, sizeof(mlx_key_data_t));
-	mlx->mlx_p = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D", 0);
-	parsing(mlx, argv[1]);
+	return (mlx);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_mlx	*mlx;
+
+	mlx = initalize_structs();
+	parsing(mlx, argv[1], argc);
 	init(mlx);
 	ft_free_all();
 	return (0);

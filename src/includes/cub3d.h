@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/27 16:32:21 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/28 22:00:35 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct s_mlx
 void	fill_parse_struct(t_mlx *mlx);
 void	validate_map(t_mlx *mlx);
 void	flood_fill_organizer(t_mlx *mlx);
-void	parsing(t_mlx *mlx, char *filename);
+void	parsing(t_mlx *mlx, char *filename, int argc);
 
 /*Input reception*/
 char	*clean_data(char *str);
