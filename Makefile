@@ -7,8 +7,8 @@ HEADERS := -I ./include -I ./libft -I ./MLX/include
 SRCDIR := ./src/
 SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)init.c \
-		$(SRCDIR)wall_render/floor_ceiling_color.c \
-		$(SRCDIR)wall_render/floor_ceiling_helper.c \
+		$(SRCDIR)floor_and_ceiling_render/floor_ceiling_color.c \
+		$(SRCDIR)floor_and_ceiling_render/floor_ceiling_helper.c \
 		$(SRCDIR)parsing/parsing.c \
 		$(SRCDIR)parsing/flood_fill.c \
 		$(SRCDIR)parsing/flood_fill_preparation.c \

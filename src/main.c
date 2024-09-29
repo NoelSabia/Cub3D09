@@ -6,13 +6,13 @@
 /*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:38:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/28 22:00:18 by noel             ###   ########.fr       */
+/*   Updated: 2024/09/29 10:58:27 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-void	init(t_mlx *mlx);
+void	startGame(t_mlx *mlx);
 
 void	clean_exit(char *str)
 {
@@ -40,7 +40,7 @@ int	main(int argc, char *argv[])
 
 	mlx = initalize_structs();
 	parsing(mlx, argv[1], argc);
-	init(mlx);
+	startGame(mlx);
 	ft_free_all();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/28 22:00:35 by noel             ###   ########.fr       */
+/*   Updated: 2024/09/29 12:58:38 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,12 @@ typedef struct s_mlx
 }	t_mlx;
 
 /*Parsing*/
-void	fill_parse_struct(t_mlx *mlx);
-void	validate_map(t_mlx *mlx);
-void	flood_fill_organizer(t_mlx *mlx);
+void	verifyMapPathAndFile(t_mlx *mlx);
+void	validateMap(t_mlx *mlx);
+void	floodFillOrganizer(t_mlx *mlx);
 void	parsing(t_mlx *mlx, char *filename, int argc);
+void	floorAndCeilingColor(t_mlx *mlx);
+
 
 /*Input reception*/
 char	*clean_data(char *str);
@@ -113,7 +115,7 @@ void	check_if_exists(char *str1, char *str2, t_mlx *mlx, char *line);
 /*Minimap*/
 void	minimap_draw(t_mlx *mlx);
 void	raycasting(t_mlx *mlx);
-void	raycasting_init(t_mlx *mlx);
+void	initalizeRaycasting(t_mlx *mlx);
 
 
 /*Main*/

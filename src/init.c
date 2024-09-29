@@ -6,7 +6,7 @@
 /*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/28 21:55:58 by noel             ###   ########.fr       */
+/*   Updated: 2024/09/29 12:59:10 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_values(t_mlx *mlx);
 void	floor_and_ceiling_color(t_mlx *mlx);
 void	keyhook_organizer(mlx_key_data_t keydata, void *mlx_copy);
 
-void	floor_and_ceiling_color_display(t_mlx *mlx)
+void	displayFloorAndCeiling(t_mlx *mlx)
 {
 	int	x;
 	int	y;
@@ -47,16 +47,20 @@ void	game_loop(void *mlx_copy)
 	raycasting(mlx);
 }
 
-void	init(t_mlx *mlx)
+void	initWindow(t_mlx *mlx)
 {
 	mlx->mlx_p = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D", 0);
-	floor_and_ceiling_color(mlx);
-	raycasting_init(mlx);
 	mlx->ray->minimap = mlx_new_image(mlx->mlx_p, TILE_SIZE*(mlx->parse->rows + 1), TILE_SIZE*(mlx->parse->cols + 1));
-    mlx->img = mlx_new_image(mlx->mlx_p, SCREEN_WIDTH, SCREEN_HEIGHT);
-    mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
-    floor_and_ceiling_color_display(mlx);
-    mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
+	mlx->img = mlx_new_image(mlx->mlx_p, SCREEN_WIDTH, SCREEN_HEIGHT);
+	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
+	mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
+}
+
+void	startGame(t_mlx *mlx)
+{
+	initWindow(mlx);
+	initalizeRaycasting(mlx);
+    displayFloorAndCeiling(mlx);
 	mlx_loop_hook(mlx->mlx_p, &game_loop, mlx);
 	mlx_key_hook(mlx->mlx_p, &keyhook_organizer, mlx);
 	mlx_loop(mlx->mlx_p);

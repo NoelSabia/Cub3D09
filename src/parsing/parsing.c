@@ -6,7 +6,7 @@
 /*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:47:05 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/28 22:23:43 by noel             ###   ########.fr       */
+/*   Updated: 2024/09/29 12:29:16 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*mapTabstoSpaces(const char *str)
 	return (newLineWithoutTabs);
 }
 
-void	put_in_2d_str(t_mlx *mlx, char *clean_file_content)
+void	convertMapStringIn2DArray(t_mlx *mlx, char *clean_file_content)
 {
 	int		i;
 	int		j;
@@ -77,7 +77,7 @@ void	put_in_2d_str(t_mlx *mlx, char *clean_file_content)
 	mlx->parse->input[k] = NULL;
 }
 
-void	player_direction(t_mlx *mlx)
+void	playerDirection(t_mlx *mlx)
 {
 	char	c;
 
@@ -118,8 +118,9 @@ void	parsing(t_mlx *mlx, char *filename, int argc)
 	validateArgsAndFileName(filename, argc);
 	file_content = readCubFile(filename);
 	clean_file_content = mapTabstoSpaces(file_content);
-	put_in_2d_str(mlx, clean_file_content);
-	fill_parse_struct(mlx);
-	validate_map(mlx);
-	player_direction(mlx);
+	convertMapStringIn2DArray(mlx, clean_file_content);
+	verifyMapPathAndFile(mlx);
+	validateMap(mlx);
+	floorAndCeilingColor(mlx);
+	playerDirection(mlx);
 }

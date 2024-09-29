@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:03:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/27 17:02:52 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/29 12:49:12 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ void	keyhook_organizer(mlx_key_data_t keydata, void *mlx_copy)
 	t_mlx	*mlx;
 
 	mlx = mlx_copy;
-	printf("roation_speed: %f\n", ROTATION_SPEED);
-	printf("looking_left: %s\n", mlx->ply->looking_left ? "true" : "false");
-	printf("most_left_angle: %f\n", mlx->ply->most_left_angle);
-	printf("middle_angle: %f\n", mlx->ply->center_angle);
-	printf("most_right_angle: %f\n", mlx->ply->most_right_angle);
-	printf("\n");
+	// printf("roation_speed: %f\n", ROTATION_SPEED);
+	// printf("looking_left: %s\n", mlx->ply->looking_left ? "true" : "false");
+	// printf("most_left_angle: %f\n", mlx->ply->most_left_angle);
+	// printf("middle_angle: %f\n", mlx->ply->center_angle);
+	// printf("most_right_angle: %f\n", mlx->ply->most_right_angle);
+	// printf("\n");
 	esc_key(keydata);
 	walk_around(keydata, mlx);
 	look_left(keydata, mlx);

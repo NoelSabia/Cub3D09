@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/27 16:44:58 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/29 12:58:19 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ float num_check(float angle)
     return (angle);
 }
 
-void	raycasting_init(t_mlx *mlx)
+void	initalizeRaycasting(t_mlx *mlx)
 {
 
 	mlx->ply->ply_y_coord = (mlx->parse->ply_x_pos_in_map) * TILE_SIZE + TILE_SIZE / 2;
