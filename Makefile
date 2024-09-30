@@ -7,8 +7,8 @@ HEADERS := -I ./include -I ./libft -I ./MLX/include
 SRCDIR := ./src/
 SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)init.c \
-		$(SRCDIR)wall_render/floor_ceiling_color.c \
-		$(SRCDIR)wall_render/floor_ceiling_helper.c \
+		$(SRCDIR)floor_and_ceiling_render/floor_ceiling_color.c \
+		$(SRCDIR)floor_and_ceiling_render/floor_ceiling_helper.c \
 		$(SRCDIR)parsing/parsing.c \
 		$(SRCDIR)parsing/flood_fill.c \
 		$(SRCDIR)parsing/flood_fill_preparation.c \
@@ -17,13 +17,14 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)parsing/graphic_orientation.c \
 		$(SRCDIR)player_movement/player_movement.c \
 		$(SRCDIR)raycasting/minimap.c \
+		$(SRCDIR)raycasting/minimap_direction.c \
 		$(SRCDIR)raycasting/raycasting.c \
 
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
-CC := cc -fsanitize=address -g
+CC := cc #-fsanitize=address -g
 
 MLX_LIB		= ./MLX42/build/libmlx42.a
 MLX_PATH	= ./MLX42

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_preparation.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:14:01 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 13:17:45 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/29 10:35:33 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	copy_map(int *i, t_mlx *mlx)
+void	copyMap(int *i, t_mlx *mlx)
 {
 	int	len;
 	int	k;
@@ -51,7 +51,7 @@ bool	char_validation(char *str)
 	return (false);
 }
 
-void	search_for_map_start(t_mlx *mlx)
+void	searchForMapStart(t_mlx *mlx)
 {
 	int	i;
 
@@ -60,15 +60,15 @@ void	search_for_map_start(t_mlx *mlx)
 	{
 		if (char_validation(mlx->parse->input[i]) == true)
 		{
-			copy_map(&i, mlx);
+			copyMap(&i, mlx);
 			return ;
 		}
 		i++;
 	}
 }
 
-void	validate_map(t_mlx *mlx)
+void	validateMap(t_mlx *mlx)
 {
-	search_for_map_start(mlx);
-	flood_fill_organizer(mlx);
+	searchForMapStart(mlx);
+	floodFillOrganizer(mlx);
 }

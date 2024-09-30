@@ -6,13 +6,14 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 10:31:23 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/30 18:20:31 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	ft_abs(int num);
+int		ft_abs(int num);
+void	arrow_north(t_mlx *mlx);
 
 int	minimap_dynamic_scale(t_mlx *mlx)
 {
@@ -70,15 +71,8 @@ void draw_walls(t_mlx *mlx)
 
 void draw_player (t_mlx *mlx)
 {
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord, mlx->ply->minimap_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord + 1, mlx->ply->minimap_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord + 2, mlx->ply->minimap_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord - 1, mlx->ply->minimap_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord - 2, mlx->ply->minimap_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord, mlx->ply->minimap_y_coord + 1, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord, mlx->ply->minimap_y_coord - 1, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord, mlx->ply->minimap_y_coord + 2, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord, mlx->ply->minimap_y_coord - 2, 0x00FF00FF);
+	// if (mlx->ply->center_angle > (3 * M_PI / 2) && mlx->ply->center_angle <= )
+	arrow_north(mlx);
 }
 
 void draw_vert (t_mlx *mlx)
@@ -125,58 +119,10 @@ void draw_horiz (t_mlx *mlx)
 	}
 }
 
-// int		new_minimap_target(int target)
-// {
-// 	int	new_target;
-
-// 	new_target = target;
-// 	return (new_target);
-// }
-
-void	minimap_draw_line(t_mlx *mlx, float target_x, float target_y)
-{
-	int delta_x = ft_abs(((int)target_x) - mlx->ply->ply_x_coord);
-	int delta_y = ft_abs(((int)target_y) - mlx->ply->ply_y_coord);
-	int step_x = (mlx->ply->ply_x_coord < (int)target_x) ? 1 : -1;
-	int step_y = (mlx->ply->ply_y_coord < (int)target_y) ? -1 : 1;
-	int error = delta_x - delta_y;
-	int	double_error;
-	int current_x = mlx->ply->ply_x_coord;
-	int current_y = mlx->ply->ply_y_coord;
-    while (1)
-	{
-		if ((current_x > 0 && current_x < current_x * (mlx->parse->rows + 1)) &&
-            (current_y > 0 && current_y < current_y * (mlx->parse->cols + 1)) &&
-			target_x < 1920 && target_y < 1080)
-			mlx_put_pixel(mlx->ray->minimap, current_x, current_y, 0x00FF00FF);
-		if (current_x >= ((int)target_x) && current_y >= ((int)target_y))
-			break;
-        double_error = error * 2;
-        if (double_error > -delta_y)
-		{
-            error -= delta_y;
-            current_x += step_x;
-        }
-        if (double_error < delta_x)
-		{
-            error += delta_x;
-            current_y -= step_y;
-        }
-    }
-}
-
-
 void	minimap_draw(t_mlx *mlx)
 {
-	//This is to check where the  player is
-	mlx->ply->minimap_y_coord = (mlx->parse->ply_x_pos_in_map) * minimap_dynamic_scale(mlx) + minimap_dynamic_scale(mlx) / 2;
-	mlx->ply->minimap_x_coord = (mlx->parse->ply_y_pos_in_map) * minimap_dynamic_scale(mlx) + minimap_dynamic_scale(mlx) / 2;
-
-	//This just draws horizontal and vertical lines
 	draw_vert(mlx);
 	draw_horiz(mlx);
-	
-	//This draws the walls (so fills the squares from the lines) and draws the player
 	draw_walls(mlx);
 	draw_player(mlx);
 }

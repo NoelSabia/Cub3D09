@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_struct_helpers.c                              :+:      :+:    :+:   */
+/*   graphic_orientation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:37:30 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/21 00:37:53 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/09/29 10:55:54 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,32 +79,3 @@ int	graphic_path_east(char *str_in, t_mlx *mlx, char *line)
 	}
 	return (0);
 }
-
-
-// int	check_if_exists4(char *str1, char *str2, t_mlx *mlx, char *line)
-// {
-// 	char	*str;
-
-// 	(void)str2;
-// 	if (ft_strncmp(str1, "NO", 2) == 0)
-// 	{
-// 		if (mlx->parse->north_set)
-// 			clean_exit("Error: 'NO' specified more than once.");
-// 		str = clean_data(line);
-// 		mlx->parse->north = str;
-// 		mlx->parse->north_set = 1;
-// 		mlx->parse->input_counter++;
-// 		return (0);
-// 	}
-// 	else if (ft_strncmp(str1, "SO", 2) == 0)
-// 	{
-// 		if (mlx->parse->south_set)
-// 			clean_exit("Error: 'SO' specified more than once.");
-// 		str = clean_data(line);
-// 		mlx->parse->south = str;
-// 		mlx->parse->south_set = 1;
-// 		mlx->parse->input_counter++;
-// 		return (0);
-// 	}
-// 	return (1);
-// }

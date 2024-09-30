@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/25 15:59:54 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/30 16:13:58 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define FOV 60
 # define TILE_SIZE 50
 # define RAY_LIMIT 120
+# define ROTATION_SPEED M_PI / 80
+# define MOVEMENT_SPEED 2
 
 /*Parsing*/
 typedef struct s_parsing
@@ -58,13 +60,19 @@ typedef struct s_parsing
 
 typedef struct s_player
 {
-	float			player_angle;
 	float			most_left_angle;
+	float			center_angle;
 	float			most_right_angle;
 	int				ply_x_coord;
 	int				ply_y_coord;
 	int				minimap_x_coord;
 	int				minimap_y_coord;	
+	bool			looking_left;
+	bool			looking_right;
+	bool			pressing_w;
+	bool			pressing_a;
+	bool			pressing_s;
+	bool			pressing_d;
 }	t_player;
 
 typedef struct raytracing
@@ -72,6 +80,7 @@ typedef struct raytracing
 	mlx_image_t	*minimap;
 	double		main_ray;
 	int			wallhit_flag;
+	double		distance_to_w;
 }	t_raytracing;
 
 /*Mainstruct*/
@@ -86,10 +95,12 @@ typedef struct s_mlx
 }	t_mlx;
 
 /*Parsing*/
-void	fill_parse_struct(t_mlx *mlx);
-void	validate_map(t_mlx *mlx);
-void	flood_fill_organizer(t_mlx *mlx);
-void	parsing(t_mlx *mlx, char *filename);
+void	verifyMapPathAndFile(t_mlx *mlx);
+void	validateMap(t_mlx *mlx);
+void	floodFillOrganizer(t_mlx *mlx);
+void	parsing(t_mlx *mlx, char *filename, int argc);
+void	floorAndCeilingColor(t_mlx *mlx);
+
 
 /*Input reception*/
 char	*clean_data(char *str);
@@ -105,7 +116,7 @@ void	check_if_exists(char *str1, char *str2, t_mlx *mlx, char *line);
 /*Minimap*/
 void	minimap_draw(t_mlx *mlx);
 void	raycasting(t_mlx *mlx);
-void	raycasting_init(t_mlx *mlx);
+void	initalizeRaycasting(t_mlx *mlx);
 
 
 /*Main*/

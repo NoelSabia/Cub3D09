@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 17:30:26 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/29 10:50:01 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	ft_abs(int num);
-void	find_player(t_mlx *mlx);
-char	**map_copy_it(t_mlx *mlx);
+int		ft_abs(int num);
+void	findPlayer(t_mlx *mlx);
+char	**prepareMapForFloodFill(t_mlx *mlx);
 
 char	*fill_spaces(int len)
 {
@@ -29,7 +29,7 @@ char	*fill_spaces(int len)
 	return (str);
 }
 
-char	*combine_strs(char *str1, char *str2)
+char	*combineMapStringWithSpaces(char *str1, char *str2)
 {
 	int		i;
 	int		j;
@@ -51,69 +51,65 @@ char	*combine_strs(char *str1, char *str2)
 		result[i] = str1[i];
 	while (str2[++j])
 		result[i + j] = str2[j];
-	result[i + j] = '\n'; /*why newline here? cause if fucking works xD*/
+	result[i + j] = '\n';
 	result[i + j + 1] = '\0';
 	return (result);
 }
 
-void	out_of_bounds_procection(t_mlx *mlx, int len)
+void	outOfBounceProtection(t_mlx *mlx, int len)
 {
-	int	longest;
+	int	longest_line;
 	int	i;
 	int	m;
 
 	len = 0;
 	i = -1;
-	longest = 0;
+	longest_line = 0;
 	while (mlx->parse->map[++i])
 	{
 		len = ft_strlen(mlx->parse->map[i]);
-		if (len > longest)
-			longest = len;
+		if (len > longest_line)
+			longest_line = len;
 	}
-	longest--;
+	longest_line--;
 	mlx->parse->cols = i;
-	mlx->parse->rows = longest;
+	mlx->parse->rows = longest_line;
 	i = -1;
 	while (mlx->parse->map[++i])
 	{
 		m = 0;
 		while (mlx->parse->map[i][m])
 			m++;
-		mlx->parse->map[i] = combine_strs(mlx->parse->map[i],
-				fill_spaces(longest - m));
+		mlx->parse->map[i] = combineMapStringWithSpaces(mlx->parse->map[i],
+				fill_spaces(longest_line - m));
 	}
 }
 
-void	flood_fill(t_mlx *mlx, int x, int y, char **map_copy)
+void	floodFill(t_mlx *mlx, int x, int y, char **map_copy)
 {
-	// for (int i  = 0; i < 5 ; i++)
-	// 	for (int j = 0; j < 3; j++)
-	// 	printf("%c", map_copy[i][j]);
-	if (x < 0 || x >= mlx->parse->cols || y < 0
-		|| y >= (int)ft_strlen(map_copy[x]))
+	if (y < 0 || y >= mlx->parse->cols || x < 0
+		|| x >= (int)ft_strlen(map_copy[x]))
 		clean_exit("Error: player isn't locked inside the map\n");
 	else if (map_copy[x][y] != '0' && map_copy[x][y] != '1')
 		clean_exit("Error: Map is invalid!\n");
 	else if (map_copy[x][y] == '1')
 		return ;
 	map_copy[x][y] = '1';
-	flood_fill(mlx, x - 1, y, map_copy);
-	flood_fill(mlx, x + 1, y, map_copy);
-	flood_fill(mlx, x, y - 1, map_copy);
-	flood_fill(mlx, x, y + 1, map_copy);
+	floodFill(mlx, x - 1, y, map_copy);
+	floodFill(mlx, x + 1, y, map_copy);
+	floodFill(mlx, x, y - 1, map_copy);
+	floodFill(mlx, x, y + 1, map_copy);
 }
 
-void	flood_fill_organizer(t_mlx *mlx)
+void	floodFillOrganizer(t_mlx *mlx)
 {
 	char	**map_copy;
 	int		len;
 
 	len = 0;
-	out_of_bounds_procection(mlx, len);
-	find_player(mlx);
-	map_copy = map_copy_it(mlx);
-	map_copy[mlx->parse->ply_y_pos_in_map][mlx->parse->ply_x_pos_in_map] = '0';
-	flood_fill(mlx, mlx->parse->ply_x_pos_in_map,
+	outOfBounceProtection(mlx, len);
+	findPlayer(mlx);
+	map_copy = prepareMapForFloodFill(mlx);
+	floodFill(mlx, mlx->parse->ply_x_pos_in_map,
 			mlx->parse->ply_y_pos_in_map, map_copy);
 }

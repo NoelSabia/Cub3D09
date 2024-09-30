@@ -6,16 +6,15 @@
 /*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:45:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/08/27 10:52:28 by noel             ###   ########.fr       */
+/*   Updated: 2024/09/29 12:56:20 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	check_format_and_init_floor_color(uint8_t ceiling[3],
-			int *i, t_mlx *mlx);
+void	checkAndFormat(uint8_t ceiling[3], int *i, t_mlx *mlx, bool floor);
 
-void	check_string(char *str)
+void	checkRGBValues(char *str)
 {
 	int	i;
 	int	check_commas;
@@ -44,7 +43,7 @@ char	*char_to_str(char c)
 	return (result);
 }
 
-void	floor_color(t_mlx *mlx)
+void	initalizeFloorColor(t_mlx *mlx)
 {
 	uint8_t		floor_color[3];
 	char		*temp;
@@ -52,7 +51,7 @@ void	floor_color(t_mlx *mlx)
 	static int	i;
 	static int	k;
 
-	check_string(mlx->parse->floor);
+	checkRGBValues(mlx->parse->floor);
 	while (strchr(" \t", mlx->parse->floor[k]))
 		k++;
 	while (mlx->parse->floor[k] && i < 3)
@@ -70,26 +69,19 @@ void	floor_color(t_mlx *mlx)
 		if (mlx->parse->floor[k] == ',')
 			k++;
 	}
-	check_format_and_init_floor_color(floor_color, &i, mlx);
+	checkAndFormat(floor_color, &i, mlx, true);
 }
 
-void	fuck_norminette(t_mlx *mlx, int *k)
+void	initalizeCeilingColor(t_mlx *mlx)
 {
-	while (strchr(" \t", mlx->parse->ceiling[(*k)]))
-		(*k)++;
-}
-
-void	floor_and_ceiling_color(t_mlx *mlx)
-{
-	uint8_t		ceiling[3];
+	uint8_t		ceiling_color[3];
 	char		*temp;
 	char		*temp2;
 	static int	i;
 	static int	k;
 
-	floor_color(mlx);
-	check_string(mlx->parse->ceiling);
-	fuck_norminette(mlx, &k);
+	while (strchr(" \t", mlx->parse->ceiling[k]))
+		k++;
 	while (mlx->parse->ceiling[k] && i < 3)
 	{
 		temp = ft_malloc(1);
@@ -99,11 +91,19 @@ void	floor_and_ceiling_color(t_mlx *mlx)
 			temp2 = char_to_str(mlx->parse->ceiling[k++]);
 			temp = ft_strjoin(temp, temp2);
 		}
-		ceiling[i++] = ft_atoi(temp);
+		ceiling_color[i++] = ft_atoi(temp);
 		if (ft_atoi(temp) < 0 || ft_atoi(temp) > 255)
 			clean_exit("Wrong number in F or C choose between 0 and 255!");
 		if (mlx->parse->ceiling[k] == ',')
 			k++;
 	}
-	check_format_and_init_floor_color(ceiling, &i, mlx);
+	checkAndFormat(ceiling_color, &i, mlx, false);
+}
+
+void	floorAndCeilingColor(t_mlx *mlx)
+{
+	checkRGBValues(mlx->parse->ceiling);
+	checkRGBValues(mlx->parse->floor);
+	initalizeCeilingColor(mlx);
+	initalizeFloorColor(mlx);
 }
