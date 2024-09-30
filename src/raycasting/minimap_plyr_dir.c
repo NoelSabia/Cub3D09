@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_direction.c                                :+:      :+:    :+:   */
+/*   minimap_plyr_dir.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:05:59 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/30 12:16:47 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/30 18:21:58 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 void	arrow_north(t_mlx *mlx)
 {
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_y_coord + 3, mlx->ply->minimap_x_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_y_coord + 2, mlx->ply->minimap_x_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_y_coord + 1, mlx->ply->minimap_x_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_y_coord, mlx->ply->minimap_x_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_y_coord + 2, mlx->ply->minimap_x_coord + 1, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_y_coord + 2, mlx->ply->minimap_x_coord - 1, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord - 2, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord - 1, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord + 1, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord + 2, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord + 3, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord + 4, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord + 1, mlx->ply->ply_y_coord, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord - 1, mlx->ply->ply_y_coord, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord + 2, mlx->ply->ply_y_coord, 0x00FF00FF);
+	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord - 2, mlx->ply->ply_y_coord, 0x00FF00FF);
 }
 
 void	arrow_east(t_mlx *mlx)

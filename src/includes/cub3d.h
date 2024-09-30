@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/30 14:17:49 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/30 16:13:58 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define FOV 60
 # define TILE_SIZE 50
 # define RAY_LIMIT 120
-# define ROTATION_SPEED M_PI / 100
-# define MOVEMENT_SPEED 1
+# define ROTATION_SPEED M_PI / 80
+# define MOVEMENT_SPEED 2
 
 /*Parsing*/
 typedef struct s_parsing

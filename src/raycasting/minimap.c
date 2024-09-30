@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/30 14:16:39 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/09/30 18:20:31 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,8 @@ void draw_walls(t_mlx *mlx)
 
 void draw_player (t_mlx *mlx)
 {
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord + 1, mlx->ply->ply_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord + 2, mlx->ply->ply_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord - 1, mlx->ply->ply_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord - 2, mlx->ply->ply_y_coord, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord + 1, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord - 1, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord + 2, 0x00FF00FF);
-	mlx_put_pixel(mlx->ray->minimap, mlx->ply->ply_x_coord, mlx->ply->ply_y_coord - 2, 0x00FF00FF);
 	// if (mlx->ply->center_angle > (3 * M_PI / 2) && mlx->ply->center_angle <= )
-	// arrow_north(mlx);
+	arrow_north(mlx);
 }
 
 void draw_vert (t_mlx *mlx)
@@ -130,21 +121,8 @@ void draw_horiz (t_mlx *mlx)
 
 void	minimap_draw(t_mlx *mlx)
 {
-	//This is to check where the  player is
-	mlx->ply->minimap_y_coord = (mlx->parse->ply_y_pos_in_map) * minimap_dynamic_scale(mlx) + minimap_dynamic_scale(mlx) / 2;
-	mlx->ply->minimap_x_coord = (mlx->parse->ply_x_pos_in_map) * minimap_dynamic_scale(mlx) + minimap_dynamic_scale(mlx) / 2;
-	printf("y: %d\n", mlx->ply->minimap_y_coord);
-	printf("x: %d\n", mlx->ply->minimap_x_coord);
-	printf("y: %d\n", mlx->ply->ply_y_coord);
-	printf("x: %d\n", mlx->ply->ply_x_coord);
-	printf("\n");
-	printf("\n");
-
-	//This just draws horizontal and vertical lines
 	draw_vert(mlx);
 	draw_horiz(mlx);
-	
-	//This draws the walls (so fills the squares from the lines) and draws the player
 	draw_walls(mlx);
 	draw_player(mlx);
 }

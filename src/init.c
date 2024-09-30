@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/29 12:59:10 by noel             ###   ########.fr       */
+/*   Updated: 2024/09/30 17:58:14 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,6 @@ void	displayFloorAndCeiling(t_mlx *mlx)
 	}
 }
 
-void	game_loop(void *mlx_copy)
-{
-	t_mlx	*mlx;
-
-	mlx = mlx_copy;
-	ft_memset(mlx->ray->minimap->pixels , 0, mlx->ray->minimap->width * mlx->ray->minimap->height);
-    minimap_draw(mlx);
-	raycasting(mlx);
-}
-
 void	initWindow(t_mlx *mlx)
 {
 	mlx->mlx_p = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D", 0);
@@ -54,6 +44,15 @@ void	initWindow(t_mlx *mlx)
 	mlx->img = mlx_new_image(mlx->mlx_p, SCREEN_WIDTH, SCREEN_HEIGHT);
 	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 	mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
+}
+
+void	game_loop(void *mlx_copy)
+{
+	t_mlx	*mlx;
+
+	mlx = mlx_copy;
+    minimap_draw(mlx);
+	raycasting(mlx);
 }
 
 void	startGame(t_mlx *mlx)
