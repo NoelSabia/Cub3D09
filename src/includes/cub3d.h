@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/29 12:58:38 by noel             ###   ########.fr       */
+/*   Updated: 2024/09/30 14:17:49 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define TILE_SIZE 50
 # define RAY_LIMIT 120
 # define ROTATION_SPEED M_PI / 100
+# define MOVEMENT_SPEED 1
 
 /*Parsing*/
 typedef struct s_parsing
