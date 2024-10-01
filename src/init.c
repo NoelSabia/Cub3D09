@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/30 17:58:14 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/01 11:29:34 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void	game_loop(void *mlx_copy)
 	t_mlx	*mlx;
 
 	mlx = mlx_copy;
-    minimap_draw(mlx);
 	raycasting(mlx);
+	ft_memset(mlx->ray->minimap->pixels, 0, mlx->ray->minimap->width * mlx->ray->minimap->height * 4);
+    minimap_draw(mlx);
 }
 
 void	startGame(t_mlx *mlx)
