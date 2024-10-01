@@ -17,7 +17,7 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)parsing/graphic_orientation.c \
 		$(SRCDIR)player_movement/player_movement.c \
 		$(SRCDIR)raycasting/minimap.c \
-		$(SRCDIR)raycasting/minimap_direction.c \
+		$(SRCDIR)raycasting/minimap_plyr_dir.c \
 		$(SRCDIR)raycasting/raycasting.c \
 
 

@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/30 18:20:31 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/01 10:44:12 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,17 @@ void draw_walls(t_mlx *mlx)
 
 void draw_player (t_mlx *mlx)
 {
-	// if (mlx->ply->center_angle > (3 * M_PI / 2) && mlx->ply->center_angle <= )
-	arrow_north(mlx);
+	float	eighth_of_unit_square;
+
+	eighth_of_unit_square = (M_PI / 2) / 2;
+	if (mlx->ply->center_angle >= (3 * M_PI / 2) - eighth_of_unit_square && mlx->ply->center_angle <= (3 * M_PI / 2) + eighth_of_unit_square)
+		arrow_north(mlx);
+	else if (mlx->ply->center_angle >= 0 + eighth_of_unit_square && mlx->ply->center_angle <= (M_PI) - eighth_of_unit_square)
+		arrow_south(mlx);
+	else if (mlx->ply->center_angle > (M_PI / 2) + eighth_of_unit_square && mlx->ply->center_angle < (3 * M_PI / 2) - eighth_of_unit_square)
+		arrow_west(mlx);
+	else
+		arrow_east(mlx);
 }
 
 void draw_vert (t_mlx *mlx)

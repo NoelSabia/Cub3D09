@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/30 16:13:58 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/01 09:47:36 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,14 @@ void	check_if_exists(char *str1, char *str2, t_mlx *mlx, char *line);
 
 /*Minimap*/
 void	minimap_draw(t_mlx *mlx);
-void	raycasting(t_mlx *mlx);
-void	initalizeRaycasting(t_mlx *mlx);
-
+void	arrow_north(t_mlx *mlx);
+void	arrow_east(t_mlx *mlx);
+void	arrow_south(t_mlx *mlx);
+void	arrow_west(t_mlx *mlx);
 
 /*Main*/
 void	clean_exit(char *str);
+void	initalizeRaycasting(t_mlx *mlx);
+void	raycasting(t_mlx *mlx);
 
 #endif
