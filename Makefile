@@ -19,12 +19,12 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)raycasting/minimap.c \
 		$(SRCDIR)raycasting/minimap_plyr_dir.c \
 		$(SRCDIR)raycasting/raycasting.c \
-
+		$(SRCDIR)wall_render/render_walls.c
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
-CC := cc #-fsanitize=address -g
+CC := cc -fsanitize=address -g
 
 MLX_LIB		= ./MLX42/build/libmlx42.a
 MLX_PATH	= ./MLX42

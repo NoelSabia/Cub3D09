@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:03:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/01 10:34:19 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/02 14:46:38 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	update_player_view(t_mlx *mlx)
 		if (mlx->ply->most_right_angle > 2 * M_PI)
 			mlx->ply->most_right_angle -= 2 * M_PI;
 	}
-	// printf("center_angle: %f\n", mlx->ply->center_angle);
 }
 
 void	set_plyr_to_new_coords(t_mlx *mlx, double new_x_pos, double new_y_pos)
