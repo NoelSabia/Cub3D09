@@ -19,7 +19,7 @@ SRCS := $(SRCDIR)main.c \
 		$(SRCDIR)raycasting/minimap.c \
 		$(SRCDIR)raycasting/minimap_plyr_dir.c \
 		$(SRCDIR)raycasting/raycasting.c \
-
+		$(SRCDIR)wall_render/render_walls.c
 
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)

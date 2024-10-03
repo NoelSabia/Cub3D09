@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/01 09:47:36 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/02 16:38:29 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define RAY_LIMIT 120
 # define ROTATION_SPEED M_PI / 80
 # define MOVEMENT_SPEED 2
+# define WALL_SLICE_WIDTH (SCREEN_WIDTH / RAY_LIMIT)
 
 /*Parsing*/
 typedef struct s_parsing
