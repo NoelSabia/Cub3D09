@@ -24,7 +24,7 @@ SRCS := $(SRCDIR)main.c \
 OBJDIR := ./obj/
 OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
-CC := cc #-fsanitize=address -g
+CC := cc -fsanitize=address -g
 
 MLX_LIB		= ./MLX42/build/libmlx42.a
 MLX_PATH	= ./MLX42
