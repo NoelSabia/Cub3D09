@@ -6,7 +6,7 @@
 /*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/03 14:43:32 by noel             ###   ########.fr       */
+/*   Updated: 2024/10/07 13:42:48 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,28 @@ void	initWindow(t_mlx *mlx)
 	mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
 }
 
-//this is just here for testing purposes! delete after testing passes
-// float 	num_check(float angle);
-// void    calculateWallHeight(t_mlx *mlx, double ray_pos);
-// void	test_for_render_wall(t_mlx *mlx)
-// {
-// 	mlx->ray->distance_to_w = 20;
-// 	for (int i = 0; i < RAY_LIMIT; i++)
-// 	{
-// 		mlx->ray->distance_to_w += i;
-// 		calculateWallHeight(mlx, mlx->ray->main_ray);	
-// 	}
-// }
-//until here u can delete everything.
+// this is just here for testing purposes! delete after testing passes
+float 	num_check(float angle);
+void    calculateWallHeight(t_mlx *mlx, double ray_pos);
+void	test_for_render_wall(t_mlx *mlx)
+{
+	mlx->ray->distance_to_w = 20;
+	for (int i = 0; i < RAY_LIMIT; i++)
+	{
+		mlx->ray->distance_to_w += i;
+		calculateWallHeight(mlx, mlx->ray->main_ray);	
+	}
+}
+// until here u can delete everything.
 
 void	game_loop(void *mlx_copy)
 {
 	t_mlx	*mlx;
 
 	mlx = mlx_copy;
-	// raycasting(mlx);
+	ft_memset(mlx->img->pixels, 0, mlx->img->width * mlx->img->height * 4);
+	displayFloorAndCeiling(mlx);
+	raycasting(mlx);
 	ft_memset(mlx->ray->minimap->pixels, 0, mlx->ray->minimap->width * mlx->ray->minimap->height * 4);
     minimap_draw(mlx);
 	// test_for_render_wall(mlx); //needs to be deleted because its just a test!

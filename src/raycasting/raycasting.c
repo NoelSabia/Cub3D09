@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/30 13:24:32 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/07 13:49:54 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ double	get_x_inter(t_mlx *mlx, double main_ray_angle)
 	return (sqrt(pow(intersec_x - mlx->ply->ply_x_coord, 2) + pow(intersec_y - mlx->ply->ply_y_coord, 2)));
 }
 
+void    calculateWallHeight(t_mlx *mlx, double ray_pos);
 void	raycasting(t_mlx *mlx)
 {
 	int		i;
@@ -148,9 +149,10 @@ void	raycasting(t_mlx *mlx)
 		{
 			mlx->ray->distance_to_w = x_coord;
 		}
-		// printf("dist: %f\n", mlx->ray->distance_to_w);
-		// printf("center_angle: %f\n", mlx->ply->center_angle);
+		printf("dist: %f\n", mlx->ray->distance_to_w);
+		printf("main_ray: %f\n", mlx->ray->main_ray);
 		i++;
 		mlx->ray->main_ray = num_check(mlx->ray->main_ray + ((M_PI / 2) / RAY_LIMIT));
+		calculateWallHeight(mlx, mlx->ray->main_ray);
 	}
 }

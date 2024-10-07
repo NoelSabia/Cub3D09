@@ -6,7 +6,7 @@
 /*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/03 14:39:49 by noel             ###   ########.fr       */
+/*   Updated: 2024/10/07 13:41:59 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void    drawWall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall)
         while (bottom_tmp <= top_end_of_wall)
         {
             bottom_tmp++;
-            if (x_start < 0 || x_start > 1920)
+            if (x_start < 0 || x_start > 1920 - 1)
                 continue ;
-            else if (bottom_tmp < 0 || bottom_tmp > 1080)
+            else if (bottom_tmp < 0 || bottom_tmp > 1080 - 1)
                 continue ;
             mlx_put_pixel(mlx->img, x_start, bottom_tmp, 0x00ff00ff);
         }
