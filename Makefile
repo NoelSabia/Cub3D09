@@ -1,73 +1,99 @@
+# Variables
 NAME := cub3D
+CC = cc
+CFLAGS := -Wextra -Wall -Werror -Ofast
 
-CFLAGS = -Wextra -Wall #-Werror  //dont forget to uncomment!!
+LIBFTDIR := ./libft
+LIBFT := $(LIBFTDIR)/libft.a
 
-HEADERS := -I ./include -I ./libft -I ./MLX/include
+INCLUDEDIRS := includes \
+               $(LIBMLXDIR)/include \
+			   $(LIBFTDIR)
+INCLUDES := $(addprefix -I, $(INCLUDEDIRS))
+HEADERS := cub3d.h
 
-SRCDIR := ./src/
-SRCS := $(SRCDIR)main.c \
-		$(SRCDIR)init.c \
-		$(SRCDIR)floor_and_ceiling_render/floor_ceiling_color.c \
-		$(SRCDIR)floor_and_ceiling_render/floor_ceiling_helper.c \
-		$(SRCDIR)parsing/parsing.c \
-		$(SRCDIR)parsing/flood_fill.c \
-		$(SRCDIR)parsing/flood_fill_preparation.c \
-		$(SRCDIR)parsing/flood_fill_helpers.c \
-		$(SRCDIR)parsing/fill_struct.c \
-		$(SRCDIR)parsing/graphic_orientation.c \
-		$(SRCDIR)player_movement/player_movement.c \
-		$(SRCDIR)raycasting/minimap.c \
-		$(SRCDIR)raycasting/minimap_plyr_dir.c \
-		$(SRCDIR)raycasting/raycasting.c \
-		$(SRCDIR)wall_render/render_walls.c
+LIBMLXDIR := ./MLX42
+LIBMLX := $(LIBMLXDIR)/build/libmlx42.a
+LIBS := $(LIBMLX)
+ifeq ($(shell uname),Darwin)
+	LIBS += -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+else ifeq ($(shell uname),Linux)
+	LIBS += -ldl -lglfw -pthread -lm
+endif
+LIBS += -L"/opt/homebrew/Cellar/glfw/3.4/lib/"
+LIBS += -L$(LIBFTDIR) -lft
 
-OBJDIR := ./obj/
-OBJS := $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
+SRCDIRS := src \
+		   src/floor_and_ceiling_render \
+		   src/parsing \
+		   src/player_movement \
+		   src/raycasting \
+		   src/wall_render
 
-CC := cc -fsanitize=address -g
+OBJDIR := obj
 
-MLX_LIB		= ./MLX42/build/libmlx42.a
-MLX_PATH	= ./MLX42
-MLX			= -ldl -lglfw -pthread -lm
-MLX_DIR = MLX42
-# MLX = $(MLX_DIR)/build/libmlx42.a
-# MLX_FLAGS = -L$(MLX_DIR)/build -lmlx42 -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+# Source files
+SRCS = main.c \
+	   init.c \
+	   floor_ceiling_color.c \
+	   floor_ceiling_helper.c \
+	   parsing.c \
+	   flood_fill.c \
+	   flood_fill_preparation.c \
+	   flood_fill_helpers.c \
+	   fill_struct.c \
+	   graphic_orientation.c \
+	   player_movement.c \
+	   minimap.c \
+	   minimap_plyr_dir.c \
+	   raycasting.c \
+	   render_walls.c
 
-.PHONY: all clean fclean re
 
+vpath %.c $(SRCDIRS)
+vpath %.h $(INCLUDEDIRS)
+
+# Object files
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+
+# Targets
 all: $(NAME)
 
-libft/libft.a:
-	@$(MAKE) -C libft
+$(NAME): $(LIBMLX) $(LIBFT) $(OBJS)
+	$(CC) $(OBJS) $(LIBS) -o $(NAME)
 
-$(MLX):
-	@cd $(MLX_DIR)/build && cmake .. && make -j4
+$(OBJDIR)/%.o: %.c $(HEADERS) | $(OBJDIR)
+	@echo "Compiling $< to $@"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJDIR)%.o: $(SRCDIR)%.c
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -I$(MLX_PATH)/include -c $< -o $@ $(HEADERS)
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
-$(NAME): $(MLX_LIB) $(OBJS) libft/libft.a
-	$(CC) $(OBJS) $(MLX_LIB) $(MLX) -o $(NAME) -Llibft -lft
+$(LIBFT):
+	@$(MAKE) -C $(LIBFTDIR)
 
-# $(NAME): $(OBJS) libft/libft.a $(MLX)
-# 	$(CC) $(OBJS) -o $(NAME) -Llibft -lft $(MLX_FLAGS)
-
-$(MLX_LIB):
-	git clone https://github.com/codam-coding-college/MLX42.git $(MLX_PATH)
-	mkdir -p $(MLX_PATH)/build
-	cd $(MLX_PATH)/build && cmake ..
-	make -C $(MLX_PATH)/build
+$(LIBMLX):
+	@if [ ! -d "$(LIBMLXDIR)" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLXDIR); \
+	fi
+	@if [ ! -d "$(LIBMLXDIR)/build" ]; then \
+		mkdir -p $(LIBMLXDIR)/build; \
+		cd $(LIBMLXDIR)/build && cmake .. && make -j4; \
+	fi
 
 clean:
-	@$(MAKE) -C libft clean
-	@$(MAKE) -C $(MLX_DIR)/build clean
+	@$(MAKE) -C $(LIBFTDIR) clean
+	@if [ -d "$(LIBMLXDIR)/build" ]; then \
+		$(MAKE) -C $(LIBMLXDIR)/build clean; \
+	fi
 	@rm -rf $(OBJDIR)
 
 fclean: clean
-	@$(MAKE) -C libft fclean
+	@$(MAKE) -C $(LIBFTDIR) fclean
 	@rm -rf $(NAME)
-	@rm -rf $(MLX_PATH)
+	@if [ -d "$(LIBMLXDIR)" ]; then \
+		rm -rf $(LIBMLXDIR); \
+	fi
 
 re: fclean all
 
@@ -80,3 +106,8 @@ norm:
 	@cd src && norminette | grep "Error:" | wc -l
 
 norminette: norm
+
+debug: CFLAGS += -g -fsanitize=address
+debug: re
+
+.PHONY: all clean fclean re run rerun norm norminette debug

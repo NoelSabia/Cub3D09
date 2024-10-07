@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/07 13:41:59 by noel             ###   ########.fr       */
+/*   Updated: 2024/10/07 16:24:29 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 void    drawWall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall)
 {
@@ -18,7 +18,7 @@ void    drawWall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall)
     int         x_start;
     int         x_end;
     int         bottom_tmp;
-    
+
     x_start = i * WALL_SLICE_WIDTH;
     x_end = i * WALL_SLICE_WIDTH + WALL_SLICE_WIDTH;
     bottom_tmp = bottom_end_of_wall--;

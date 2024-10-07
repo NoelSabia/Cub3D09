@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/07 13:42:48 by noel             ###   ########.fr       */
+/*   Updated: 2024/10/07 16:23:53 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/cub3d.h"
+#include "cub3d.h"
 
 void	init_values(t_mlx *mlx);
 void	floor_and_ceiling_color(t_mlx *mlx);
@@ -55,7 +55,7 @@ void	test_for_render_wall(t_mlx *mlx)
 	for (int i = 0; i < RAY_LIMIT; i++)
 	{
 		mlx->ray->distance_to_w += i;
-		calculateWallHeight(mlx, mlx->ray->main_ray);	
+		calculateWallHeight(mlx, mlx->ray->main_ray);
 	}
 }
 // until here u can delete everything.

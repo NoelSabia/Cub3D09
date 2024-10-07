@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/02 16:38:29 by noel             ###   ########.fr       */
+/*   Updated: 2024/10/07 16:24:04 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <stdbool.h>
 # include <math.h>
 
-# include "../../libft/libft.h"
-# include "../../MLX42/include/MLX42/MLX42.h"
+# include "../libft/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
@@ -67,7 +67,7 @@ typedef struct s_player
 	int				ply_x_coord;
 	int				ply_y_coord;
 	int				minimap_x_coord;
-	int				minimap_y_coord;	
+	int				minimap_y_coord;
 	bool			looking_left;
 	bool			looking_right;
 	bool			pressing_w;

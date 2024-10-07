@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:03:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/02 14:46:38 by noel             ###   ########.fr       */
+/*   Updated: 2024/10/07 16:24:29 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 void	esc_key(mlx_key_data_t keydata)
 {
@@ -100,17 +100,17 @@ void	update_player_position(t_mlx *mlx)
 	if (mlx->ply->pressing_d)
 	{
 		new_x_pos = -sin(mlx->ply->center_angle) * MOVEMENT_SPEED;
-		new_y_pos = cos(mlx->ply->center_angle) * MOVEMENT_SPEED;		
+		new_y_pos = cos(mlx->ply->center_angle) * MOVEMENT_SPEED;
 	}
 	if (mlx->ply->pressing_s)
 	{
 		new_x_pos = -cos(mlx->ply->center_angle) * MOVEMENT_SPEED;
-		new_y_pos = -sin(mlx->ply->center_angle) * MOVEMENT_SPEED;	
+		new_y_pos = -sin(mlx->ply->center_angle) * MOVEMENT_SPEED;
 	}
 	if (mlx->ply->pressing_a)
 	{
 		new_x_pos = sin(mlx->ply->center_angle) * MOVEMENT_SPEED;
-		new_y_pos = -cos(mlx->ply->center_angle) * MOVEMENT_SPEED;	
+		new_y_pos = -cos(mlx->ply->center_angle) * MOVEMENT_SPEED;
 	}
 	set_plyr_to_new_coords(mlx, new_x_pos, new_y_pos);
 }

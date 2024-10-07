@@ -2,4 +2,5 @@
 *.a
 obj
 cub3D
+.vscode
 
