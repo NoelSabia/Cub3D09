@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/07 16:24:29 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/08 13:29:12 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,29 +130,26 @@ double	get_x_inter(t_mlx *mlx, double main_ray_angle)
 	return (sqrt(pow(intersec_x - mlx->ply->ply_x_coord, 2) + pow(intersec_y - mlx->ply->ply_y_coord, 2)));
 }
 
-void    calculateWallHeight(t_mlx *mlx, double ray_pos);
-void	raycasting(t_mlx *mlx)
+void    calculateWallHeight(t_mlx *mlx);
+void raycasting(t_mlx *mlx)
 {
-	int		i;
-	double	y_coord;
-	double	x_coord;
+	double	h_inter;
+	double	v_inter;
+	int		ray;
 
-	i = 0;
+	ray = 0;
 	mlx->ray->main_ray = mlx->ply->most_left_angle;
-	while (i < RAY_LIMIT)
+	mlx->ply->fov_rd = (FOV * M_PI / 180);
+	while (ray < RAY_LIMIT)
 	{
-		x_coord = get_x_inter(mlx, num_check(mlx->ray->main_ray));
-		y_coord = get_y_inter(mlx, num_check(mlx->ray->main_ray));
-		if (x_coord <= y_coord)
-			mlx->ray->distance_to_w = y_coord;
+		h_inter = get_y_inter(mlx, num_check(mlx->ray->main_ray));
+		v_inter = get_x_inter(mlx, num_check(mlx->ray->main_ray));
+		if (v_inter <= h_inter) // check the distance
+			mlx->ray->distance_to_w = v_inter;
 		else
-		{
-			mlx->ray->distance_to_w = x_coord;
-		}
-		printf("dist: %f\n", mlx->ray->distance_to_w);
-		printf("main_ray: %f\n", mlx->ray->main_ray);
-		i++;
-		mlx->ray->main_ray = num_check(mlx->ray->main_ray + ((M_PI / 2) / RAY_LIMIT));
-		calculateWallHeight(mlx, mlx->ray->main_ray);
+			mlx->ray->distance_to_w = h_inter;
+	    calculateWallHeight(mlx);
+		ray++;
+		mlx->ray->main_ray += (mlx->ply->fov_rd / RAY_LIMIT);
 	}
 }
