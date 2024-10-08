@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:03:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/07 16:24:29 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/08 13:45:39 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void	set_plyr_to_new_coords(t_mlx *mlx, double new_x_pos, double new_y_pos)
 		mlx->ply->ply_x_coord = new_x;
 		mlx->ply->ply_y_coord = new_y;
 	}
-	// printf("ply_x_coord: %d\n", mlx->ply->ply_x_coord);
-	// printf("ply_y_coord: %d\n", mlx->ply->ply_y_coord);
 }
 
 void	update_player_position(t_mlx *mlx)
@@ -92,11 +90,12 @@ void	update_player_position(t_mlx *mlx)
 	double	new_x_pos;
 	double	new_y_pos;
 
+	new_x_pos = 0;
+	new_y_pos = 0;
 	if (mlx->ply->pressing_w)
-	{
 		new_x_pos = cos(mlx->ply->center_angle) * MOVEMENT_SPEED;
+	if (mlx->ply->pressing_w)
 		new_y_pos = sin(mlx->ply->center_angle) * MOVEMENT_SPEED;
-	}
 	if (mlx->ply->pressing_d)
 	{
 		new_x_pos = -sin(mlx->ply->center_angle) * MOVEMENT_SPEED;
