@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/09 14:23:09 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/09 15:22:09 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*combineMapStringWithSpaces(char *str1, char *str2)
 	while (str1[++i])
 		if (ft_strchr("01NWSE \n", str1[i]) == NULL)
 			clean_exit("Unallowed characters in map detected!\n\
-					or map not at the bottom of the file!\n");
+or map not at the bottom of the file!\n");
 	result = ft_malloc(ft_strlen(str1) + ft_strlen(str2) + 2);
 	len = ft_strlen(str1);
 	if (len > 0 && str1[len - 1] == '\n')
@@ -85,24 +85,17 @@ void	outOfBounceProtection(t_mlx *mlx, int len)
 	}
 }
 
-void	floodFill(t_mlx *mlx, int x, int y, char **map_copy)
+void	floodFill(t_mlx *mlx, int y, int x, char **map_copy)
 {
-	if (y < 0 || y >= mlx->parse->rows || x < 0
-		|| x >= (int)ft_strlen(map_copy[y]))
-	{
-		printf("x: %d\n", x);
-		printf("y: %d\n", y);
-		clean_exit("Error: player isn't locked inside the map\n");
-	}
-	else if (map_copy[y][x] != '0' && map_copy[y][x] != '1')
+	if (map_copy[y][x] != '0' && map_copy[y][x] != '1')
 		clean_exit("Error: Map is invalid!\n");
 	else if (map_copy[y][x] == '1')
 		return ;
 	map_copy[y][x] = '1';
-	floodFill(mlx, x - 1, y, map_copy);
-	floodFill(mlx, x + 1, y, map_copy);
-	floodFill(mlx, x, y - 1, map_copy);
-	floodFill(mlx, x, y + 1, map_copy);
+	floodFill(mlx, y - 1, x, map_copy);
+	floodFill(mlx, y + 1, x, map_copy);
+	floodFill(mlx, y, x - 1, map_copy);
+	floodFill(mlx, y, x + 1, map_copy);
 }
 
 void	floodFillOrganizer(t_mlx *mlx)
@@ -114,10 +107,6 @@ void	floodFillOrganizer(t_mlx *mlx)
 	outOfBounceProtection(mlx, len);
 	findPlayer(mlx);
 	map_copy = prepareMapForFloodFill(mlx);
-	printf("y1: %d\n", mlx->parse->ply_y_pos_in_map);
-	printf("x1: %d\n", mlx->parse->ply_x_pos_in_map);
-	for (int i = 0; i < 6; i++)
-		printf("map: %s\n", map_copy[i]);
-	floodFill(mlx, mlx->parse->ply_x_pos_in_map,
-			mlx->parse->ply_y_pos_in_map, map_copy);
+	floodFill(mlx, mlx->parse->ply_y_pos_in_map,
+		mlx->parse->ply_x_pos_in_map, map_copy);
 }

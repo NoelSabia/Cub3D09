@@ -20,7 +20,7 @@ ifeq ($(shell uname),Darwin)
 else ifeq ($(shell uname),Linux)
 	LIBS += -ldl -lglfw -pthread -lm
 endif
-LIBS += -L"/opt/homebrew/Cellar/glfw/3.4/lib/"
+# LIBS += -L"/opt/homebrew/Cellar/glfw/3.4/lib/"
 LIBS += -L$(LIBFTDIR) -lft
 
 SRCDIRS := src \
