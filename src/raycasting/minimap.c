@@ -1,5 +1,5 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*			                                                                */
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -25,7 +25,7 @@ int	minimap_dynamic_scale(t_mlx *mlx)
 	return (dynamic_minimap_size);
 }
 
-void put_block(t_mlx *mlx, int i, int j)
+void	put_block(t_mlx *mlx, int i, int j)
 {
 	int		i_end;
 	int		j_end;
@@ -46,30 +46,30 @@ void put_block(t_mlx *mlx, int i, int j)
 	}
 }
 
-void draw_walls(t_mlx *mlx)
+void	draw_walls(t_mlx *mlx)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 	int	len_for_draw;
 
-    i = 0;
+	i = 0;
 	len_for_draw = minimap_dynamic_scale(mlx);
-    while (i < mlx->parse->cols)
-    {
-        j = 0;
-        while (j < mlx->parse->rows)
-        {
-            if (mlx->parse->map[i][j] == '1')
-            {
-                put_block(mlx, j * len_for_draw, i * len_for_draw);
-            }
-            j++;
-        }
-        i++;
-    }
+	while (i < mlx->parse->cols)
+	{
+		j = 0;
+		while (j < mlx->parse->rows)
+		{
+			if (mlx->parse->map[i][j] == '1')
+			{
+				put_block(mlx, j * len_for_draw, i * len_for_draw);
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
-void draw_player (t_mlx *mlx)
+void	draw_player(t_mlx *mlx)
 {
 	float	eighth_of_unit_square;
 
@@ -81,17 +81,20 @@ void draw_player (t_mlx *mlx)
 	if (mlx->ply->minimap_x_coord < 5 || mlx->ply->minimap_x_coord >= 1915
 		|| mlx->ply->minimap_y_coord < 5 || mlx->ply->minimap_y_coord >= 1075)
 		return ;
-	if (mlx->ply->center_angle >= (3 * M_PI / 2) - eighth_of_unit_square && mlx->ply->center_angle <= (3 * M_PI / 2) + eighth_of_unit_square)
+	if (mlx->ply->center_angle >= (3 * M_PI / 2) - eighth_of_unit_square
+		&& mlx->ply->center_angle <= (3 * M_PI / 2) + eighth_of_unit_square)
 		arrow_north(mlx);
-	else if (mlx->ply->center_angle >= 0 + eighth_of_unit_square && mlx->ply->center_angle <= (M_PI) - eighth_of_unit_square)
+	else if (mlx->ply->center_angle >= 0 + eighth_of_unit_square
+		&& mlx->ply->center_angle <= (M_PI) - eighth_of_unit_square)
 		arrow_south(mlx);
-	else if (mlx->ply->center_angle > (M_PI / 2) + eighth_of_unit_square && mlx->ply->center_angle < (3 * M_PI / 2) - eighth_of_unit_square)
+	else if (mlx->ply->center_angle > (M_PI / 2) + eighth_of_unit_square
+		&& mlx->ply->center_angle < (3 * M_PI / 2) - eighth_of_unit_square)
 		arrow_west(mlx);
 	else
 		arrow_east(mlx);
 }
 
-void draw_vert (t_mlx *mlx)
+void	draw_vert(t_mlx *mlx)
 {
 	int		i;
 	int		j;
@@ -104,7 +107,8 @@ void draw_vert (t_mlx *mlx)
 	{
 		while (i < minimap_dynamic_scale(mlx) * (mlx->parse->cols))
 		{
-			mlx_put_pixel(mlx->ray->minimap, minimap_dynamic_scale(mlx)  * j, i, 0xFFFFFFFF);
+			mlx_put_pixel(mlx->ray->minimap,
+				minimap_dynamic_scale(mlx) * j, i, 0xFFFFFFFF);
 			i++;
 		}
 		i = 0;
@@ -113,7 +117,7 @@ void draw_vert (t_mlx *mlx)
 	}
 }
 
-void draw_horiz (t_mlx *mlx)
+void	draw_horiz(t_mlx *mlx)
 {
 	int		i;
 	int		j;
@@ -126,7 +130,8 @@ void draw_horiz (t_mlx *mlx)
 	{
 		while (i < minimap_dynamic_scale(mlx) * (mlx->parse->rows))
 		{
-			mlx_put_pixel(mlx->ray->minimap, i, minimap_dynamic_scale(mlx) * j, 0xFFFFFFFF);
+			mlx_put_pixel(mlx->ray->minimap, i,
+				minimap_dynamic_scale(mlx) * j, 0xFFFFFFFF);
 			i++;
 		}
 		i = 0;
