@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/09 10:12:00 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/09 14:12:33 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,13 @@ void draw_player (t_mlx *mlx)
 	float	eighth_of_unit_square;
 
 	eighth_of_unit_square = (M_PI / 2) / 2;
-	mlx->ply->minimap_x_coord = 10;
-	mlx->ply->minimap_y_coord = 10;
+	mlx->ply->minimap_x_coord = (mlx->ply->ply_x_coord / 100) * 25 + 65;
+	printf("minimap_x: %d\n", mlx->ply->minimap_x_coord);
+	mlx->ply->minimap_y_coord = mlx->ply->ply_y_coord / 100 * 25 + 10;
+	printf("minimap_y: %d\n", mlx->ply->minimap_y_coord);
+	if (mlx->ply->minimap_x_coord < 5 || mlx->ply->minimap_x_coord >= 1915
+		|| mlx->ply->minimap_y_coord < 5 || mlx->ply->minimap_y_coord >= 1075)
+		return ;
 	if (mlx->ply->center_angle >= (3 * M_PI / 2) - eighth_of_unit_square && mlx->ply->center_angle <= (3 * M_PI / 2) + eighth_of_unit_square)
 		arrow_north(mlx);
 	else if (mlx->ply->center_angle >= 0 + eighth_of_unit_square && mlx->ply->center_angle <= (M_PI) - eighth_of_unit_square)

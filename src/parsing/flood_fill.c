@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/08 14:31:01 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/09 14:23:09 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,11 @@ void	floodFill(t_mlx *mlx, int x, int y, char **map_copy)
 {
 	if (y < 0 || y >= mlx->parse->rows || x < 0
 		|| x >= (int)ft_strlen(map_copy[y]))
+	{
+		printf("x: %d\n", x);
+		printf("y: %d\n", y);
 		clean_exit("Error: player isn't locked inside the map\n");
+	}
 	else if (map_copy[y][x] != '0' && map_copy[y][x] != '1')
 		clean_exit("Error: Map is invalid!\n");
 	else if (map_copy[y][x] == '1')
@@ -110,7 +114,10 @@ void	floodFillOrganizer(t_mlx *mlx)
 	outOfBounceProtection(mlx, len);
 	findPlayer(mlx);
 	map_copy = prepareMapForFloodFill(mlx);
-	printf("%d\n", mlx->parse->ply_y_pos_in_map);
+	printf("y1: %d\n", mlx->parse->ply_y_pos_in_map);
+	printf("x1: %d\n", mlx->parse->ply_x_pos_in_map);
+	for (int i = 0; i < 6; i++)
+		printf("map: %s\n", map_copy[i]);
 	floodFill(mlx, mlx->parse->ply_x_pos_in_map,
 			mlx->parse->ply_y_pos_in_map, map_copy);
 }
