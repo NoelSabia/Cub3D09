@@ -1,6 +1,6 @@
 # Variables
 NAME := cub3D
-CC = cc
+CC = cc -g  -fsanitize=address
 CFLAGS := -Wextra -Wall -Werror -Ofast
 
 LIBFTDIR := ./libft
