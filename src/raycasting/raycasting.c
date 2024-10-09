@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/08 15:20:12 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/09 10:32:11 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,6 @@ void	initalizeRaycasting(t_mlx *mlx)
     mlx->ply->most_right_angle = num_check(mlx->ply->center_angle + ((M_PI / 2) / 2));
 }
 
-float nor_angle(float angle) // normalize the angle
-{
-	if (angle < 0)
-		angle += (2 * M_PI);
-	if (angle > (2 * M_PI))
-		angle -= (2 * M_PI);
-	return (angle);
-}
-
 int unit_circle(float angle, char c)
 {
 	if (c == 'x')
@@ -58,7 +49,7 @@ int unit_circle(float angle, char c)
 	return (0);
 }
 
-int inter_check(float angle, float *inter, float *step, int is_horizon) // check the intersection
+int inter_check(float angle, float *inter, float *step, int is_horizon)
 {
 	if (is_horizon)
 	{
@@ -161,6 +152,7 @@ void raycasting(t_mlx *mlx)
 			mlx->ray->distance_to_w = v_inter;
 		else
 			mlx->ray->distance_to_w = h_inter;
+		mlx->ray->distance_to_w *= cos(num_check(mlx->ray->main_ray - mlx->ply->center_angle));
 	    calculateWallHeight(mlx);
 		ray++;
 		mlx->ray->main_ray += (mlx->ply->fov_rd / RAY_LIMIT);
