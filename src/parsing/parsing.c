@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:47:05 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/07 16:24:29 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/08 16:02:21 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ void	playerDirection(t_mlx *mlx)
 
 	c = mlx->parse->map[mlx->parse->ply_y_pos_in_map][mlx->parse->ply_x_pos_in_map];
 	if (c == 'E')
-		mlx->ply->center_angle = 0;
+		mlx->ply->center_angle = 0 + 0.28;
 	else if (c == 'S')
-		mlx->ply->center_angle = (M_PI / 2);
+		mlx->ply->center_angle = (M_PI / 2) + 0.28;
 	else if (c == 'W')
-		mlx->ply->center_angle = M_PI;
+		mlx->ply->center_angle = M_PI + 0.28;
 	else if (c == 'N')
-		mlx->ply->center_angle = (3 * M_PI) / 2;
+		mlx->ply->center_angle = (3 * M_PI) / 2 + 0.28;
 	else
 		clean_exit("Player spawn is not W N E or S!");
 }

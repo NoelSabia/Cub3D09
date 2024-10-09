@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/08 13:29:12 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/08 15:20:12 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord);
 int		minimap_dynamic_scale(t_mlx *mlx);
+void     calculateWallHeight(t_mlx *mlx);
 
 float num_check(float angle)
 {
@@ -33,104 +34,116 @@ void	initalizeRaycasting(t_mlx *mlx)
     mlx->ply->most_right_angle = num_check(mlx->ply->center_angle + ((M_PI / 2) / 2));
 }
 
-bool	intersec_check(float main_ray_angle, float *intersec, float *step, bool is_horizontal)
+float nor_angle(float angle) // normalize the angle
 {
-	if (is_horizontal == true)
+	if (angle < 0)
+		angle += (2 * M_PI);
+	if (angle > (2 * M_PI))
+		angle -= (2 * M_PI);
+	return (angle);
+}
+
+int unit_circle(float angle, char c)
+{
+	if (c == 'x')
 	{
-		if (main_ray_angle > 0 && main_ray_angle < M_PI)
+		if (angle > 0 && angle < M_PI)
+		return (1);
+	}
+	else if (c == 'y')
+	{
+		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
+		return (1);
+	}
+	return (0);
+}
+
+int inter_check(float angle, float *inter, float *step, int is_horizon) // check the intersection
+{
+	if (is_horizon)
+	{
+		if (angle > 0 && angle < M_PI)
 		{
-			*intersec += TILE_SIZE;
-			return (false);
+			*inter += TILE_SIZE;
+			return (-1);
 		}
 		*step *= -1;
 	}
-	if (is_horizontal == false)
+	else
 	{
-		if (!(main_ray_angle > (M_PI / 2) && main_ray_angle < (3 * M_PI) / 2))
+		if (!(angle > M_PI / 2 && angle < 3 * M_PI / 2)) 
 		{
-			*intersec += TILE_SIZE;
-			return (false);
+			*inter += TILE_SIZE;
+			return (-1);
 		}
 		*step *= -1;
 	}
-	return (true);
+	return (1);
 }
 
-bool	unit_circle(float main_ray_angle, bool horizontal)
-{
-	if (horizontal == true)
-		if (main_ray_angle > 0 && main_ray_angle < M_PI)
-			return (true);
-	if (horizontal == false)
-		if (main_ray_angle > (M_PI / 2) && main_ray_angle < (3 * M_PI) / 2)
-			return (true);
-	return (false);
-}
-
-bool	wall_hit(float x, float y, t_mlx *mlx)
+int wall_hit(float x, float y, t_mlx *mlx)
 {
 	int  x_m;
 	int  y_m;
 
 	if (x < 0 || y < 0)
-		return (false);
+		return (0);
 	x_m = floor (x / TILE_SIZE);
 	y_m = floor (y / TILE_SIZE);
 	if ((y_m >= mlx->parse->cols || x_m >= mlx->parse->rows))
-		return (false);
+		return (0);
 	if (mlx->parse->map[y_m] && x_m <= (int)strlen(mlx->parse->map[y_m]))
 		if (mlx->parse->map[y_m][x_m] == '1')
-			return (false);
-	return (true);
+			return (0);
+	return (1);
 }
 
-double	get_y_inter(t_mlx *mlx, double main_ray_angle)
+float get_y_inter(t_mlx *mlx, float angl)
 {
-	float	intersec_x;
-	float	intersec_y;
-	float	x_step;
-	float	y_step;
-	int		pixel;
+	float h_x;
+	float h_y;
+	float x_step;
+	float y_step;
+	int  pixel;
 
 	y_step = TILE_SIZE;
-	x_step = TILE_SIZE / tan(main_ray_angle);
-	intersec_y = floor(mlx->ply->ply_y_coord / TILE_SIZE) * TILE_SIZE; //does this even make sense?
-	pixel = intersec_check(main_ray_angle, &intersec_y, &y_step, true);
-	intersec_x = mlx->ply->ply_x_coord + (intersec_y - mlx->ply->ply_y_coord) / tan(main_ray_angle);
-	if ((unit_circle(main_ray_angle, 'y') && x_step > 0) || (!unit_circle(main_ray_angle, 'y') && x_step < 0))
+	x_step = TILE_SIZE / tan(angl);
+	h_y = floor(mlx->ply->ply_y_coord / TILE_SIZE) * TILE_SIZE;
+	pixel = inter_check(angl, &h_y, &y_step, 1);
+	h_x = mlx->ply->ply_x_coord + (h_y - mlx->ply->ply_y_coord) / tan(angl);
+	if ((unit_circle(angl, 'y') && x_step > 0) || (!unit_circle(angl, 'y') && x_step < 0))
 		x_step *= -1;
-	while (wall_hit(intersec_x, intersec_y - pixel, mlx))
+	while (wall_hit(h_x, h_y - pixel, mlx))
 	{
-		intersec_x += x_step;
-		intersec_y += y_step;
+		h_x += x_step;
+		h_y += y_step;
 	}
-	return (sqrt(pow(intersec_x - mlx->ply->ply_x_coord, 2) + pow(intersec_y - mlx->ply->ply_y_coord, 2)));
+	return (sqrt(pow(h_x - mlx->ply->ply_x_coord, 2) + pow(h_y - mlx->ply->ply_y_coord, 2)));
 }
 
-double	get_x_inter(t_mlx *mlx, double main_ray_angle)
+float get_x_inter(t_mlx *mlx, float angl)
 {
-	float	intersec_x;
-	float	intersec_y;
-	float	x_step;
-	float	y_step;
-	int		pixel;
+	float v_x;
+	float v_y;
+	float x_step;
+	float y_step;
+	int  pixel;
 
-	x_step = TILE_SIZE;
-	y_step = TILE_SIZE * tan(main_ray_angle);
-	intersec_x = floor(mlx->ply->ply_x_coord / TILE_SIZE) * TILE_SIZE;
-	pixel = intersec_check(main_ray_angle, &intersec_x, &x_step, false);
-	intersec_y = mlx->ply->ply_y_coord + (intersec_x - mlx->ply->ply_x_coord) * tan(main_ray_angle);
-	if ((unit_circle(main_ray_angle, 'x') && y_step < 0) || (!unit_circle(main_ray_angle, 'x') && y_step > 0))
-    	y_step *= -1;
-	while (wall_hit(intersec_x - pixel, intersec_y, mlx))
+	x_step = TILE_SIZE; 
+	y_step = TILE_SIZE * tan(angl);
+	v_x = floor(mlx->ply->ply_x_coord / TILE_SIZE) * TILE_SIZE;
+	pixel = inter_check(angl, &v_x, &x_step, 0);
+	v_y = mlx->ply->ply_y_coord + (v_x - mlx->ply->ply_x_coord) * tan(angl);
+	if ((unit_circle(angl, 'x') && y_step < 0) || (!unit_circle(angl, 'x') && y_step > 0))
+		y_step *= -1;
+	while (wall_hit(v_x - pixel, v_y, mlx))
 	{
-		intersec_x += x_step;
-		intersec_y += y_step;
+		v_x += x_step;
+		v_y += y_step;
 	}
-	return (sqrt(pow(intersec_x - mlx->ply->ply_x_coord, 2) + pow(intersec_y - mlx->ply->ply_y_coord, 2)));
+	return (sqrt(pow(v_x - mlx->ply->ply_x_coord, 2) + pow(v_y - mlx->ply->ply_y_coord, 2)));
 }
 
-void    calculateWallHeight(t_mlx *mlx);
 void raycasting(t_mlx *mlx)
 {
 	double	h_inter;
@@ -144,7 +157,7 @@ void raycasting(t_mlx *mlx)
 	{
 		h_inter = get_y_inter(mlx, num_check(mlx->ray->main_ray));
 		v_inter = get_x_inter(mlx, num_check(mlx->ray->main_ray));
-		if (v_inter <= h_inter) // check the distance
+		if (v_inter <= h_inter)
 			mlx->ray->distance_to_w = v_inter;
 		else
 			mlx->ray->distance_to_w = h_inter;

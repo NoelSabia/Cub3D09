@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/07 16:24:29 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/08 16:18:56 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void draw_player (t_mlx *mlx)
 	float	eighth_of_unit_square;
 
 	eighth_of_unit_square = (M_PI / 2) / 2;
+	mlx->ply->minimap_x_coord = ;
+	mlx->ply->minimap_y_coord = ;
 	if (mlx->ply->center_angle >= (3 * M_PI / 2) - eighth_of_unit_square && mlx->ply->center_angle <= (3 * M_PI / 2) + eighth_of_unit_square)
 		arrow_north(mlx);
 	else if (mlx->ply->center_angle >= 0 + eighth_of_unit_square && mlx->ply->center_angle <= (M_PI) - eighth_of_unit_square)
