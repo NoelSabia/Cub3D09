@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/07 16:24:04 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/09 14:44:42 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_player
 	int				ply_y_coord;
 	int				minimap_x_coord;
 	int				minimap_y_coord;
+	float			fov_rd;
 	bool			looking_left;
 	bool			looking_right;
 	bool			pressing_w;
