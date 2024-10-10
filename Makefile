@@ -48,6 +48,10 @@ SRCS = main.c \
 	   minimap_plyr_dir.c \
 	   raycasting.c \
 	   render_walls.c \
+	   map_validation.c \
+	   key_strokes.c \
+	   draw_walls.c \
+	   intersection_check.c \
 	   texture_init.c
 
 
