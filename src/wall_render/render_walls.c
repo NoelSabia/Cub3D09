@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 14:26:28 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/10 15:04:08 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,28 @@ mlx_texture_t *get_texture(t_mlx *mlx)
     if (mlx->ray->no_or_so_wallhit_flag == true)
     {
         if (mlx->ray->main_ray > 0 && mlx->ray->main_ray < M_PI)
+        {
+            // printf("south\n");
 			return (mlx->parse->south_tex);
+        }
 		else
+        {
+            // printf("north\n");
 			return (mlx->parse->north_tex);
+        }
     }
     else
     {
         if (mlx->ray->main_ray > M_PI / 2 && mlx->ray->main_ray < 3 * (M_PI / 2))
-			return (mlx->parse->east_tex);
-		else
+        {
+            // printf("west\n");
 			return (mlx->parse->west_tex);
+        }
+		else
+        {
+            // printf("east\n");
+			return (mlx->parse->east_tex);
+        }
     }
 }
 
@@ -69,8 +81,8 @@ void    draw_textures(t_mlx *mlx)
     img = mlx_texture_to_image(mlx->mlx_p, texture);
     if (!img)
         clean_exit("MLX has problems to convert a textuer into an img, not our fault tho :)");
-	if (mlx_image_to_window(mlx->mlx_p, img, 0, 0) < 0)
-        clean_exit("weewoo");
+	if (mlx_image_to_window(mlx->mlx_p, img, 100, 100) < 0)
+        clean_exit("Well...shit");
 }
 
 void     calculateWallHeight(t_mlx *mlx)
@@ -87,4 +99,5 @@ void     calculateWallHeight(t_mlx *mlx)
     else if (top_end >= SCREEN_HEIGHT)
         top_end = SCREEN_HEIGHT - 1;
     drawWall(mlx, bottom_end, top_end);
+    draw_textures(mlx);
 }
