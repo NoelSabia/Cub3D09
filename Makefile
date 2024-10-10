@@ -47,7 +47,11 @@ SRCS = main.c \
 	   minimap.c \
 	   minimap_plyr_dir.c \
 	   raycasting.c \
-	   render_walls.c
+	   render_walls.c \
+	   map_validation.c \
+	   key_strokes.c \
+	   draw_walls.c \
+	   intersection_check.c
 
 
 vpath %.c $(SRCDIRS)

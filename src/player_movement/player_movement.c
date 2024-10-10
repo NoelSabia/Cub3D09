@@ -3,41 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:03:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/08 13:45:39 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/10 15:47:46 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	esc_key(mlx_key_data_t keydata)
-{
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		ft_free_all();
-		exit (0);
-	}
-}
-
-void	are_keys_released(mlx_key_data_t keydata, t_mlx *mlx)
-{
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
-		mlx->ply->pressing_w = false;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
-		mlx->ply->pressing_s = false;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
-		mlx->ply->pressing_a = false;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
-		mlx->ply->pressing_d = false;
-	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
-		mlx->ply->looking_left = false;
-	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
-		mlx->ply->looking_right = false;
-}
-
-void	update_player_view(t_mlx *mlx)
+static void	update_player_view(t_mlx *mlx)
 {
 	if (mlx->ply->looking_left)
 	{
@@ -114,20 +89,6 @@ void	update_player_position(t_mlx *mlx)
 	set_plyr_to_new_coords(mlx, new_x_pos, new_y_pos);
 }
 
-void	walk_around(mlx_key_data_t keydata, t_mlx *mlx)
-{
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		mlx->ply->pressing_w = true;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		mlx->ply->pressing_s = true;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		mlx->ply->pressing_a = true;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		mlx->ply->pressing_d = true;
-	update_player_position(mlx);
-	are_keys_released(keydata, mlx);
-}
-
 void	look_left(mlx_key_data_t keydata, t_mlx *mlx)
 {
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
@@ -142,15 +103,4 @@ void	look_right(mlx_key_data_t keydata, t_mlx *mlx)
 		mlx->ply->looking_right = true;
 	update_player_view(mlx);
 	are_keys_released(keydata, mlx);
-}
-
-void	keyhook_organizer(mlx_key_data_t keydata, void *mlx_copy)
-{
-	t_mlx	*mlx;
-
-	mlx = mlx_copy;
-	esc_key(keydata);
-	walk_around(keydata, mlx);
-	look_left(keydata, mlx);
-	look_right(keydata, mlx);
 }

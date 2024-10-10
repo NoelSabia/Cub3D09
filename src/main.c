@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:38:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 02:11:20 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:50:52 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	clean_exit(char *str)
 	exit(EXIT_FAILURE);
 }
 
-t_mlx *initalize_structs()
+t_mlx	*initalize_structs(void)
 {
-	t_mlx *mlx;
+	t_mlx	*mlx;
 
 	mlx = ft_calloc(1, sizeof(t_mlx));
 	mlx->parse = ft_calloc(1, sizeof(t_parsing));

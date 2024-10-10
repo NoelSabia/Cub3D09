@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 02:09:12 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 15:51:30 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,9 @@ void	validate_map(t_mlx *mlx);
 void	floodfill_organiser(t_mlx *mlx);
 void	parsing(t_mlx *mlx, char *filename, int argc);
 void	init_floor_celing_colors(t_mlx *mlx);
-
+char	*read_map_file(char *filename);
+char	*map_tab_to_space(const char *str);
+void	map_to_doublearray(t_mlx *mlx, char *clean_file_content);
 
 /*Input reception*/
 char	*clean_data(char *str);
@@ -114,13 +116,30 @@ int		graphic_path_north(char *str_in, t_mlx *mlx, char *line);
 int		graphic_path_south(char *str_in, t_mlx *mlx, char *line);
 void	check_if_exists(char *str1, char *str2, t_mlx *mlx, char *line);
 
+/*Movement*/
+void	are_keys_released(mlx_key_data_t keydata, t_mlx *mlx);
+void	look_left(mlx_key_data_t keydata, t_mlx *mlx);
+void	look_right(mlx_key_data_t keydata, t_mlx *mlx);
+void	update_player_position(t_mlx *mlx);
+
+/*Math calculations*/
+float	get_y_inter(t_mlx *mlx, float angl);
+float	get_x_inter(t_mlx *mlx, float angl);
+int		inter_check(float angle, float *inter, float *step, int is_horizon);
+int		unit_circle(float angle, char c);
+int		wall_hit(float x, float y, t_mlx *mlx);
+void	calculate_wall_hight(t_mlx *mlx);
 
 /*Minimap*/
 void	minimap_draw(t_mlx *mlx);
+void	draw_vert(t_mlx *mlx);
+void	draw_horiz(t_mlx *mlx);
+void	draw_walls(t_mlx *mlx);
 void	arrow_north(t_mlx *mlx);
 void	arrow_east(t_mlx *mlx);
 void	arrow_south(t_mlx *mlx);
 void	arrow_west(t_mlx *mlx);
+int		minimap_dynamic_scale(t_mlx *mlx);
 
 /*Main*/
 void	clean_exit(char *str);

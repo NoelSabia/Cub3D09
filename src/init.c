@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 02:11:20 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:49:49 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	floor_celing_display(t_mlx *mlx)
 void	init_window(t_mlx *mlx)
 {
 	mlx->mlx_p = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D", 0);
-	mlx->ray->minimap = mlx_new_image(mlx->mlx_p, TILE_SIZE*(mlx->parse->rows + 1), TILE_SIZE*(mlx->parse->cols + 1));
+	mlx->ray->minimap = mlx_new_image(mlx->mlx_p,
+			TILE_SIZE * (mlx->parse->rows + 1),
+			TILE_SIZE * (mlx->parse->cols + 1));
 	mlx->img = mlx_new_image(mlx->mlx_p, SCREEN_WIDTH, SCREEN_HEIGHT);
 	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 	mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
@@ -54,15 +56,16 @@ void	game_loop(void *mlx_copy)
 	ft_memset(mlx->img->pixels, 0, mlx->img->width * mlx->img->height * 4);
 	floor_celing_display(mlx);
 	raycasting(mlx);
-	ft_memset(mlx->ray->minimap->pixels, 0, mlx->ray->minimap->width * mlx->ray->minimap->height * 4);
-    minimap_draw(mlx);
+	ft_memset(mlx->ray->minimap->pixels, 0,
+		mlx->ray->minimap->width * mlx->ray->minimap->height * 4);
+	minimap_draw(mlx);
 }
 
 void	start_game(t_mlx *mlx)
 {
 	init_window(mlx);
 	init_raycasting(mlx);
-    floor_celing_display(mlx);
+	floor_celing_display(mlx);
 	mlx_loop_hook(mlx->mlx_p, &game_loop, mlx);
 	mlx_key_hook(mlx->mlx_p, &keyhook_organizer, mlx);
 	mlx_loop(mlx->mlx_p);

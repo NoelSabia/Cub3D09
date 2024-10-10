@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 02:04:34 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:16:17 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*fill_spaces(int len)
 	return (str);
 }
 
-char	*combineMapStringWithSpaces(char *str1, char *str2) //need to rename this function
+char	*add_space_to_map(char *str1, char *str2)
 {
 	int		i;
 	int		j;
@@ -80,7 +80,7 @@ void	out_of_bounds_prot(t_mlx *mlx, int len)
 		m = 0;
 		while (mlx->parse->map[i][m])
 			m++;
-		mlx->parse->map[i] = combineMapStringWithSpaces(mlx->parse->map[i],
+		mlx->parse->map[i] = add_space_to_map(mlx->parse->map[i],
 				fill_spaces(longest_line - m));
 	}
 }

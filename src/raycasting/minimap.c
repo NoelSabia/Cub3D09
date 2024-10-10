@@ -12,9 +12,6 @@
 
 #include "cub3d.h"
 
-int		ft_abs(int num);
-void	arrow_north(t_mlx *mlx);
-
 int	minimap_dynamic_scale(t_mlx *mlx)
 {
 	int	dynamic_minimap_size;
@@ -25,59 +22,15 @@ int	minimap_dynamic_scale(t_mlx *mlx)
 	return (dynamic_minimap_size);
 }
 
-void	put_block(t_mlx *mlx, int i, int j)
-{
-	int		i_end;
-	int		j_end;
-	int		j_zero;
-
-	j_zero = j;
-	i_end = i + minimap_dynamic_scale(mlx);
-	j_end = j + minimap_dynamic_scale(mlx);
-	while (i < i_end)
-	{
-		while (j < j_end)
-		{
-			mlx_put_pixel(mlx->ray->minimap, i, j, 0xFFFFFFFF);
-			j++;
-		}
-		j = j_zero;
-		i++;
-	}
-}
-
-void	draw_walls(t_mlx *mlx)
-{
-	int	i;
-	int	j;
-	int	len_for_draw;
-
-	i = 0;
-	len_for_draw = minimap_dynamic_scale(mlx);
-	while (i < mlx->parse->cols)
-	{
-		j = 0;
-		while (j < mlx->parse->rows)
-		{
-			if (mlx->parse->map[i][j] == '1')
-			{
-				put_block(mlx, j * len_for_draw, i * len_for_draw);
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
 void	draw_player(t_mlx *mlx)
 {
 	float	eighth_of_unit_square;
 
 	eighth_of_unit_square = (M_PI / 2) / 2;
 	mlx->ply->minimap_x_coord = (mlx->ply->ply_x_coord / 100) * 25 + 65;
-	printf("minimap_x: %d\n", mlx->ply->minimap_x_coord);
+	printf("minimap_x: %d\n", mlx->ply->minimap_x_coord); // delete this when done
 	mlx->ply->minimap_y_coord = mlx->ply->ply_y_coord / 100 * 25 + 10;
-	printf("minimap_y: %d\n", mlx->ply->minimap_y_coord);
+	printf("minimap_y: %d\n", mlx->ply->minimap_y_coord); // delete this when done
 	if (mlx->ply->minimap_x_coord < 5 || mlx->ply->minimap_x_coord >= 1915
 		|| mlx->ply->minimap_y_coord < 5 || mlx->ply->minimap_y_coord >= 1075)
 		return ;
@@ -92,52 +45,6 @@ void	draw_player(t_mlx *mlx)
 		arrow_west(mlx);
 	else
 		arrow_east(mlx);
-}
-
-void	draw_vert(t_mlx *mlx)
-{
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	k = 0;
-	j = 1;
-	while (k < (mlx->parse->rows))
-	{
-		while (i < minimap_dynamic_scale(mlx) * (mlx->parse->cols))
-		{
-			mlx_put_pixel(mlx->ray->minimap,
-				minimap_dynamic_scale(mlx) * j, i, 0xFFFFFFFF);
-			i++;
-		}
-		i = 0;
-		j++;
-		k++;
-	}
-}
-
-void	draw_horiz(t_mlx *mlx)
-{
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	k = 0;
-	j = 1;
-	while (k < (mlx->parse->cols))
-	{
-		while (i < minimap_dynamic_scale(mlx) * (mlx->parse->rows))
-		{
-			mlx_put_pixel(mlx->ray->minimap, i,
-				minimap_dynamic_scale(mlx) * j, 0xFFFFFFFF);
-			i++;
-		}
-		i = 0;
-		j++;
-		k++;
-	}
 }
 
 void	minimap_draw(t_mlx *mlx)
