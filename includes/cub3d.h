@@ -29,7 +29,7 @@
 # define FOV 60
 # define TILE_SIZE 50
 # define RAY_LIMIT 120
-# define ROTATION_SPEED M_PI / 80
+# define ROTATION_SPEED M_PI / 40
 # define MOVEMENT_SPEED 2
 # define WALL_SLICE_WIDTH (SCREEN_WIDTH / RAY_LIMIT)
 
@@ -57,6 +57,10 @@ typedef struct s_parsing
 	int				ply_y_pos_in_map;
 	int				rows;
 	int				cols;
+	mlx_texture_t	*north_tex;
+	mlx_texture_t	*east_tex;
+	mlx_texture_t	*south_tex;
+	mlx_texture_t	*west_tex;
 }	t_parsing;
 
 typedef struct s_player
@@ -81,7 +85,7 @@ typedef struct raytracing
 {
 	mlx_image_t	*minimap;
 	double		main_ray;
-	int			wallhit_flag;
+	bool		no_or_so_wallhit_flag;
 	double		distance_to_w;
 }	t_raytracing;
 

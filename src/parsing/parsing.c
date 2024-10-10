@@ -59,4 +59,5 @@ void	parsing(t_mlx *mlx, char *filename, int argc)
 	validate_map(mlx);
 	init_floor_celing_colors(mlx);
 	define_player_direction(mlx);
+	init_textures(mlx);
 }
