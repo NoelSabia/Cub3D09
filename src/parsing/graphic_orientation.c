@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_orientation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:37:30 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/07 16:24:29 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 13:22:23 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	graphic_path_north(char *str_in, t_mlx *mlx, char *line)
 {
 	char	*str_tmp;
+	int		where_to_place_null;
 
 	if (ft_strncmp(str_in, "NO", 2) == 0)
 	{
@@ -24,6 +25,8 @@ int	graphic_path_north(char *str_in, t_mlx *mlx, char *line)
 		mlx->parse->north = str_tmp;
 		mlx->parse->north_set = 1;
 		mlx->parse->input_counter++;
+		where_to_place_null = ft_strlen(mlx->parse->north);
+		mlx->parse->north[where_to_place_null - 1] = '\0';
 		return (1);
 	}
 	return (0);
@@ -32,6 +35,7 @@ int	graphic_path_north(char *str_in, t_mlx *mlx, char *line)
 int	graphic_path_south(char *str_in, t_mlx *mlx, char *line)
 {
 	char	*str_tmp;
+	int		where_to_place_null;
 
 	if (ft_strncmp(str_in, "SO", 2) == 0)
 	{
@@ -41,6 +45,8 @@ int	graphic_path_south(char *str_in, t_mlx *mlx, char *line)
 		mlx->parse->south = str_tmp;
 		mlx->parse->south_set = 1;
 		mlx->parse->input_counter++;
+		where_to_place_null = ft_strlen(mlx->parse->south);
+		mlx->parse->south[where_to_place_null - 1] = '\0';
 		return (1);
 	}
 	return (0);
@@ -49,6 +55,7 @@ int	graphic_path_south(char *str_in, t_mlx *mlx, char *line)
 int	graphic_path_west(char *str_in, t_mlx *mlx, char *line)
 {
 	char	*str_tmp;
+	int		where_to_place_null;
 
 	if (ft_strncmp(str_in, "WE", 2) == 0)
 	{
@@ -58,6 +65,8 @@ int	graphic_path_west(char *str_in, t_mlx *mlx, char *line)
 		mlx->parse->west = str_tmp;
 		mlx->parse->west_set = 1;
 		mlx->parse->input_counter++;
+		where_to_place_null = ft_strlen(mlx->parse->west);
+		mlx->parse->west[where_to_place_null - 1] = '\0';
 		return (1);
 	}
 	return (0);
@@ -66,6 +75,7 @@ int	graphic_path_west(char *str_in, t_mlx *mlx, char *line)
 int	graphic_path_east(char *str_in, t_mlx *mlx, char *line)
 {
 	char	*str_tmp;
+	int		where_to_place_null;
 
 	if (ft_strncmp(str_in, "EA", 2) == 0)
 	{
@@ -75,6 +85,8 @@ int	graphic_path_east(char *str_in, t_mlx *mlx, char *line)
 		mlx->parse->east = str_tmp;
 		mlx->parse->east_set = 1;
 		mlx->parse->input_counter++;
+		where_to_place_null = ft_strlen(mlx->parse->east);
+		mlx->parse->east[where_to_place_null - 1] = '\0';
 		return (1);
 	}
 	return (0);

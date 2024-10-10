@@ -47,7 +47,8 @@ SRCS = main.c \
 	   minimap.c \
 	   minimap_plyr_dir.c \
 	   raycasting.c \
-	   render_walls.c
+	   render_walls.c \
+	   texture_init.c
 
 
 vpath %.c $(SRCDIRS)
