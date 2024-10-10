@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/09 10:32:11 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/10 12:29:53 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void raycasting(t_mlx *mlx)
 	ray = 0;
 	mlx->ray->main_ray = mlx->ply->most_left_angle;
 	mlx->ply->fov_rd = (FOV * M_PI / 180);
+	mlx->ray->no_or_so_wallhit_flag = false;
 	while (ray < RAY_LIMIT)
 	{
 		h_inter = get_y_inter(mlx, num_check(mlx->ray->main_ray));
@@ -151,9 +152,13 @@ void raycasting(t_mlx *mlx)
 		if (v_inter <= h_inter)
 			mlx->ray->distance_to_w = v_inter;
 		else
+		{
 			mlx->ray->distance_to_w = h_inter;
+			mlx->ray->no_or_so_wallhit_flag = true;
+		}
 		mlx->ray->distance_to_w *= cos(num_check(mlx->ray->main_ray - mlx->ply->center_angle));
 	    calculateWallHeight(mlx);
+		mlx->ray->no_or_so_wallhit_flag = false;
 		ray++;
 		mlx->ray->main_ray += (mlx->ply->fov_rd / RAY_LIMIT);
 	}

@@ -6,11 +6,13 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:47:05 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/08 16:02:21 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/10 12:49:04 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_textures(t_mlx *mlx);
 
 char	*readCubFile(char *filename)
 {
@@ -121,6 +123,7 @@ void	parsing(t_mlx *mlx, char *filename, int argc)
 	convertMapStringIn2DArray(mlx, clean_file_content);
 	verifyMapPathAndFile(mlx);
 	validateMap(mlx);
+	init_textures(mlx);
 	floorAndCeilingColor(mlx);
 	playerDirection(mlx);
 }

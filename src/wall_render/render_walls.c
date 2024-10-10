@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/07 16:24:29 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 12:49:55 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,31 @@ void    drawWall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall)
     i++;
     if (i == 120)
         i = 0;
+}
+
+mlx_texture_t *get_texture(t_mlx *mlx)
+{
+    if (mlx->ray->no_or_so_wallhit_flag == true)
+    {
+        if (mlx->ray->main_ray > 0 && mlx->ray->main_ray < M_PI)
+			return (mlx->parse->south_tex);
+		else
+			return (mlx->parse->north_tex);
+    }
+    else
+    {
+        if (mlx->ray->main_ray > M_PI / 2 && mlx->ray->main_ray < 3 * (M_PI / 2))
+			return (mlx->parse->east_tex);
+		else
+			return (mlx->parse->west_tex);
+    }
+}
+
+void    draw_textures(t_mlx *mlx)
+{
+    mlx_texture_t   *texture;
+
+    texture = get_texture(mlx);
 }
 
 void     calculateWallHeight(t_mlx *mlx)
