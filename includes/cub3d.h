@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 15:51:30 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 16:10:26 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	init_floor_celing_colors(t_mlx *mlx);
 char	*read_map_file(char *filename);
 char	*map_tab_to_space(const char *str);
 void	map_to_doublearray(t_mlx *mlx, char *clean_file_content);
+void	init_textures(t_mlx *mlx);
 
 /*Input reception*/
 char	*clean_data(char *str);
