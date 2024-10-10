@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 13:33:02 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/10 14:26:28 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,15 @@ mlx_texture_t *get_texture(t_mlx *mlx)
 void    draw_textures(t_mlx *mlx)
 {
     mlx_texture_t   *texture;
+    mlx_image_t     *img;
 
+    img = NULL;
     texture = get_texture(mlx);
+    img = mlx_texture_to_image(mlx->mlx_p, texture);
+    if (!img)
+        clean_exit("MLX has problems to convert a textuer into an img, not our fault tho :)");
+	if (mlx_image_to_window(mlx->mlx_p, img, 0, 0) < 0)
+        clean_exit("weewoo");
 }
 
 void     calculateWallHeight(t_mlx *mlx)
