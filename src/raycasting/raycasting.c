@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/09 10:32:11 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/10 02:10:10 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	minimap_draw_line(t_mlx *mlx, float x_coord, float y_coord);
 int		minimap_dynamic_scale(t_mlx *mlx);
-void     calculateWallHeight(t_mlx *mlx);
+void     calculate_wall_hight(t_mlx *mlx);
 
 float num_check(float angle)
 {
@@ -25,7 +25,7 @@ float num_check(float angle)
     return (angle);
 }
 
-void	initalizeRaycasting(t_mlx *mlx)
+void	init_raycasting(t_mlx *mlx)
 {
 
 	mlx->ply->ply_y_coord = (mlx->parse->ply_y_pos_in_map) * TILE_SIZE + TILE_SIZE / 2;
@@ -153,7 +153,7 @@ void raycasting(t_mlx *mlx)
 		else
 			mlx->ray->distance_to_w = h_inter;
 		mlx->ray->distance_to_w *= cos(num_check(mlx->ray->main_ray - mlx->ply->center_angle));
-	    calculateWallHeight(mlx);
+	    calculate_wall_hight(mlx);
 		ray++;
 		mlx->ray->main_ray += (mlx->ply->fov_rd / RAY_LIMIT);
 	}

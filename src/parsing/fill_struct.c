@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:05:20 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/07 16:24:29 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 01:57:46 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	get_celing_color(char *str_in, t_mlx *mlx, char *line)
 	return (0);
 }
 
-void	isMapStartAndGraphicPathValid(char *str1, char *str2, t_mlx *mlx, char *line)
+void	map_and_graphic_validation(char *str1, char *str2, t_mlx *mlx, char *line)
 {
 	if (ft_strncmp(str2, "\n", 1) == 0)
 		return ;
@@ -74,7 +74,7 @@ void	isMapStartAndGraphicPathValid(char *str1, char *str2, t_mlx *mlx, char *lin
 	clean_exit("Not all elements included in the .cub file!");
 }
 
-void	verifyMapPathAndFile(t_mlx *mlx)
+void	map_path_file_validation(t_mlx *mlx)
 {
 	int		i;
 	int		m;
@@ -92,7 +92,7 @@ void	verifyMapPathAndFile(t_mlx *mlx)
 		str1 = ft_strncpy(&mlx->parse->input[i][m], 0, 1);
 		str2 = ft_strncpy(&mlx->parse->input[i][m], 0, 0);
 		line = mlx->parse->input[i];
-		isMapStartAndGraphicPathValid(str1, str2, mlx, line);
+		map_and_graphic_validation(str1, str2, mlx, line);
 	}
 	if (!mlx->parse->north_set || !mlx->parse->west_set
 		|| !mlx->parse->south_set || !mlx->parse->east_set

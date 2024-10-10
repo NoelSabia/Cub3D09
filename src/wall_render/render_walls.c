@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/09 15:43:44 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 02:10:10 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	drawWall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall)
+void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall)
 {
 	static int	i;
 	int			x_start;
@@ -41,7 +41,7 @@ void	drawWall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall)
 		i = 0;
 }
 
-void	calculateWallHeight(t_mlx *mlx)
+void	calculate_wall_hight(t_mlx *mlx)
 {
 	int	wall_height;
 	int	bottom_end;
@@ -54,5 +54,5 @@ void	calculateWallHeight(t_mlx *mlx)
 		bottom_end = 0;
 	else if (top_end >= SCREEN_HEIGHT)
 		top_end = SCREEN_HEIGHT - 1;
-	drawWall(mlx, bottom_end, top_end);
+	draw_wall(mlx, bottom_end, top_end);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/09 14:44:42 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/10 02:09:12 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ typedef struct s_mlx
 }	t_mlx;
 
 /*Parsing*/
-void	verifyMapPathAndFile(t_mlx *mlx);
-void	validateMap(t_mlx *mlx);
-void	floodFillOrganizer(t_mlx *mlx);
+void	map_path_file_validation(t_mlx *mlx);
+void	validate_map(t_mlx *mlx);
+void	floodfill_organiser(t_mlx *mlx);
 void	parsing(t_mlx *mlx, char *filename, int argc);
-void	floorAndCeilingColor(t_mlx *mlx);
+void	init_floor_celing_colors(t_mlx *mlx);
 
 
 /*Input reception*/
@@ -124,7 +124,7 @@ void	arrow_west(t_mlx *mlx);
 
 /*Main*/
 void	clean_exit(char *str);
-void	initalizeRaycasting(t_mlx *mlx);
+void	init_raycasting(t_mlx *mlx);
 void	raycasting(t_mlx *mlx);
 
 #endif

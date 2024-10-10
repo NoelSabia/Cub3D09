@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_helpers.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:34:48 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/09 15:22:40 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 02:04:34 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_abs(int num)
 	return (num);
 }
 
-void	findPlayer(t_mlx *mlx)
+void	find_player(t_mlx *mlx)
 {
 	int		y;
 	int		x;
@@ -41,7 +41,7 @@ void	findPlayer(t_mlx *mlx)
 	}
 }
 
-char	**prepareMapForFloodFill(t_mlx *mlx)
+char	**map_for_floodfill(t_mlx *mlx)
 {
 	char	**copy;
 	int		i;

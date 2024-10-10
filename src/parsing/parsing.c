@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:47:05 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/08 16:02:21 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/10 02:08:02 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*readCubFile(char *filename)
+char	*read_map_file(char *filename)
 {
 	int			fd;
 	char		*buffer;
@@ -30,7 +30,7 @@ char	*readCubFile(char *filename)
 	return (buffer);
 }
 
-char	*mapTabstoSpaces(const char *str)
+char	*map_tab_to_space(const char *str)
 {
 	int		i;
 	int		count;
@@ -48,7 +48,7 @@ char	*mapTabstoSpaces(const char *str)
 	return (newLineWithoutTabs);
 }
 
-void	convertMapStringIn2DArray(t_mlx *mlx, char *clean_file_content)
+void	map_to_doublearray(t_mlx *mlx, char *clean_file_content)
 {
 	int		i;
 	int		j;
@@ -77,7 +77,7 @@ void	convertMapStringIn2DArray(t_mlx *mlx, char *clean_file_content)
 	mlx->parse->input[k] = NULL;
 }
 
-void	playerDirection(t_mlx *mlx)
+void	define_player_direction(t_mlx *mlx)
 {
 	char	c;
 
@@ -94,7 +94,7 @@ void	playerDirection(t_mlx *mlx)
 		clean_exit("Player spawn is not W N E or S!");
 }
 
-void	validateArgsAndFileName(char *filename, int argc)
+void	argument_validation(char *filename, int argc)
 {
 	char	*cub;
 
@@ -115,12 +115,12 @@ void	parsing(t_mlx *mlx, char *filename, int argc)
 	char	*file_content;
 	char	*clean_file_content;
 
-	validateArgsAndFileName(filename, argc);
-	file_content = readCubFile(filename);
-	clean_file_content = mapTabstoSpaces(file_content);
-	convertMapStringIn2DArray(mlx, clean_file_content);
-	verifyMapPathAndFile(mlx);
-	validateMap(mlx);
-	floorAndCeilingColor(mlx);
-	playerDirection(mlx);
+	argument_validation(filename, argc);
+	file_content = read_map_file(filename);
+	clean_file_content = map_tab_to_space(file_content);
+	map_to_doublearray(mlx, clean_file_content);
+	map_path_file_validation(mlx);
+	validate_map(mlx);
+	init_floor_celing_colors(mlx);
+	define_player_direction(mlx);
 }

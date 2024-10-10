@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/09 15:22:09 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 02:04:34 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 int		ft_abs(int num);
-void	findPlayer(t_mlx *mlx);
-char	**prepareMapForFloodFill(t_mlx *mlx);
+void	find_player(t_mlx *mlx);
+char	**map_for_floodfill(t_mlx *mlx);
 
 char	*fill_spaces(int len)
 {
@@ -29,7 +29,7 @@ char	*fill_spaces(int len)
 	return (str);
 }
 
-char	*combineMapStringWithSpaces(char *str1, char *str2)
+char	*combineMapStringWithSpaces(char *str1, char *str2) //need to rename this function
 {
 	int		i;
 	int		j;
@@ -56,7 +56,7 @@ or map not at the bottom of the file!\n");
 	return (result);
 }
 
-void	outOfBounceProtection(t_mlx *mlx, int len)
+void	out_of_bounds_prot(t_mlx *mlx, int len)
 {
 	int	longest_line;
 	int	i;
@@ -85,28 +85,28 @@ void	outOfBounceProtection(t_mlx *mlx, int len)
 	}
 }
 
-void	floodFill(t_mlx *mlx, int y, int x, char **map_copy)
+void	floodfill(t_mlx *mlx, int y, int x, char **map_copy)
 {
 	if (map_copy[y][x] != '0' && map_copy[y][x] != '1')
 		clean_exit("Error: Map is invalid!\n");
 	else if (map_copy[y][x] == '1')
 		return ;
 	map_copy[y][x] = '1';
-	floodFill(mlx, y - 1, x, map_copy);
-	floodFill(mlx, y + 1, x, map_copy);
-	floodFill(mlx, y, x - 1, map_copy);
-	floodFill(mlx, y, x + 1, map_copy);
+	floodfill(mlx, y - 1, x, map_copy);
+	floodfill(mlx, y + 1, x, map_copy);
+	floodfill(mlx, y, x - 1, map_copy);
+	floodfill(mlx, y, x + 1, map_copy);
 }
 
-void	floodFillOrganizer(t_mlx *mlx)
+void	floodfill_organiser(t_mlx *mlx)
 {
 	char	**map_copy;
 	int		len;
 
 	len = 0;
-	outOfBounceProtection(mlx, len);
-	findPlayer(mlx);
-	map_copy = prepareMapForFloodFill(mlx);
-	floodFill(mlx, mlx->parse->ply_y_pos_in_map,
+	out_of_bounds_prot(mlx, len);
+	find_player(mlx);
+	map_copy = map_for_floodfill(mlx);
+	floodfill(mlx, mlx->parse->ply_y_pos_in_map,
 		mlx->parse->ply_x_pos_in_map, map_copy);
 }

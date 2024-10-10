@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:38:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/07 16:23:53 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 02:11:20 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	startGame(t_mlx *mlx);
+void	start_game(t_mlx *mlx);
 
 void	clean_exit(char *str)
 {
@@ -40,7 +40,7 @@ int	main(int argc, char *argv[])
 
 	mlx = initalize_structs();
 	parsing(mlx, argv[1], argc);
-	startGame(mlx);
+	start_game(mlx);
 	ft_free_all();
 	return (0);
 }
