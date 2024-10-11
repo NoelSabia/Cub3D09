@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/11 20:25:06 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/11 20:56:26 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define TILE_SIZE 50
 # define RAY_LIMIT 1920
 # define ROTATION_SPEED M_PI / 80
-# define MOVEMENT_SPEED 2
+# define MOVEMENT_SPEED 10
 # define WALL_SLICE_WIDTH (SCREEN_WIDTH / RAY_LIMIT)
 
 /*Parsing*/
@@ -136,7 +136,7 @@ void	update_player_position(t_mlx *mlx);
 float	get_y_inter(t_mlx *mlx, float angl);
 float	get_x_inter(t_mlx *mlx, float angl);
 int		inter_check(float angle, float *inter, float *step, int is_horizon);
-int		unit_circle(float angle, char c);
+int		unit_circle(float angle, bool horizontal);
 int		wall_hit(float x, float y, t_mlx *mlx);
 void	calculate_wall_hight(t_mlx *mlx);
 
