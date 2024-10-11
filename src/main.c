@@ -6,13 +6,11 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:38:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/11 09:51:26 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/11 13:18:18 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	start_game(t_mlx *mlx);
 
 void	clean_exit(char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 21:48:59 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/11 13:17:55 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void	arrow_west(t_mlx *mlx);
 int		minimap_dynamic_scale(t_mlx *mlx);
 
 /*Main*/
+void	start_game(t_mlx *mlx);
 void	clean_exit(char *str);
 void	init_raycasting(t_mlx *mlx);
 void	raycasting(t_mlx *mlx);
