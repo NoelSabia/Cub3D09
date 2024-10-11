@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/11 15:09:23 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/11 20:23:21 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ mlx_texture_t *get_texture(t_mlx *mlx)
     }
 }
 
-uint8_t	reverse_bytes(uint8_t c)
+int	reverse_bytes(int c)
 {
-	uint8_t	b;
+	int	b;
 
+	// printf("c: %d\n", c);
 	b = 0;
 	b |= (c & 0xFF) << 24;
 	b |= (c & 0xFF00) << 8;
@@ -48,8 +49,8 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall
 	int				x_start;
 	int				x_end;
 	int				bottom_tmp;
-	double			x_o;
-	double			y_o;
+	double			x_tex;
+	double			y_tex;
 	mlx_texture_t	*texture;
 	uint32_t		*arr;
 	double			factor;
@@ -60,10 +61,13 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall
 	texture = get_texture(mlx);
 	arr = (uint32_t *)texture->pixels;
 	factor = (double)texture->height / wall_h;
-	x_o = mlx->ray->no_or_so_wallhit_flag ? (int)fmodf((mlx->ray->horiz_x * (texture->width / TILE_SIZE)), texture->width) : (int)fmodf((mlx->ray->vert_y * (texture->width / TILE_SIZE)), texture->width);
-	y_o = (top_end_of_wall - (SCREEN_HEIGHT / 2) + (wall_h / 2)) * factor;
-	if (y_o < 0)
-		y_o = 0;
+	x_tex = mlx->ray->no_or_so_wallhit_flag ? (int)fmodf((mlx->ray->horiz_x * (texture->width / TILE_SIZE)), texture->width) : (int)fmodf((mlx->ray->vert_y * (texture->width / TILE_SIZE)), texture->width);
+	y_tex = (bottom_end_of_wall - (SCREEN_HEIGHT / 2) + (wall_h / 2)) * factor;
+	// printf("var1: %d\n", bottom_end_of_wall);
+	// printf("w_h: %d\n", wall_h);
+	// printf("factor: %f\n", factor);
+	if (y_tex < 0)
+		y_tex = 0;
 	while (x_start <= x_end)
 	{
 		while (bottom_tmp <= top_end_of_wall)
@@ -71,13 +75,15 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall
 			bottom_tmp++;
 			if (x_start < 0 || x_start > 1920 - 1)
 				continue ;
-			else if (bottom_tmp < 0 || bottom_tmp > 1080 - 1)
+			else if (y_tex < 0 || y_tex > 1080 - 1)
 				continue ;
-			printf("y_o: %d\n", (int)y_o);
-			printf("x_o: %d\n", (int)x_o);
-			printf("width: %d\n", texture->width);
-			mlx_put_pixel(mlx->img, x_start, bottom_tmp, reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
-			y_o += factor;
+			// printf("here: %d\n", (int)y_tex);
+			// printf("x_tex: %d\n", (int)x_tex);
+			// printf("width: %d\n", texture->width);
+			if ((int)y_tex * texture->width + (int)x_tex < texture->width * texture->height)
+				mlx_put_pixel(mlx->img, x_start, bottom_tmp, reverse_bytes(arr[(int)y_tex * texture->width + (int)x_tex]));
+			y_tex += factor; //factor is doing some weird bullshit!!!!!!
+			// printf("y_tex: %f\n", y_tex);
 		}
 		bottom_tmp = bottom_end_of_wall;
 		x_start++;
@@ -85,7 +91,7 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall
 	i++;
 	if (i == RAY_LIMIT)
 		i = 0;
-	exit(0);
+	// exit(0);
 }
 
 void	calculate_wall_hight(t_mlx *mlx)

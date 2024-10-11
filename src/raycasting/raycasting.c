@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/11 13:19:06 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/11 20:10:07 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ void	raycasting(t_mlx *mlx)
 		mlx->ray->ray_counter++;
 		mlx->ray->main_ray += (mlx->ply->fov_rd / RAY_LIMIT);
 	}
+	// exit(0);
 }
