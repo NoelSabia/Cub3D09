@@ -29,10 +29,10 @@ void	draw_player(t_mlx *mlx)
 
 	squaresize = minimap_dynamic_scale(mlx);
 	eighth_of_unit_square = (M_PI / 2) / 2;
-	mlx->ply->minimap_x_coord = (mlx->ply->ply_x_coord / 100) * 25 + 65;
-	// printf("minimap_x: %d\n", mlx->ply->minimap_x_coord); // delete this when done
-	mlx->ply->minimap_y_coord = mlx->ply->ply_y_coord / 100 * 25 + 10;
-	// printf("minimap_y: %d\n", mlx->ply->minimap_y_coord); // delete this when done
+	mlx->ply->minimap_x_coord = mlx->parse->ply_x_pos_in_map
+		* squaresize + (squaresize / 2);
+	mlx->ply->minimap_y_coord = mlx->parse->ply_y_pos_in_map
+		* squaresize + (squaresize / 2);
 	if (mlx->ply->minimap_x_coord < 5 || mlx->ply->minimap_x_coord >= 1915
 		|| mlx->ply->minimap_y_coord < 5 || mlx->ply->minimap_y_coord >= 1075)
 		return ;

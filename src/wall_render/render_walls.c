@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/11 13:19:24 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/11 15:09:23 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ mlx_texture_t *get_texture(t_mlx *mlx)
     }
 }
 
-u_int8_t	reverse_bytes(u_int8_t c)
+uint8_t	reverse_bytes(uint8_t c)
 {
-	u_int8_t	b;
+	uint8_t	b;
 
 	b = 0;
 	b |= (c & 0xFF) << 24;
@@ -83,8 +83,9 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall
 		x_start++;
 	}
 	i++;
-	if (i == 120)
+	if (i == RAY_LIMIT)
 		i = 0;
+	exit(0);
 }
 
 void	calculate_wall_hight(t_mlx *mlx)
