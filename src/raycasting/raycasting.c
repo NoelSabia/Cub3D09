@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/11 20:10:07 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/11 20:57:58 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	init_raycasting(t_mlx *mlx)
 			+ ((M_PI / 2) / 2));
 }
 
-int	unit_circle(float angle, char c)
+int	unit_circle(float angle, bool horizontal)
 {
-	if (c == 'x')
+	if (horizontal)
 	{
 		if (angle > 0 && angle < M_PI)
 			return (1);
 	}
-	else if (c == 'y')
+	else if (!horizontal)
 	{
 		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
 			return (1);
@@ -48,27 +48,27 @@ int	unit_circle(float angle, char c)
 	return (0);
 }
 
-int	wall_hit(float x, float y, t_mlx *mlx)
+int	wall_hit(float player_x, float player_y, t_mlx *mlx)
 {
-	int	x_m;
-	int	y_m;
+	int	map_x;
+	int	map_y;
 
-	if (x < 0 || y < 0)
+	if (player_x < 0 || player_y < 0)
 		return (0);
-	x_m = floor (x / TILE_SIZE);
-	y_m = floor (y / TILE_SIZE);
-	if ((y_m >= mlx->parse->cols || x_m >= mlx->parse->rows))
-		return (0);
-	if (mlx->parse->map[y_m] && x_m <= (int)strlen(mlx->parse->map[y_m]))
-		if (mlx->parse->map[y_m][x_m] == '1')
+	map_x = floor(player_x / TILE_SIZE);
+	map_y = floor(player_y / TILE_SIZE);
+	if (((map_y >= mlx->parse->cols || map_x >= mlx->parse->rows) || 
+		(mlx->parse->map[map_y] && map_x <= (int)strlen(mlx->parse->map[map_y]) && 
+		mlx->parse->map[map_y][map_x] == '1')))
 			return (0);
 	return (1);
 }
 
+
 void	raycasting(t_mlx *mlx)
 {
-	double	h_inter;
-	double	v_inter;
+	double	x_inter;
+	double	y_inter;
 
 	mlx->ray->ray_counter = 0;
 	mlx->ray->main_ray = mlx->ply->most_left_angle;
@@ -76,13 +76,13 @@ void	raycasting(t_mlx *mlx)
 	mlx->ray->no_or_so_wallhit_flag = false;
 	while (mlx->ray->ray_counter < RAY_LIMIT)
 	{
-		h_inter = get_y_inter(mlx, num_check(mlx->ray->main_ray));
-		v_inter = get_x_inter(mlx, num_check(mlx->ray->main_ray));
-		if (v_inter <= h_inter)
-			mlx->ray->distance_to_w = v_inter;
+		x_inter = get_y_inter(mlx, num_check(mlx->ray->main_ray));
+		y_inter = get_x_inter(mlx, num_check(mlx->ray->main_ray));
+		if (y_inter <= x_inter)
+			mlx->ray->distance_to_w = y_inter;
 		else
 		{
-			mlx->ray->distance_to_w = h_inter;
+			mlx->ray->distance_to_w = x_inter;
 			mlx->ray->no_or_so_wallhit_flag = true;
 		}
 		mlx->ray->distance_to_w *= cos(num_check(mlx->ray->main_ray
@@ -92,5 +92,4 @@ void	raycasting(t_mlx *mlx)
 		mlx->ray->ray_counter++;
 		mlx->ray->main_ray += (mlx->ply->fov_rd / RAY_LIMIT);
 	}
-	// exit(0);
 }
