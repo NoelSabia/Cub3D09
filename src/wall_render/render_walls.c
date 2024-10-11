@@ -6,22 +6,64 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 15:36:35 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/11 13:16:41 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall)
+mlx_texture_t *get_texture(t_mlx *mlx)
 {
-	static int	i;
-	int			x_start;
-	int			x_end;
-	int			bottom_tmp;
+    if (mlx->ray->no_or_so_wallhit_flag == true)
+    {
+        if (mlx->ray->main_ray > 0 && mlx->ray->main_ray < M_PI)
+			return (mlx->parse->south_tex);
+		else
+			return (mlx->parse->north_tex);
+    }
+    else
+    {
+        if (mlx->ray->main_ray > M_PI / 2 && mlx->ray->main_ray < 3 * (M_PI / 2))
+			return (mlx->parse->west_tex);
+		else
+			return (mlx->parse->east_tex);
+    }
+}
+
+u_int8_t	reverse_bytes(u_int8_t c)
+{
+	u_int8_t	b;
+
+	b = 0;
+	b |= (c & 0xFF) << 24;
+	b |= (c & 0xFF00) << 8;
+	b |= (c & 0xFF0000) >> 8;
+	b |= (c & 0xFF000000) >> 24;
+	return (b);
+}
+
+void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall_h)
+{
+	static int		i;
+	int				x_start;
+	int				x_end;
+	int				bottom_tmp;
+	double			x_o;
+	double			y_o;
+	mlx_texture_t	*texture;
+	uint32_t		*arr;
+	double			factor;
 
 	x_start = i * WALL_SLICE_WIDTH;
 	x_end = i * WALL_SLICE_WIDTH + WALL_SLICE_WIDTH;
 	bottom_tmp = bottom_end_of_wall--;
+	texture = get_texture(mlx);
+	arr = (uint32_t *)texture->pixels;
+	factor = (double)texture->height / wall_h;
+	x_o = mlx->ray->no_or_so_wallhit_flag ? (int)fmodf((mlx->ray->horiz_x * (texture->width / TILE_SIZE)), texture->width) : (int)fmodf((mlx->ray->vert_y * (texture->width / TILE_SIZE)), texture->width);
+	y_o = (top_end_of_wall - (SCREEN_HEIGHT / 2) + (wall_h / 2)) * factor;
+	if (y_o < 0)
+		y_o = 0;
 	while (x_start <= x_end)
 	{
 		while (bottom_tmp <= top_end_of_wall)
@@ -31,7 +73,11 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall)
 				continue ;
 			else if (bottom_tmp < 0 || bottom_tmp > 1080 - 1)
 				continue ;
-			mlx_put_pixel(mlx->img, x_start, bottom_tmp, 0x0000ff);
+			printf("y_o: %d\n", (int)y_o);
+			printf("x_o: %d\n", (int)x_o);
+			printf("width: %d\n", texture->width);
+			mlx_put_pixel(mlx->img, x_start, bottom_tmp, reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
+			y_o += factor;
 		}
 		bottom_tmp = bottom_end_of_wall;
 		x_start++;
@@ -39,50 +85,6 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall)
 	i++;
 	if (i == 120)
 		i = 0;
-}
-
-mlx_texture_t *get_texture(t_mlx *mlx)
-{
-    if (mlx->ray->no_or_so_wallhit_flag == true)
-    {
-        if (mlx->ray->main_ray > 0 && mlx->ray->main_ray < M_PI)
-        {
-            // printf("south\n");
-			return (mlx->parse->south_tex);
-        }
-		else
-        {
-            // printf("north\n");
-			return (mlx->parse->north_tex);
-        }
-    }
-    else
-    {
-        if (mlx->ray->main_ray > M_PI / 2 && mlx->ray->main_ray < 3 * (M_PI / 2))
-        {
-            // printf("west\n");
-			return (mlx->parse->west_tex);
-        }
-		else
-        {
-            // printf("east\n");
-			return (mlx->parse->east_tex);
-        }
-    }
-}
-
-void    draw_textures(t_mlx *mlx)
-{
-    mlx_texture_t   *texture;
-    mlx_image_t     *img;
-
-    img = NULL;
-    texture = get_texture(mlx);
-    img = mlx_texture_to_image(mlx->mlx_p, texture);
-    if (!img)
-        clean_exit("MLX has problems to convert a textuer into an img, not our fault tho :)");
-	if (mlx_image_to_window(mlx->mlx_p, img, 100, 100) < 0)
-        clean_exit("Well...shit");
 }
 
 void	calculate_wall_hight(t_mlx *mlx)
@@ -99,5 +101,5 @@ void	calculate_wall_hight(t_mlx *mlx)
 		bottom_end = 0;
 	else if (top_end >= SCREEN_HEIGHT)
 		top_end = SCREEN_HEIGHT - 1;
-	draw_wall(mlx, bottom_end, top_end);
+	draw_wall(mlx, bottom_end, top_end, wall_height);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_check.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:06:28 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/10/10 15:49:10 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 21:49:29 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ float	get_y_inter(t_mlx *mlx, float angl)
 		h_x += x_step;
 		h_y += y_step;
 	}
+	mlx->ray->horiz_x = h_x;
+	mlx->ray->horiz_y = h_y;
 	return (sqrt(pow(h_x - mlx->ply->ply_x_coord, 2)
 			+ pow(h_y - mlx->ply->ply_y_coord, 2)));
 }
@@ -58,6 +60,8 @@ float	get_x_inter(t_mlx *mlx, float angl)
 		v_x += x_step;
 		v_y += y_step;
 	}
+	mlx->ray->vert_x = v_x;
+	mlx->ray->vert_y = v_y;
 	return (sqrt(pow(v_x - mlx->ply->ply_x_coord, 2)
 			+ pow(v_y - mlx->ply->ply_y_coord, 2)));
 }

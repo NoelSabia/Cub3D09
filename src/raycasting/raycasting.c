@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 15:50:04 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/10 21:25:35 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,12 @@ void	raycasting(t_mlx *mlx)
 {
 	double	h_inter;
 	double	v_inter;
-	int		ray;
 
-	ray = 0;
+	mlx->ray->ray_counter = 0;
 	mlx->ray->main_ray = mlx->ply->most_left_angle;
 	mlx->ply->fov_rd = (FOV * M_PI / 180);
 	mlx->ray->no_or_so_wallhit_flag = false;
-	while (ray < RAY_LIMIT)
+	while (mlx->ray->ray_counter < RAY_LIMIT)
 	{
 		h_inter = get_y_inter(mlx, num_check(mlx->ray->main_ray));
 		v_inter = get_x_inter(mlx, num_check(mlx->ray->main_ray));
@@ -86,11 +85,11 @@ void	raycasting(t_mlx *mlx)
 			mlx->ray->distance_to_w = h_inter;
 			mlx->ray->no_or_so_wallhit_flag = true;
 		}
-    mlx->ray->distance_to_w *= cos(num_check(mlx->ray->main_ray
+    	mlx->ray->distance_to_w *= cos(num_check(mlx->ray->main_ray
 					- mlx->ply->center_angle));
 		calculate_wall_hight(mlx);
 		mlx->ray->no_or_so_wallhit_flag = false;
-		ray++;
+		mlx->ray->ray_counter++;
 		mlx->ray->main_ray += (mlx->ply->fov_rd / RAY_LIMIT);
 	}
 }

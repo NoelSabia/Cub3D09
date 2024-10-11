@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 16:10:26 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/10 21:48:59 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ typedef struct raytracing
 	double		main_ray;
 	bool		no_or_so_wallhit_flag;
 	double		distance_to_w;
+	float		horiz_x;
+	float		horiz_y;
+	float		vert_x;
+	float		vert_y;
+	int			ray_counter;
 }	t_raytracing;
 
 /*Mainstruct*/

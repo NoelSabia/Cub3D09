@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 14:49:49 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/11 09:54:11 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,16 @@ void	floor_celing_display(t_mlx *mlx)
 void	init_window(t_mlx *mlx)
 {
 	mlx->mlx_p = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D", 0);
+	if (!mlx->mlx_p)
+		clean_exit("weewoo1\n");
 	mlx->ray->minimap = mlx_new_image(mlx->mlx_p,
 			TILE_SIZE * (mlx->parse->rows + 1),
 			TILE_SIZE * (mlx->parse->cols + 1));
+	if (!mlx->ray->minimap)
+		clean_exit("weewoo2\n");
 	mlx->img = mlx_new_image(mlx->mlx_p, SCREEN_WIDTH, SCREEN_HEIGHT);
+	if (!mlx->img)
+		clean_exit("weewoo3\n");
 	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 	mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
 }
