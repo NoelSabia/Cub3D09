@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/11 13:19:24 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/12 18:20:35 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,6 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall
 				continue ;
 			else if (bottom_tmp < 0 || bottom_tmp > 1080 - 1)
 				continue ;
-			printf("y_o: %d\n", (int)y_o);
-			printf("x_o: %d\n", (int)x_o);
-			printf("width: %d\n", texture->width);
 			mlx_put_pixel(mlx->img, x_start, bottom_tmp, reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
 			y_o += factor;
 		}
