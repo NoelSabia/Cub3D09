@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/11 20:27:37 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/13 23:33:05 by noel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+float	num_check(float angle);
 
 mlx_texture_t *get_texture(t_mlx *mlx)
 {
+	mlx->ray->main_ray = num_check(mlx->ray->main_ray);
     if (mlx->ray->no_or_so_wallhit_flag == true)
     {
         if (mlx->ray->main_ray > 0 && mlx->ray->main_ray < M_PI)
@@ -60,7 +62,11 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall
 	texture = get_texture(mlx);
 	arr = (uint32_t *)texture->pixels;
 	factor = (double)texture->height / wall_h;
-	x_tex = mlx->ray->no_or_so_wallhit_flag ? (int)fmodf((mlx->ray->horiz_x * (texture->width / TILE_SIZE)), texture->width) : (int)fmodf((mlx->ray->vert_y * (texture->width / TILE_SIZE)), texture->width);
+    if (mlx->ray->no_or_so_wallhit_flag)
+        x_tex = (mlx->ray->horiz_x / TILE_SIZE) - floor(mlx->ray->horiz_x / TILE_SIZE);
+    else
+        x_tex = (mlx->ray->vert_y / TILE_SIZE) - floor(mlx->ray->vert_y / TILE_SIZE);
+    x_tex *= texture->width;
 	y_tex = (bottom_end_of_wall - (SCREEN_HEIGHT / 2) + (wall_h / 2)) * factor;
 	if (y_tex < 0)
 		y_tex = 0;
@@ -84,6 +90,7 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall
 	if (i == RAY_LIMIT)
 		i = 0;
 }
+
 
 void	calculate_wall_hight(t_mlx *mlx)
 {
