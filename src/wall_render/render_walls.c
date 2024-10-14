@@ -84,7 +84,7 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall
 			bottom_tmp++;
 			if (x_start < 0 || x_start > 1920 - 1)
 				continue ;
-			else if (y_tex < 0 || y_tex > 1080 - 1)
+			else if (bottom_tmp < 0 || bottom_tmp > 1080 - 1)
 				continue ;
 			if ((int)y_tex * texture->width + (int)x_tex < texture->width * texture->height)
 				mlx_put_pixel(mlx->img, x_start, bottom_tmp, reverse_bytes(arr[(int)y_tex * texture->width + (int)x_tex]));
