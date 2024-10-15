@@ -38,10 +38,10 @@ void	draw_player(t_mlx *mlx)
 		return ;
 	if (mlx->ply->center_angle >= (3 * M_PI / 2) - eighth_of_unit_square
 		&& mlx->ply->center_angle <= (3 * M_PI / 2) + eighth_of_unit_square)
-		arrow_north(mlx);
+		arrow_south(mlx);
 	else if (mlx->ply->center_angle >= 0 + eighth_of_unit_square
 		&& mlx->ply->center_angle <= (M_PI) - eighth_of_unit_square)
-		arrow_south(mlx);
+		arrow_north(mlx);
 	else if (mlx->ply->center_angle > (M_PI / 2) + eighth_of_unit_square
 		&& mlx->ply->center_angle < (3 * M_PI / 2) - eighth_of_unit_square)
 		arrow_west(mlx);

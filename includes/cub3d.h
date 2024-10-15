@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/15 10:44:03 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/15 11:18:05 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
-# define FOV 60
+# define FOV 75
 # define TILE_SIZE 50
 # define RAY_LIMIT 1920
-# define ROTATION_SPEED M_PI / (RAY_LIMIT / 50)
+# define ROTATION_SPEED (M_PI / 60)
 # define MOVEMENT_SPEED 15
 # define WALL_SLICE_WIDTH (SCREEN_WIDTH / RAY_LIMIT)
 
