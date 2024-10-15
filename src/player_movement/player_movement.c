@@ -6,13 +6,13 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:03:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/15 11:22:47 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/15 17:53:25 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	update_player_view(t_mlx *mlx)
+void	update_player_view(t_mlx *mlx)
 {
 	if (mlx->ply->looking_left)
 	{
@@ -93,7 +93,7 @@ void	look_left(mlx_key_data_t keydata, t_mlx *mlx)
 {
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
 		mlx->ply->looking_left = true;
-	update_player_view(mlx);
+	// update_player_view(mlx);
 	are_keys_released(keydata, mlx);
 }
 
@@ -101,6 +101,6 @@ void	look_right(mlx_key_data_t keydata, t_mlx *mlx)
 {
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
 		mlx->ply->looking_right = true;
-	update_player_view(mlx);
+	// update_player_view(mlx);
 	are_keys_released(keydata, mlx);
 }

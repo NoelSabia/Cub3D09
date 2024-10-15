@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/15 14:45:25 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/15 16:12:50 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,7 @@ void	raycasting(t_mlx *mlx)
 
 	mlx->ray->ray_counter = 0;
 	mlx->ray->main_ray = mlx->ply->most_left_angle;
-	mlx->ply->fov_rd = (mlx->ply->most_left_angle - mlx->ply->most_right_angle);
-	if (mlx->ply->fov_rd < 0)
-		mlx->ply->fov_rd *= -1;
+	mlx->ply->fov_rd = 1.570797;
 	mlx->ray->no_or_so_wallhit_flag = false;
 	while (mlx->ray->ray_counter < RAY_LIMIT)
 	{

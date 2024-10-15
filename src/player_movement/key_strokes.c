@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:28:24 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/10/10 14:30:03 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/15 17:52:05 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	walk_around(mlx_key_data_t keydata, t_mlx *mlx)
 		mlx->ply->pressing_a = true;
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 		mlx->ply->pressing_d = true;
-	update_player_position(mlx);
+	// update_player_position(mlx);
 	are_keys_released(keydata, mlx);
 }
 

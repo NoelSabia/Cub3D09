@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/11 13:18:07 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/15 17:52:59 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	game_loop(void *mlx_copy)
 	raycasting(mlx);
 	ft_memset(mlx->ray->minimap->pixels, 0,
 		mlx->ray->minimap->width * mlx->ray->minimap->height * 4);
+	update_player_position(mlx);
+	update_player_view(mlx);
 	minimap_draw(mlx);
 }
 
