@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:03:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 15:47:46 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/15 10:25:57 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	update_player_view(t_mlx *mlx)
 {
+	printf("center angle ply view = %f\n", mlx->ply->center_angle);
 	if (mlx->ply->looking_left)
 	{
 		mlx->ply->most_left_angle -= ROTATION_SPEED;
@@ -67,6 +68,7 @@ void	update_player_position(t_mlx *mlx)
 
 	new_x_pos = 0;
 	new_y_pos = 0;
+	printf("center angle update pos = %f\n", mlx->ply->center_angle);
 	if (mlx->ply->pressing_w)
 		new_x_pos = cos(mlx->ply->center_angle) * MOVEMENT_SPEED;
 	if (mlx->ply->pressing_w)

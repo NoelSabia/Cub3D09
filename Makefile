@@ -79,7 +79,7 @@ $(LIBFT):
 
 $(LIBMLX):
 	@if [ ! -d "$(LIBMLXDIR)" ]; then \
-		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLXDIR); \
+		git clone -b v2.3.4 https://github.com/codam-coding-college/MLX42.git $(LIBMLXDIR); \
 	fi
 	@if [ ! -d "$(LIBMLXDIR)/build" ]; then \
 		mkdir -p $(LIBMLXDIR)/build; \

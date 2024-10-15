@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel <noel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/14 17:41:40 by noel             ###   ########.fr       */
+/*   Updated: 2024/10/15 10:44:03 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define FOV 60
 # define TILE_SIZE 50
 # define RAY_LIMIT 1920
-# define ROTATION_SPEED M_PI / 40
-# define MOVEMENT_SPEED 2
+# define ROTATION_SPEED M_PI / (RAY_LIMIT / 50)
+# define MOVEMENT_SPEED 15
 # define WALL_SLICE_WIDTH (SCREEN_WIDTH / RAY_LIMIT)
 
 /*Parsing*/
