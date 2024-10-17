@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/15 17:53:36 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/16 14:55:52 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define TILE_SIZE 50
 # define RAY_LIMIT 1920
 # define ROTATION_SPEED (M_PI / 60)
-# define MOVEMENT_SPEED 15
+# define MOVEMENT_SPEED 5
 # define WALL_SLICE_WIDTH (SCREEN_WIDTH / RAY_LIMIT)
 
 /*Parsing*/
