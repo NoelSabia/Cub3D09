@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:03:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/20 18:16:10 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/20 18:43:21 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ void	set_plyr_to_new_coords(t_mlx *mlx, double new_x_pos, double new_y_pos)
 		mlx->ply->ply_x_coord = new_x;
 		mlx->ply->ply_y_coord = new_y;
 	}
+	else if (y_move_check(new_y, mlx->ply->ply_x_coord, mlx))
+		mlx->ply->ply_y_coord = new_y;
+	else if (x_move_check(mlx->ply->ply_y_coord, new_x, mlx))
+		mlx->ply->ply_x_coord = new_x;
 }
 
 void	update_player_position(t_mlx *mlx)

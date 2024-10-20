@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/20 18:17:30 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/20 18:41:08 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ void	look_right(mlx_key_data_t keydata, t_mlx *mlx);
 void	update_player_position(t_mlx *mlx);
 void	update_player_view(t_mlx *mlx);
 bool	val_ply_pos(int ply_y, int ply_x, t_mlx *mlx);
-
+bool	x_move_check(int old_y, int new_x, t_mlx *mlx);
+bool	y_move_check(int new_y, int old_x, t_mlx *mlx);
 
 /*Math calculations*/
 float	get_y_inter(t_mlx *mlx, float angl);
