@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:57:45 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/20 18:22:26 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/20 19:33:37 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@ float	num_check(float angle)
 	return (angle);
 }
 
-void	init_raycasting(t_mlx *mlx)
+void    init_raycasting(t_mlx *mlx)
 {
-	mlx->ply->ply_y_coord = (mlx->parse->ply_y_pos_in_map) * TILE_SIZE
-		+ TILE_SIZE / 2;
-	mlx->ply->ply_x_coord = (mlx->parse->ply_x_pos_in_map) * TILE_SIZE
-		+ TILE_SIZE / 2;
-	mlx->ply->most_left_angle = num_check(mlx->ply->center_angle
-			- ((M_PI / 2) / 2));
-	mlx->ply->most_right_angle = num_check(mlx->ply->center_angle
-			+ ((M_PI / 2) / 2));
+    double  half_fov;
+    half_fov = (FOV * M_PI / 180) / 2;
+    mlx->ply->ply_y_coord = (mlx->parse->ply_y_pos_in_map) * TILE_SIZE
+        + TILE_SIZE / 2;
+    mlx->ply->ply_x_coord = (mlx->parse->ply_x_pos_in_map) * TILE_SIZE
+        + TILE_SIZE / 2;
+    mlx->ply->most_left_angle = num_check(mlx->ply->center_angle
+            - half_fov);
+    mlx->ply->most_right_angle = num_check(mlx->ply->center_angle
+            + half_fov);
 }
 
 int	unit_circle(float angle, char c)
@@ -72,12 +74,13 @@ void	raycasting(t_mlx *mlx)
 
 	mlx->ray->ray_counter = 0;
 	mlx->ray->main_ray = mlx->ply->most_left_angle;
-	mlx->ply->fov_rd = (M_PI / 2);
+	mlx->ply->fov_rd = (FOV * M_PI / 180);
 	mlx->ray->no_or_so_wallhit_flag = false;
 	while (mlx->ray->ray_counter < RAY_LIMIT)
 	{
-		h_inter = get_y_inter(mlx, num_check(mlx->ray->main_ray));
-		v_inter = get_x_inter(mlx, num_check(mlx->ray->main_ray));
+		double ray_angle = num_check(mlx->ray->main_ray);
+		h_inter = get_y_inter(mlx, ray_angle);
+		v_inter = get_x_inter(mlx, ray_angle);
 		if (v_inter <= h_inter)
 			mlx->ray->distance_to_w = v_inter;
 		else
@@ -85,9 +88,13 @@ void	raycasting(t_mlx *mlx)
 			mlx->ray->distance_to_w = h_inter;
 			mlx->ray->no_or_so_wallhit_flag = true;
 		}
-		mlx->ray->distance_to_w *= cos(num_check(mlx->ray->main_ray
-					- mlx->ply->center_angle));
+		// Fish-eye correction
+		double angle_diff = ray_angle - mlx->ply->center_angle;
+		mlx->ray->distance_to_w *= cos(angle_diff);
+
+		// Wall height calculation based on distance
 		calculate_wall_hight(mlx);
+
 		mlx->ray->no_or_so_wallhit_flag = false;
 		mlx->ray->ray_counter++;
 		mlx->ray->main_ray += (mlx->ply->fov_rd / RAY_LIMIT);

@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/15 13:30:31 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/20 19:39:31 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ void	calculate_wall_hight(t_mlx *mlx)
 
 	wall_height = (TILE_SIZE / mlx->ray->distance_to_w)
 		* ((SCREEN_HEIGHT / 2) / tan(1.047197551 / 2));
-	bottom_end = SCREEN_HEIGHT / 2 - wall_height / 2;
-	top_end = SCREEN_HEIGHT / 2 + wall_height / 2;
+	bottom_end = (SCREEN_HEIGHT / 2) - (wall_height / 2);
+	top_end = (SCREEN_HEIGHT / 2) + (wall_height / 2);
 	if (bottom_end < 0)
 		bottom_end = 0;
 	else if (top_end >= SCREEN_HEIGHT)
