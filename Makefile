@@ -52,7 +52,8 @@ SRCS = main.c \
 	   key_strokes.c \
 	   draw_walls.c \
 	   intersection_check.c \
-	   texture_init.c
+	   texture_init.c \
+	   validate_position.c
 
 
 vpath %.c $(SRCDIRS)

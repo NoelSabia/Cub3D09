@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/16 14:55:52 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/20 18:17:30 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct raytracing
 	int			ray_counter;
 }	t_raytracing;
 
+
 /*Mainstruct*/
 typedef struct s_mlx
 {
@@ -132,6 +133,8 @@ void	look_left(mlx_key_data_t keydata, t_mlx *mlx);
 void	look_right(mlx_key_data_t keydata, t_mlx *mlx);
 void	update_player_position(t_mlx *mlx);
 void	update_player_view(t_mlx *mlx);
+bool	val_ply_pos(int ply_y, int ply_x, t_mlx *mlx);
+
 
 /*Math calculations*/
 float	get_y_inter(t_mlx *mlx, float angl);

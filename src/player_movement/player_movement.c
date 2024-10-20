@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:03:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/15 17:53:25 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/20 18:16:10 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,16 @@ void	update_player_view(t_mlx *mlx)
 
 void	set_plyr_to_new_coords(t_mlx *mlx, double new_x_pos, double new_y_pos)
 {
-	int		map_grid_y;
-	int		map_grid_x;
 	int		new_x;
 	int		new_y;
 
 	new_x = round(mlx->ply->ply_x_coord + new_x_pos);
 	new_y = round(mlx->ply->ply_y_coord + new_y_pos);
-	map_grid_x = (new_x / TILE_SIZE);
-	map_grid_y = (new_y / TILE_SIZE);
-	if (mlx->parse->map[map_grid_y][map_grid_x] != '1' &&
-	(mlx->parse->map[map_grid_y][mlx->ply->ply_x_coord / TILE_SIZE] != '1' &&
-	mlx->parse->map[mlx->ply->ply_y_coord / TILE_SIZE][map_grid_x] != '1'))
+	if (val_ply_pos(new_y - 10, new_x, mlx)
+		&& val_ply_pos(new_y + 10, new_x, mlx)
+		&& val_ply_pos(new_y, new_x + 10, mlx)
+		&& val_ply_pos(new_y, new_x - 10, mlx)
+		&& val_ply_pos(new_y, new_x, mlx))
 	{
 		mlx->ply->ply_x_coord = new_x;
 		mlx->ply->ply_y_coord = new_y;
