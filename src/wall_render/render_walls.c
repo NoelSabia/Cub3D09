@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/21 11:37:58 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/21 16:01:40 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall,
 	int top_end_of_wall, int wall_h)
 {
 	static int		i;
-	int				x_start;
-	int				x_end;
 	int				bottom_tmp;
 	double			x_tex;
 	double			y_tex;
@@ -59,8 +57,6 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall,
 	uint32_t		*arr;
 	double			factor;
 
-	x_start = i * WALL_SLICE_WIDTH;
-	x_end = i * WALL_SLICE_WIDTH + WALL_SLICE_WIDTH;
 	bottom_tmp = bottom_end_of_wall--;
 	texture = get_texture(mlx);
 	arr = (uint32_t *)texture->pixels;
@@ -73,22 +69,18 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall,
 	y_tex = (bottom_end_of_wall - (SCREEN_HEIGHT / 2) + (wall_h / 2)) * factor;
 	if (y_tex < 0)
 		y_tex = 0;
-	while (x_start <= x_end)
+	while (bottom_tmp <= top_end_of_wall)
 	{
-		while (bottom_tmp <= top_end_of_wall)
-		{
-			bottom_tmp++;
-			if (x_start < 0 || x_start > SCREEN_WIDTH - 1)
-				continue ;
-			else if (bottom_tmp < 0 || bottom_tmp > SCREEN_HEIGHT - 1)
-				continue ;
-			if ((int)y_tex * texture->width + (int)x_tex < texture->width * texture->height)
-				mlx_put_pixel(mlx->img, x_start, bottom_tmp, reverse_bytes(arr[(int)y_tex * texture->width + (int)x_tex]));
-			y_tex += factor;
-		}
-		bottom_tmp = bottom_end_of_wall;
-		x_start++;
+		bottom_tmp++;
+		if (i < 0 || i > SCREEN_WIDTH - 1)
+			continue ;
+		else if (bottom_tmp < 0 || bottom_tmp > SCREEN_HEIGHT - 1)
+			continue ;
+		if ((int)y_tex * texture->width + (int)x_tex < texture->width * texture->height)
+			mlx_put_pixel(mlx->img, i, bottom_tmp, reverse_bytes(arr[(int)y_tex * texture->width + (int)x_tex]));
+		y_tex += factor;
 	}
+	bottom_tmp = bottom_end_of_wall;
 	i++;
 	if (i == RAY_LIMIT)
 		i = 0;
