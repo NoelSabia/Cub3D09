@@ -1,6 +1,5 @@
-# Variables
 NAME := cub3D
-CC = cc -g  #-fsanitize=address
+CC = cc -g
 CFLAGS := -Wextra -Wall -Werror -Ofast
 
 LIBFTDIR := ./libft
@@ -20,7 +19,7 @@ ifeq ($(shell uname),Darwin)
 else ifeq ($(shell uname),Linux)
 	LIBS += -ldl -lglfw -pthread -lm
 endif
-# LIBS += -L"/opt/homebrew/Cellar/glfw/3.4/lib/"
+
 LIBS += -L$(LIBFTDIR) -lft
 
 SRCDIRS := src \
@@ -59,10 +58,8 @@ SRCS = main.c \
 vpath %.c $(SRCDIRS)
 vpath %.h $(INCLUDEDIRS)
 
-# Object files
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
-# Targets
 all: $(NAME)
 
 $(NAME): $(LIBMLX) $(LIBFT) $(OBJS)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/15 17:52:59 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/21 10:11:51 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ void	init_window(t_mlx *mlx)
 {
 	mlx->mlx_p = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D", 0);
 	if (!mlx->mlx_p)
-		clean_exit("weewoo1\n");
+		clean_exit("MLX Instance failed to created\n");
 	mlx->ray->minimap = mlx_new_image(mlx->mlx_p,
 			TILE_SIZE * (mlx->parse->rows + 1),
 			TILE_SIZE * (mlx->parse->cols + 1));
 	if (!mlx->ray->minimap)
-		clean_exit("weewoo2\n");
+		clean_exit("Image for Minimap could not be created\n");
 	mlx->img = mlx_new_image(mlx->mlx_p, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!mlx->img)
-		clean_exit("weewoo3\n");
+		clean_exit("Image for 3D Part could not be created\n");
 	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 	mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
 }
@@ -61,6 +61,7 @@ void	game_loop(void *mlx_copy)
 	mlx = mlx_copy;
 	ft_memset(mlx->img->pixels, 0, mlx->img->width * mlx->img->height * 4);
 	floor_celing_display(mlx);
+	mlx->ray->ray_counter = 0;
 	raycasting(mlx);
 	ft_memset(mlx->ray->minimap->pixels, 0,
 		mlx->ray->minimap->width * mlx->ray->minimap->height * 4);

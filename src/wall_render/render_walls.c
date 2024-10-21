@@ -3,33 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/20 19:39:31 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/21 11:37:58 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 float	num_check(float angle);
 
-mlx_texture_t *get_texture(t_mlx *mlx)
+mlx_texture_t	*get_texture(t_mlx *mlx)
 {
 	mlx->ray->main_ray = num_check(mlx->ray->main_ray);
-    if (mlx->ray->no_or_so_wallhit_flag == true)
-    {
-        if (mlx->ray->main_ray > 0 && mlx->ray->main_ray < M_PI)
+	if (mlx->ray->no_or_so_wallhit_flag == true)
+	{
+		if (mlx->ray->main_ray > 0 && mlx->ray->main_ray < M_PI)
 			return (mlx->parse->south_tex);
 		else
 			return (mlx->parse->north_tex);
-    }
-    else
-    {
-        if (mlx->ray->main_ray > M_PI / 2 && mlx->ray->main_ray < 3 * (M_PI / 2))
+	}
+	else
+	{
+		if (mlx->ray->main_ray > M_PI / 2
+			&& mlx->ray->main_ray < 3 * (M_PI / 2))
 			return (mlx->parse->west_tex);
 		else
 			return (mlx->parse->east_tex);
-    }
+	}
 }
 
 int	reverse_bytes(int c)
@@ -44,7 +46,8 @@ int	reverse_bytes(int c)
 	return (b);
 }
 
-void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall_h)
+void	draw_wall(t_mlx *mlx, int bottom_end_of_wall,
+	int top_end_of_wall, int wall_h)
 {
 	static int		i;
 	int				x_start;
@@ -62,11 +65,11 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall
 	texture = get_texture(mlx);
 	arr = (uint32_t *)texture->pixels;
 	factor = (double)texture->height / wall_h;
-    if (mlx->ray->no_or_so_wallhit_flag)
-        x_tex = (mlx->ray->horiz_x / TILE_SIZE) - floor(mlx->ray->horiz_x / TILE_SIZE);
-    else
-        x_tex = (mlx->ray->vert_y / TILE_SIZE) - floor(mlx->ray->vert_y / TILE_SIZE);
-    x_tex *= texture->width;
+	if (mlx->ray->no_or_so_wallhit_flag)
+		x_tex = (mlx->ray->horiz_x / TILE_SIZE) - floor(mlx->ray->horiz_x / TILE_SIZE);
+	else
+		x_tex = (mlx->ray->vert_y / TILE_SIZE) - floor(mlx->ray->vert_y / TILE_SIZE);
+	x_tex *= texture->width;
 	y_tex = (bottom_end_of_wall - (SCREEN_HEIGHT / 2) + (wall_h / 2)) * factor;
 	if (y_tex < 0)
 		y_tex = 0;
@@ -90,7 +93,6 @@ void	draw_wall(t_mlx *mlx, int bottom_end_of_wall, int top_end_of_wall, int wall
 	if (i == RAY_LIMIT)
 		i = 0;
 }
-
 
 void	calculate_wall_hight(t_mlx *mlx)
 {

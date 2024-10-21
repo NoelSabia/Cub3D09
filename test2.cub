@@ -1,7 +1,7 @@
 NO src/wall_pictures/coal_ore.png
-SO src/wall_pictures/diamond_ore.png
-WE src/wall_pictures/lapis_ore.png
-EA src/wall_pictures/redstone_ore.png
+SO src/wall_pictures/coal_ore.png
+WE src/wall_pictures/coal_ore.png
+EA src/wall_pictures/coal_ore.png
 
 C 0,184,205
 F 30,15,15

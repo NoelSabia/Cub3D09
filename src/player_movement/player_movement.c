@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:03:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/20 18:43:21 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/21 10:04:18 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	look_left(mlx_key_data_t keydata, t_mlx *mlx)
 {
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
 		mlx->ply->looking_left = true;
-	// update_player_view(mlx);
 	are_keys_released(keydata, mlx);
 }
 
@@ -103,6 +102,5 @@ void	look_right(mlx_key_data_t keydata, t_mlx *mlx)
 {
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
 		mlx->ply->looking_right = true;
-	// update_player_view(mlx);
 	are_keys_released(keydata, mlx);
 }

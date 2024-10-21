@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/20 18:41:08 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/21 13:17:09 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 # define FOV 75
 # define TILE_SIZE 50
 # define RAY_LIMIT 1920
-# define ROTATION_SPEED (M_PI / 60)
+# define ROTATION_SPEED 0.05235987755983
 # define MOVEMENT_SPEED 5
-# define WALL_SLICE_WIDTH (SCREEN_WIDTH / RAY_LIMIT)
+# define WALL_SLICE_WIDTH 1
 
 /*Parsing*/
 typedef struct s_parsing
@@ -94,7 +94,6 @@ typedef struct raytracing
 	int			ray_counter;
 }	t_raytracing;
 
-
 /*Mainstruct*/
 typedef struct s_mlx
 {
@@ -141,8 +140,8 @@ bool	y_move_check(int new_y, int old_x, t_mlx *mlx);
 float	get_y_inter(t_mlx *mlx, float angl);
 float	get_x_inter(t_mlx *mlx, float angl);
 int		inter_check(float angle, float *inter, float *step, int is_horizon);
-int		unit_circle(float angle, char c);
-int		wall_hit(float x, float y, t_mlx *mlx);
+bool	unit_circle(float angle, bool y_axis);
+float	wall_hit(float x, float y, t_mlx *mlx);
 void	calculate_wall_hight(t_mlx *mlx);
 
 /*Minimap*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_plyr_dir.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:05:59 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 14:43:34 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/21 10:05:04 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	arrow_north(t_mlx *mlx)
 {
-	// printf("x_coord: %d\n", mlx->ply->minimap_x_coord);
-	// printf("y_coord: %d\n", mlx->ply->minimap_y_coord);
 	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord,
 		mlx->ply->minimap_y_coord - 2, 0xFF0000FF);
 	mlx_put_pixel(mlx->ray->minimap, mlx->ply->minimap_x_coord,
