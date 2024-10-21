@@ -29,9 +29,9 @@ void	draw_player(t_mlx *mlx)
 
 	squaresize = minimap_dynamic_scale(mlx);
 	eighth_of_unit_square = (M_PI / 2) / 2;
-	mlx->ply->minimap_x_coord = mlx->parse->ply_x_pos_in_map
+	mlx->ply->minimap_x_coord = (mlx->ply->ply_x_coord / TILE_SIZE)
 		* squaresize + (squaresize / 2);
-	mlx->ply->minimap_y_coord = mlx->parse->ply_y_pos_in_map
+	mlx->ply->minimap_y_coord = (mlx->ply->ply_y_coord / TILE_SIZE)
 		* squaresize + (squaresize / 2);
 	if (mlx->ply->center_angle >= (3 * M_PI / 2) - eighth_of_unit_square
 		&& mlx->ply->center_angle <= (3 * M_PI / 2) + eighth_of_unit_square)
