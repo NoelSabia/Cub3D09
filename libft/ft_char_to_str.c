@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   floor_ceiling_helper.c                             :+:      :+:    :+:   */
+/*   ft_char_to_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/23 16:47:33 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 14:32:40 by tpaesch          ###   ########.fr       */
+/*   Created: 2024/10/21 16:19:27 by tpaesch           #+#    #+#             */
+/*   Updated: 2024/10/21 16:30:15 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	check_and_format(uint8_t ceiling[3], int *i, t_mlx *mlx, bool floor)
+
+char	*ft_char_to_str(char c)
 {
-	if (*i != 3)
-		clean_exit("Invalid ceiling color format!");
-	if (floor == false)
-		mlx->parse->ceiling_color = (ceiling[0] << 24)
-			| (ceiling[1] << 16) | (ceiling[2] << 8) | 0xFF;
-	else if (floor == true)
-		mlx->parse->floor_color = (ceiling[0] << 24)
-			| (ceiling[1] << 16) | (ceiling[2] << 8) | 0xFF;
+	char	*result;
+
+	result = ft_malloc(2);
+	result[0] = c;
+	result[1] = '\0';
+	return (result);
 }

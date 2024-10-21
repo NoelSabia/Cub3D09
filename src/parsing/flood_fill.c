@@ -6,15 +6,11 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 14:16:17 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/21 16:09:10 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int		ft_abs(int num);
-void	find_player(t_mlx *mlx);
-char	**map_for_floodfill(t_mlx *mlx);
 
 char	*fill_spaces(int len)
 {

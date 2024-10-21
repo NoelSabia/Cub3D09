@@ -3,6 +3,7 @@ NAME = libft.a
 SOURCES = ft_atoi.c \
 ft_bzero.c \
 ft_calloc.c \
+ft_char_to_str.c \
 ft_free_all.c \
 ft_free.c \
 ft_isalnum.c \

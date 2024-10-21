@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/21 10:11:51 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/21 16:08:57 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	init_values(t_mlx *mlx);
-void	floor_and_ceiling_color(t_mlx *mlx);
-void	keyhook_organizer(mlx_key_data_t keydata, void *mlx_copy);
 
 void	floor_celing_display(t_mlx *mlx)
 {

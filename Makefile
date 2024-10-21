@@ -35,12 +35,12 @@ OBJDIR := obj
 SRCS = main.c \
 	   init.c \
 	   floor_ceiling_color.c \
-	   floor_ceiling_helper.c \
+	   floor_ceiling_init.c \
 	   parsing.c \
 	   flood_fill.c \
 	   flood_fill_preparation.c \
 	   flood_fill_helpers.c \
-	   fill_struct.c \
+	   parse_map_file.c \
 	   graphic_orientation.c \
 	   player_movement.c \
 	   minimap.c \
