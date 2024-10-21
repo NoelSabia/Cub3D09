@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:23 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/21 16:01:40 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/21 17:23:31 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,44 +46,52 @@ int	reverse_bytes(int c)
 	return (b);
 }
 
-void	draw_wall(t_mlx *mlx, int bottom_end_of_wall,
+void	draw_wall(t_mlx *mlx, mlx_texture_t *texture,
+	uint32_t *arr, int top_end_of_wall)
+{
+	while (mlx->ray->bottom_tmp <= top_end_of_wall)
+	{
+		mlx->ray->bottom_tmp++;
+		if (mlx->ray->i < 0 || mlx->ray->i > SCREEN_WIDTH - 1)
+			continue ;
+		else if (mlx->ray->bottom_tmp < 0
+			|| mlx->ray->bottom_tmp > SCREEN_HEIGHT - 1)
+			continue ;
+		if ((int)mlx->ray->y_tex * texture->width + (int)mlx->ray->x_tex
+			< texture->width * texture->height)
+			mlx_put_pixel(mlx->img, mlx->ray->i, mlx->ray->bottom_tmp,
+				reverse_bytes(arr[(int)mlx->ray->y_tex
+					* texture->width + (int)mlx->ray->x_tex]));
+		mlx->ray->y_tex += mlx->ray->factor;
+	}
+}
+
+void	prepare_drawing(t_mlx *mlx, int bottom_end_of_wall,
 	int top_end_of_wall, int wall_h)
 {
-	static int		i;
-	int				bottom_tmp;
-	double			x_tex;
-	double			y_tex;
 	mlx_texture_t	*texture;
 	uint32_t		*arr;
-	double			factor;
 
-	bottom_tmp = bottom_end_of_wall--;
+	mlx->ray->bottom_tmp = bottom_end_of_wall--;
 	texture = get_texture(mlx);
 	arr = (uint32_t *)texture->pixels;
-	factor = (double)texture->height / wall_h;
+	mlx->ray->factor = (double)texture->height / wall_h;
 	if (mlx->ray->no_or_so_wallhit_flag)
-		x_tex = (mlx->ray->horiz_x / TILE_SIZE) - floor(mlx->ray->horiz_x / TILE_SIZE);
+		mlx->ray->x_tex = (mlx->ray->horiz_x / TILE_SIZE)
+			- floor(mlx->ray->horiz_x / TILE_SIZE);
 	else
-		x_tex = (mlx->ray->vert_y / TILE_SIZE) - floor(mlx->ray->vert_y / TILE_SIZE);
-	x_tex *= texture->width;
-	y_tex = (bottom_end_of_wall - (SCREEN_HEIGHT / 2) + (wall_h / 2)) * factor;
-	if (y_tex < 0)
-		y_tex = 0;
-	while (bottom_tmp <= top_end_of_wall)
-	{
-		bottom_tmp++;
-		if (i < 0 || i > SCREEN_WIDTH - 1)
-			continue ;
-		else if (bottom_tmp < 0 || bottom_tmp > SCREEN_HEIGHT - 1)
-			continue ;
-		if ((int)y_tex * texture->width + (int)x_tex < texture->width * texture->height)
-			mlx_put_pixel(mlx->img, i, bottom_tmp, reverse_bytes(arr[(int)y_tex * texture->width + (int)x_tex]));
-		y_tex += factor;
-	}
-	bottom_tmp = bottom_end_of_wall;
-	i++;
-	if (i == RAY_LIMIT)
-		i = 0;
+		mlx->ray->x_tex = (mlx->ray->vert_y / TILE_SIZE)
+			- floor(mlx->ray->vert_y / TILE_SIZE);
+	mlx->ray->x_tex *= texture->width;
+	mlx->ray->y_tex = (bottom_end_of_wall - (SCREEN_HEIGHT / 2)
+			+ (wall_h / 2)) * mlx->ray->factor;
+	if (mlx->ray->y_tex < 0)
+		mlx->ray->y_tex = 0;
+	draw_wall(mlx, texture, arr, top_end_of_wall);
+	mlx->ray->bottom_tmp = bottom_end_of_wall;
+	mlx->ray->i++;
+	if (mlx->ray->i == RAY_LIMIT)
+		mlx->ray->i = 0;
 }
 
 void	calculate_wall_hight(t_mlx *mlx)
@@ -100,5 +108,5 @@ void	calculate_wall_hight(t_mlx *mlx)
 		bottom_end = 0;
 	else if (top_end >= SCREEN_HEIGHT)
 		top_end = SCREEN_HEIGHT - 1;
-	draw_wall(mlx, bottom_end, top_end, wall_height);
+	prepare_drawing(mlx, bottom_end, top_end, wall_height);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:34:25 by nsabia            #+#    #+#             */
-/*   Updated: 2024/09/26 16:35:16 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/21 17:24:48 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	*ft_strncpy(char *src, int start, int end);
 bool	ft_malloc_str_arr(size_t size, char ***arr);
-
 
 /* for garbage collector*/
 int		*garbage_col_count(void);
