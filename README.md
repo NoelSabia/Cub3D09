@@ -1,3 +1,0 @@
-# Cub3Dmyass
-
-wieso

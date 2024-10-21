@@ -1,5 +1,5 @@
 NAME := cub3D
-CC = cc -g
+CC = cc
 CFLAGS := -Wextra -Wall -Werror -Ofast
 
 LIBFTDIR := ./libft
@@ -109,8 +109,5 @@ norm:
 	@cd src && norminette | grep "Error:" | wc -l
 
 norminette: norm
-
-debug: CFLAGS += -g -fsanitize=address
-debug: re
 
 .PHONY: all clean fclean re run rerun norm norminette debug
