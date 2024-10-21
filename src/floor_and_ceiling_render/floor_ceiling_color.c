@@ -6,12 +6,11 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:45:52 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/21 16:19:51 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/21 17:39:17 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void	check_and_format(uint8_t ceiling[3], int *i, t_mlx *mlx, bool floor)
 {

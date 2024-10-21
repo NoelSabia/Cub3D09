@@ -6,12 +6,11 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:19:27 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/10/21 16:30:15 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/21 17:39:41 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 char	*ft_char_to_str(char c)
 {
