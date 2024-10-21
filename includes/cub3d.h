@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/21 17:36:42 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/21 18:00:18 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ typedef struct s_mlx
 	t_player		*ply;
 	t_raytracing	*ray;
 }	t_mlx;
-
 
 /*Parsing*/
 void	check_and_format(uint8_t ceiling[3], int *i, t_mlx *mlx, bool floor);
