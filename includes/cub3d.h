@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/21 17:33:36 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/21 17:36:42 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,12 @@ typedef struct raytracing
 	float		horiz_y;
 	float		vert_x;
 	float		vert_y;
+	int			bottom_tmp;
+	double		x_tex;
+	double		y_tex;
+	double		factor;
+	int			top_end;
+	int			i;
 	int			ray_counter;
 }	t_raytracing;
 
