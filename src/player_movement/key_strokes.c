@@ -3,20 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   key_strokes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:28:24 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/10/21 10:04:09 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/22 17:58:11 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	esc_key(mlx_key_data_t keydata)
+void	esc_key(mlx_key_data_t keydata, t_mlx *mlx)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
 		ft_free_all();
+		if (mlx->parse->north_tex)
+			mlx_delete_texture(mlx->parse->north_tex);
+		if (mlx->parse->south_tex)
+			mlx_delete_texture(mlx->parse->south_tex);
+		if (mlx->parse->west_tex)
+			mlx_delete_texture(mlx->parse->west_tex);
+		if (mlx->parse->east_tex)
+			mlx_delete_texture(mlx->parse->east_tex);
 		exit (0);
 	}
 }
@@ -55,7 +63,7 @@ void	keyhook_organizer(mlx_key_data_t keydata, void *mlx_copy)
 	t_mlx	*mlx;
 
 	mlx = mlx_copy;
-	esc_key(keydata);
+	esc_key(keydata, mlx);
 	walk_around(keydata, mlx);
 	look_left(keydata, mlx);
 	look_right(keydata, mlx);

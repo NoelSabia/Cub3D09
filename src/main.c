@@ -3,20 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:38:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/22 16:48:06 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/22 17:57:06 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	clean_exit(char *str)
+void	clean_exit(char *str, t_mlx *mlx)
 {
 	printf("Error\n");
 	printf("%s\n", str);
 	ft_free_all();
+	if (mlx->parse->north_tex)
+		mlx_delete_texture(mlx->parse->north_tex);
+	if (mlx->parse->south_tex)
+		mlx_delete_texture(mlx->parse->south_tex);
+	if (mlx->parse->west_tex)
+		mlx_delete_texture(mlx->parse->west_tex);
+	if (mlx->parse->east_tex)
+		mlx_delete_texture(mlx->parse->east_tex);
 	exit(EXIT_FAILURE);
 }
 
@@ -40,5 +48,13 @@ int	main(int argc, char *argv[])
 	parsing(mlx, argv[1], argc);
 	start_game(mlx);
 	ft_free_all();
+	if (mlx->parse->north_tex)
+		mlx_delete_texture(mlx->parse->north_tex);
+	if (mlx->parse->south_tex)
+		mlx_delete_texture(mlx->parse->south_tex);
+	if (mlx->parse->west_tex)
+		mlx_delete_texture(mlx->parse->west_tex);
+	if (mlx->parse->east_tex)
+		mlx_delete_texture(mlx->parse->east_tex);
 	return (0);
 }

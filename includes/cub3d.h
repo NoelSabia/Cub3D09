@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:39:19 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/21 18:00:18 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/22 18:05:01 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define TILE_SIZE 50
 # define RAY_LIMIT 1920
 # define ROTATION_SPEED 0.05235987755983
-# define MOVEMENT_SPEED 5
+# define MOVEMENT_SPEED 7
 # define WALL_SLICE_WIDTH 1
 
 /*Parsing*/
@@ -134,7 +134,7 @@ int		graphic_path_south(char *str_in, t_mlx *mlx, char *line);
 void	check_if_exists(char *str1, char *str2, t_mlx *mlx, char *line);
 
 /*Colors*/
-void	check_rgb_values(char *str);
+void	check_rgb_values(char *str, t_mlx *mlx);
 int		get_floor_color(char *str_in, t_mlx *mlx, char *line);
 int		get_celing_color(char *str_in, t_mlx *mlx, char *line);
 
@@ -171,7 +171,7 @@ int		minimap_dynamic_scale(t_mlx *mlx);
 
 /*Main*/
 void	start_game(t_mlx *mlx);
-void	clean_exit(char *str);
+void	clean_exit(char *str, t_mlx *mlx);
 void	init_raycasting(t_mlx *mlx);
 void	raycasting(t_mlx *mlx);
 

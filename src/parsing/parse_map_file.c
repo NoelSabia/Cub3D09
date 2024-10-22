@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_struct.c                                      :+:      :+:    :+:   */
+/*   parse_map_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 21:05:20 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/10 14:20:11 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/22 17:51:37 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_floor_color(char *str_in, t_mlx *mlx, char *line)
 	if (ft_strncmp(str_in, "F", 1) == 0)
 	{
 		if (mlx->parse->floor_set)
-			clean_exit("Error: 'F' specified more than once.");
+			clean_exit("Error: 'F' specified more than once.", mlx);
 		str_tmp = clean_data(line);
 		mlx->parse->floor = str_tmp;
 		mlx->parse->floor_set = 1;
@@ -48,7 +48,7 @@ int	get_celing_color(char *str_in, t_mlx *mlx, char *line)
 	if (ft_strncmp(str_in, "C", 1) == 0)
 	{
 		if (mlx->parse->ceiling_set)
-			clean_exit("Error: 'C' specified more than once.");
+			clean_exit("Error: 'C' specified more than once.", mlx);
 		str_tmp = clean_data(line);
 		mlx->parse->ceiling = str_tmp;
 		mlx->parse->ceiling_set = 1;
@@ -71,7 +71,7 @@ void	map_graphic_validation(char *str1, char *str2, t_mlx *mlx, char *line)
 		|| graphic_path_north(str1, mlx, line)
 		|| graphic_path_south(str1, mlx, line))
 		return ;
-	clean_exit("Not all elements included in the .cub file!");
+	clean_exit("Not all elements included in the .cub file!", mlx);
 }
 
 void	map_path_file_validation(t_mlx *mlx)
@@ -97,5 +97,5 @@ void	map_path_file_validation(t_mlx *mlx)
 	if (!mlx->parse->north_set || !mlx->parse->west_set
 		|| !mlx->parse->south_set || !mlx->parse->east_set
 		|| !mlx->parse->ceiling_set || !mlx->parse->floor_set)
-		clean_exit("Not all elements included in the .cub file!");
+		clean_exit("Not all elements included in the .cub file!", mlx);
 }

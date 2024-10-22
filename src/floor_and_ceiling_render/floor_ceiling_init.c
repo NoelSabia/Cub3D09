@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floor_ceiling_init.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:47:33 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/22 16:11:25 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/22 18:03:19 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_celing_color(t_mlx *mlx)
 		}
 		ceiling_color[i++] = ft_atoi(temp);
 		if (ft_atoi(temp) < 0 || ft_atoi(temp) > 255)
-			clean_exit("Wrong number in F or C choose between 0 and 255!");
+			clean_exit("Wrong number in F or C choose between 0 and 255!", mlx);
 		if (mlx->parse->ceiling[k] == ',')
 			k++;
 	}
@@ -61,7 +61,7 @@ void	init_floor_color(t_mlx *mlx)
 		}
 		floor_color[i++] = ft_atoi(temp);
 		if (ft_atoi(temp) < 0 || ft_atoi(temp) > 255)
-			clean_exit("Wrong number in F or C choose between 0 and 255!");
+			clean_exit("Wrong number in F or C choose between 0 and 255!", mlx);
 		if (mlx->parse->floor[k] == ',')
 			k++;
 	}
@@ -70,8 +70,8 @@ void	init_floor_color(t_mlx *mlx)
 
 void	init_floor_celing_colors(t_mlx *mlx)
 {
-	check_rgb_values(mlx->parse->ceiling);
-	check_rgb_values(mlx->parse->floor);
+	check_rgb_values(mlx->parse->ceiling, mlx);
+	check_rgb_values(mlx->parse->floor, mlx);
 	init_celing_color(mlx);
 	init_floor_color(mlx);
 }

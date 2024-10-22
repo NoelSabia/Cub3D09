@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:48:34 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/21 16:08:57 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/22 17:44:59 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ void	init_window(t_mlx *mlx)
 {
 	mlx->mlx_p = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D", 0);
 	if (!mlx->mlx_p)
-		clean_exit("MLX Instance failed to created\n");
+		clean_exit("MLX Instance failed to created\n", mlx);
 	mlx->ray->minimap = mlx_new_image(mlx->mlx_p,
 			TILE_SIZE * (mlx->parse->rows + 1),
 			TILE_SIZE * (mlx->parse->cols + 1));
 	if (!mlx->ray->minimap)
-		clean_exit("Image for Minimap could not be created\n");
+		clean_exit("Image for Minimap could not be created\n", mlx);
 	mlx->img = mlx_new_image(mlx->mlx_p, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!mlx->img)
-		clean_exit("Image for 3D Part could not be created\n");
+		clean_exit("Image for 3D Part could not be created\n", mlx);
 	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 	mlx_image_to_window(mlx->mlx_p, mlx->ray->minimap, 0, 0);
 }

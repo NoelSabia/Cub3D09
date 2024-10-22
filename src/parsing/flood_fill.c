@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/22 15:54:55 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/22 18:00:51 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*fill_spaces(int len)
 	return (str);
 }
 
-char	*add_space_to_map(char *str1, char *str2)
+char	*add_space_to_map(char *str1, char *str2, t_mlx *mlx)
 {
 	int		i;
 	int		j;
@@ -37,7 +37,7 @@ char	*add_space_to_map(char *str1, char *str2)
 	while (str1[++i])
 		if (ft_strchr("01NWSE \n", str1[i]) == NULL)
 			clean_exit("Unallowed characters in map detected!\n\
-			or map not at the bottom of the file!\n");
+			or map not at the bottom of the file!\n", mlx);
 	result = ft_malloc(ft_strlen(str1) + ft_strlen(str2) + 2);
 	len = ft_strlen(str1);
 	if (len > 0 && str1[len - 1] == '\n')
@@ -77,16 +77,16 @@ void	out_of_bounds_prot(t_mlx *mlx, int len)
 		while (mlx->parse->map[i][m])
 			m++;
 		mlx->parse->map[i] = add_space_to_map(mlx->parse->map[i],
-				fill_spaces(longest_line - m));
+				fill_spaces(longest_line - m), mlx);
 	}
 }
 
 void	floodfill(t_mlx *mlx, int y, int x, char **map_copy)
 {
 	if (y < 0 || y >= mlx->parse->cols || x < 0 || x >= mlx->parse->rows)
-    	clean_exit("Error: Map is invalid\n");
+		clean_exit("Error: Map is invalid\n", mlx);
 	if (map_copy[y][x] != '0' && map_copy[y][x] != '1')
-		clean_exit("Error: Map is invalid!\n");
+		clean_exit("Error: Map is invalid!\n", mlx);
 	else if (map_copy[y][x] == '1')
 		return ;
 	map_copy[y][x] = '1';
