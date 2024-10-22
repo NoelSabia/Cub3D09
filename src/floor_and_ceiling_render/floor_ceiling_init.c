@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floor_ceiling_init.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:47:33 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/21 16:20:20 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/22 16:11:25 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	init_celing_color(t_mlx *mlx)
 	static int	i;
 	static int	k;
 
-	while (strchr(" \t", mlx->parse->ceiling[k]))
+	while (ft_strchr(" \t", mlx->parse->ceiling[k]))
 		k++;
 	while (mlx->parse->ceiling[k] && i < 3)
 	{
 		temp = ft_malloc(1);
 		temp[0] = '\0';
-		while (strchr("0123456789", mlx->parse->ceiling[k]))
+		while (ft_strchr("0123456789", mlx->parse->ceiling[k]))
 		{
 			temp2 = ft_char_to_str(mlx->parse->ceiling[k++]);
 			temp = ft_strjoin(temp, temp2);
@@ -48,14 +48,13 @@ void	init_floor_color(t_mlx *mlx)
 	static int	i;
 	static int	k;
 
-	check_rgb_values(mlx->parse->floor);
-	while (strchr(" \t", mlx->parse->floor[k]))
+	while (ft_strchr(" \t", mlx->parse->floor[k]))
 		k++;
 	while (mlx->parse->floor[k] && i < 3)
 	{
 		temp = ft_malloc(1);
 		temp[0] = '\0';
-		while (strchr("0123456789", mlx->parse->floor[k]))
+		while (ft_strchr("0123456789", mlx->parse->floor[k]))
 		{
 			temp2 = ft_char_to_str(mlx->parse->floor[k++]);
 			temp = ft_strjoin(temp, temp2);

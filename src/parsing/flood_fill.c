@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/21 16:09:10 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/22 15:54:55 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*add_space_to_map(char *str1, char *str2)
 	while (str1[++i])
 		if (ft_strchr("01NWSE \n", str1[i]) == NULL)
 			clean_exit("Unallowed characters in map detected!\n\
-or map not at the bottom of the file!\n");
+			or map not at the bottom of the file!\n");
 	result = ft_malloc(ft_strlen(str1) + ft_strlen(str2) + 2);
 	len = ft_strlen(str1);
 	if (len > 0 && str1[len - 1] == '\n')
@@ -83,6 +83,8 @@ void	out_of_bounds_prot(t_mlx *mlx, int len)
 
 void	floodfill(t_mlx *mlx, int y, int x, char **map_copy)
 {
+	if (y < 0 || y >= mlx->parse->cols || x < 0 || x >= mlx->parse->rows)
+    	clean_exit("Error: Map is invalid\n");
 	if (map_copy[y][x] != '0' && map_copy[y][x] != '1')
 		clean_exit("Error: Map is invalid!\n");
 	else if (map_copy[y][x] == '1')
