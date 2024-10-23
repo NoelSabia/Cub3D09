@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:38:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/22 17:57:06 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/23 15:55:16 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	clean_exit(char *str, t_mlx *mlx)
 {
 	printf("Error\n");
 	printf("%s\n", str);
-	ft_free_all();
 	if (mlx->parse->north_tex)
 		mlx_delete_texture(mlx->parse->north_tex);
 	if (mlx->parse->south_tex)
@@ -25,6 +24,7 @@ void	clean_exit(char *str, t_mlx *mlx)
 		mlx_delete_texture(mlx->parse->west_tex);
 	if (mlx->parse->east_tex)
 		mlx_delete_texture(mlx->parse->east_tex);
+	ft_free_all();
 	exit(EXIT_FAILURE);
 }
 
@@ -40,10 +40,16 @@ t_mlx	*initalize_structs(void)
 	return (mlx);
 }
 
+void leaks()
+{
+	system("leaks cub3D");
+}
+
 int	main(int argc, char *argv[])
 {
 	t_mlx	*mlx;
 
+	atexit(leaks);
 	mlx = initalize_structs();
 	parsing(mlx, argv[1], argc);
 	start_game(mlx);

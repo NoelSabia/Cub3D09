@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:22:28 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/22 18:00:51 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/10/23 16:23:06 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ char	*fill_spaces(int len)
 	int		counter;
 
 	str = ft_malloc(ft_abs(len) + 10);
+	ft_bzero(str, ft_abs(len) + 10);
 	counter = 0;
 	while (counter++ <= len)
 		str = ft_strjoin(" ", str);
-	str[counter] = '\0';
 	return (str);
 }
 
