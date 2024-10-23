@@ -86,9 +86,6 @@ $(LIBMLX):
 
 clean:
 	@$(MAKE) -C $(LIBFTDIR) clean
-	@if [ -d "$(LIBMLXDIR)/build" ]; then \
-		$(MAKE) -C $(LIBMLXDIR)/build clean; \
-	fi
 	@rm -rf $(OBJDIR)
 
 fclean: clean
