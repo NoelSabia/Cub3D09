@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:38:53 by nsabia            #+#    #+#             */
-/*   Updated: 2024/10/23 15:55:16 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/10/25 15:58:11 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,10 @@ t_mlx	*initalize_structs(void)
 	return (mlx);
 }
 
-void leaks()
-{
-	system("leaks cub3D");
-}
-
 int	main(int argc, char *argv[])
 {
 	t_mlx	*mlx;
 
-	atexit(leaks);
 	mlx = initalize_structs();
 	parsing(mlx, argv[1], argc);
 	start_game(mlx);
